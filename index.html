@@ -3,80 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مول لبنان الإلكتروني</title>
+    <title>مول لبنان - المنصة التجارية الكبرى</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f4f4; color: #222; }
-        
-        /* رأس الصفحة مع زر لوحة التحكم السريع */
+        body { background-color: #f9f9f9; color: #222; }
+
+        /* الهيدر العلوي */
         header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 4px solid #d4af37; position: relative; }
         header h1 { font-size: 26px; color: #d4af37; margin-bottom: 5px; }
-        header p { color: #ccc; font-size: 14px; }
-        
-        .admin-btn { position: absolute; top: 15px; left: 15px; background: #d4af37; color: #111; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 13px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .admin-btn:hover { background: #fff; }
+        header p { font-size: 14px; color: #ccc; }
 
-        .container { max-width: 1100px; margin: 30px auto; padding: 0 15px; }
-        .section-title { font-size: 20px; color: #333; margin-bottom: 20px; border-right: 5px solid #d4af37; padding-right: 10px; font-weight: bold; }
+        /* أزرار الإدارة السريعة أعلى الصفحة */
+        .admin-nav { background: #222; padding: 10px; text-align: center; border-bottom: 1px solid #333; }
+        .admin-nav a { color: #d4af37; text-decoration: none; margin: 0 10px; font-size: 13px; font-weight: bold; padding: 5px 10px; border: 1px solid #d4af37; border-radius: 4px; transition: 0.3s; }
+        .admin-nav a:hover { background: #d4af37; color: #111; }
+
+        .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+
+        /* ================= شاشة العرض الفخمة المقلبة (Slider) ================= */
+        .slider-container { position: relative; width: 100%; height: 320px; background: #111; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.15); margin-bottom: 30px; border: 2px solid #d4af37; }
+        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; color: #fff; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), #111; }
+        .slide.active { opacity: 1; }
+        .slide h2 { font-size: 28px; color: #d4af37; margin-bottom: 10px; }
+        .slide p { font-size: 18px; color: #eee; margin-bottom: 15px; }
+        .slide .price-tag { background: #e74c3c; color: #fff; padding: 6px 15px; border-radius: 20px; font-size: 16px; font-weight: bold; }
+        .slider-title { text-align: center; font-size: 18px; font-weight: bold; color: #111; margin-bottom: 10px; }
+        /* ==================================================================== */
+
+        /* أقسام المحلات */
+        .section-title { font-size: 22px; color: #111; margin: 25px 0 15px; border-right: 4px solid #d4af37; padding-right: 10px; }
         
-        /* بطاقات المحلات ودولاب الحظ */
-        .shops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .shop-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; padding: 25px 15px; border: 1px solid #eee; transition: transform 0.3s; }
-        .shop-card:hover { transform: translateY(-5px); border-color: #d4af37; }
-        
-        /* تمييز بطاقة دولاب الحظ بلون خاص */
-        .wheel-card { border: 2px dashed #d4af37; background: #fffdf5; }
-        
-        .shop-icon { font-size: 60px; margin-bottom: 15px; }
-        .shop-name { font-size: 20px; font-weight: bold; color: #111; margin-bottom: 8px; }
-        .shop-desc { color: #666; font-size: 14px; margin-bottom: 20px; }
-        
-        .btn-visit { display: inline-block; width: 100%; padding: 12px; background: #111; color: #d4af37; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; font-weight: bold; text-decoration: none; transition: 0.3s; border: 1px solid #d4af37; }
-        .btn-visit:hover { background: #d4af37; color: #111; }
-        
-        .btn-wheel { background: #d4af37; color: #111; }
-        .btn-wheel:hover { background: #111; color: #d4af37; }
+        .shops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .shop-card { background: #fff; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.06); transition: 0.3s; border-top: 3px solid #d4af37; text-decoration: none; color: #222; }
+        .shop-card:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+        .shop-card h3 { font-size: 18px; color: #111; margin-bottom: 8px; }
+        .shop-card p { font-size: 13px; color: #666; }
+
+        footer { text-align: center; padding: 20px; background: #111; color: #d4af37; margin-top: 40px; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <header>
-    <!-- زر لوحة التحكم السريع للمستودع -->
-    <a href="https://github.com/ysfmsmr/ysfmsmr.github.io" target="_blank" class="admin-btn">⚙️ لوحة التحكم</a>
-    
     <h1>🛍️ مول لبنان الإلكتروني</h1>
-    <p>وجهتك الأولى للتسوق أونلاين في جميع الأراضي اللبنانية</p>
+    <p>وجهتك الأولى للتسوق والمتاجر الفاخرة</p>
 </header>
 
+<!-- روابط الإدارة السريعة -->
+<div class="admin-nav">
+    <a href="register.html">📝 انضم كتاجر</a>
+    <a href="vendor_dashboard.html">🏷️ لوحة التاجر</a>
+    <a href="admin_panel.html">⚙️ إدارة الأدمن</a>
+    <a href="lucky_wheel.html">🎁 دولاب الحظ</a>
+</div>
+
 <div class="container">
-    <div class="section-title">أقسام ومحلات المول</div>
 
-    <div class="shops-grid">
-        <!-- دولاب الحظ -->
-        <div class="shop-card wheel-card">
-            <div class="shop-icon">🎡</div>
-            <div class="shop-name">دولاب الحظ الفوري</div>
-            <div class="shop-desc">لف الدولاب واربح خصومات وهدايا مجانية فورية على طلبيتك</div>
-            <a href="lucky_wheel.html" class="btn-visit btn-wheel">جرب حظك الآن 🎁</a>
-        </div>
-
-        <!-- محل الملابس -->
-        <div class="shop-card">
-            <div class="shop-icon">👔</div>
-            <div class="shop-name">محل الأناقة للملابس</div>
-            <div class="shop-desc">أرقى الموديلات العصرية والشبابية بأفضل الخامات</div>
-            <a href="shop_clothes.html" class="btn-visit">زيارة المحل 🚪</a>
-        </div>
-        
-        <!-- محل الأحذية -->
-        <div class="shop-card">
-            <div class="shop-icon">👞</div>
-            <div class="shop-name">محل الأحذية الفاخرة</div>
-            <div class="shop-desc">جلود طبيعية وأحذية مريحة لكل الأوقات والمناسبات</div>
-            <a href="shop_shoes.html" class="btn-visit">زيارة المحل 🚪</a>
+    <!-- واجهة القطع الفخمة المقلبة (Slider) -->
+    <div class="slider-title">🔥 أبرز القطع والحسومات الفاخرة في المول</div>
+    <div class="slider-container" id="luxurySlider">
+        <!-- يتم تعبئة العروض المتحركة تلقائياً هنا -->
+        <div class="slide active">
+            <h2>مرحباً بكم في مول لبنان</h2>
+            <p>أرقى المتاجر وأفضل المنتجات بانتظاركم</p>
+            <span class="price-tag">تخفيضات كبرى</span>
         </div>
     </div>
+
+    <!-- أقسام المتاجر -->
+    <div class="section-title">أقسام ومتاجر المول</div>
+    <div class="shops-grid">
+        <a href="shop_clothes.html" class="shop-card">
+            <h3>👔 أزياء وملابس</h3>
+            <p>أحدث صيحات الموضة والألبسة</p>
+        </a>
+        <a href="shop_perfumes.html" class="shop-card">
+            <h3>🌸 عطور وبخور</h3>
+            <p>أفخم العطور الشرقية والغربية</p>
+        </a>
+        <a href="shop_shoes.html" class="shop-card">
+            <h3>👞 أحذية راقية</h3>
+            <p>أرقى الموديلات الرجالية والنسائية</p>
+        </a>
+    </div>
+
 </div>
+
+<footer>
+    جميع الحقوق محفوظة - مول لبنان © 2026
+</footer>
+
+<script>
+    // جلب المنتجات والعروض المضافة من التجار لعرضها بالسلايدر المتحرك
+    function loadSliderProducts() {
+        let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
+        const sliderContainer = document.getElementById('luxurySlider');
+
+        if (products.length === 0) return; // إذا ما في منتجات بضل العرض الافتراضي
+
+        let slidesHTML = '';
+        products.forEach((prod, index) => {
+            let activeClass = index === 0 ? 'active' : '';
+            let priceText = prod.discountPrice ? `<span style="text-decoration: line-through; opacity: 0.7;">${prod.price} $</span> <span style="color:#2ecc71; font-weight:bold;">${prod.discountPrice} $</span>` : `${prod.price} $`;
+            
+            slidesHTML += `
+                <div class="slide ${activeClass}">
+                    <h2>🌟 ${prod.name}</h2>
+                    <p>متوفر الآن في مول لبنان بأفضل الأسعار</p>
+                    <div class="price-tag">${priceText}</div>
+                </div>
+            `;
+        });
+
+        sliderContainer.innerHTML = slidesHTML;
+        startSlider();
+    }
+
+    // حركة التقليب التلقائي كل 5 ثواني
+    function startSlider() {
+        const slides = document.querySelectorAll('.slide');
+        if (slides.length <= 1) return;
+        
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000); // 5000 ميللي ثانية = 5 ثواني
+    }
+
+    window.onload = loadSliderProducts;
+</script>
 
 </body>
 </html>
