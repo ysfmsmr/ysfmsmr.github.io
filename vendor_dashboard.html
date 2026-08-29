@@ -3,7 +3,6 @@ function sendToStoreFront(index) {
     let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
     let storeFront = JSON.parse(localStorage.getItem('storeFrontDisplayOnly')) || [];
     
-    // نقل المنتج المحدد لواجهة المحل فقط
     storeFront = [storage[index]]; 
     
     localStorage.setItem('storeFrontDisplayOnly', JSON.stringify(storeFront));
