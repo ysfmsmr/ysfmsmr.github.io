@@ -42,7 +42,7 @@
     <a href="shop_shoes.html" class="nav-btn">👞 الأحذية</a>
     <a href="shop_perfumes.html" class="nav-btn">💎 العطور</a>
     <a href="lucky_wheel.html" class="nav-btn nav-btn-game">🎡 دولاب الحظ</a>
-    <a href="vendor_dashboard.html" class="nav-btn">📦 لوحة التاجر</a> <!-- هون الرابط كان المشكلة -->
+    <a href="vendor_dashboard.html" class="nav-btn">📦 لوحة التاجر</a>
     <a href="admin_panel.html" class="nav-btn" style="background:#333; color:#fff;">⚙️ الإدارة</a>
 </div>
 
@@ -67,51 +67,53 @@
 </div>
 
 <script>
-    // جلب البضائع من التخزين المحلي، أو استخدام الديفولت
-    let vendorItems = JSON.parse(localStorage.getItem('vendorStorage')) || [];
-    let mainScreenItems = JSON.parse(localStorage.getItem('mainSliderProducts')) || [];
-    
-    // دمج البضائع (من التاجر أو الشاشة الرئيسية)
-    let combinedItems = [...vendorItems, ...mainScreenItems];
+    // جلب البضائع من التخزين المحلي للتاجر أو الاستوديو بدقة
+    let vendorItems = JSON.parse(localStorage.getItem('vendorStorage')) || JSON.parse(localStorage.getItem('storeFrontDisplayOnly')) || [];
 
     const defaultProducts = [
         {
-            name: "فستان أطفال فخم ★", // استخدام name أو title
+            title: "فستان أطفال فخم ★",
             desc: "📍 معروض من أحدث بضائع المحلات والتجار",
             price: "10",
             oldPrice: "20",
-            img: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=60" // استخدام img أو image
+            image: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=60"
         },
         {
-            name: "حذاء رجالي جلد فاخر 👞",
+            title: "حذاء رجالي جلد فاخر 👞",
             desc: "📍 مصنع خصيصاً لأجل إطلالتك الراسخة",
             price: "25",
             oldPrice: "40",
-            img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&auto=format&fit=crop&q=60"
+            image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&auto=format&fit=crop&q=60"
         }
     ];
 
-    let allProducts = combinedItems.length > 0 ? combinedItems : defaultProducts;
+    let allProducts = vendorItems.length > 0 ? vendorItems : defaultProducts;
     let currentIndex = 0;
 
     function updateSlider() {
         if(!allProducts || allProducts.length === 0) return;
         let p = allProducts[currentIndex];
         
-        // استخدام خصائص متعددة عشان نضمن إن البيانات صحيحة
-        document.getElementById('slideImg').src = p.img || p.image || p.thumb || 'https://via.placeholder.com/300';
-        document.getElementById('slideTitle').innerText = p.name || p.title || 'قطعة مميزة';
-        document.getElementById('slideDesc').innerText = p.desc || p.description || '📍 معروض من أحدث بضائع المحلات';
-        document.getElementById('slidePrice').innerText = p.price ? p.price + ' $' : '';
-        document.getElementById('slideOldPrice').innerText = p.oldPrice ? p.oldPrice + ' $' : '';
+        // ربط صحيح ودقيق للأنشطة والأسماء والصور بدون تداخل
+        let imgSource = p.image || p.img || p.thumb || 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=60';
+        let titleText = p.title || p.name || 'قطعة مميزة';
+        let descText = p.desc || p.description || '📍 معروض من أحدث بضائع المحلات';
+        let priceText = p.price ? p.price + ' $' : '';
+        let oldPriceText = p.oldPrice ? p.oldPrice + ' $' : '';
+
+        document.getElementById('slideImg').src = imgSource;
+        document.getElementById('slideTitle').innerText = titleText;
+        document.getElementById('slideDesc').innerText = descText;
+        document.getElementById('slidePrice').innerText = priceText;
+        document.getElementById('slideOldPrice').innerText = oldPriceText;
         document.getElementById('slideIndicator').innerText = `قطعة (${currentIndex + 1} من ${allProducts.length})`;
         
         currentIndex = (currentIndex + 1) % allProducts.length;
     }
 
     if(allProducts.length > 0) {
-        updateSlider(); // أول عرض
-        setInterval(updateSlider, 10000); // تقليب كل 10 ثواني
+        updateSlider();
+        setInterval(updateSlider, 10000);
     }
 </script>
 
