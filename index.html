@@ -20,8 +20,8 @@
         .section-title { color: #d4af37; font-size: 15px; margin: 15px 0 10px 0; font-weight: bold; }
         
         .slider-card { background: #000; border: 2px solid #d4af37; border-radius: 12px; max-width: 350px; margin: 0 auto; padding: 15px; box-shadow: 0 4px 15px rgba(212,175,55,0.2); position: relative; }
-        .badge { position: absolute; top: 10px; right: 10px; background: #ff4757; color: #fff; padding: 3px 8px; font-size: 11px; border-radius: 4px; font-weight: bold; }
-        .slide-counter { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: #d4af37; padding: 3px 8px; font-size: 11px; border-radius: 4px; border: 1px solid #d4af37; }
+        .badge { position: absolute; top: 10px; right: 10px; background: #ff4757; color: #fff; padding: 3px 8px; font-size: 11px; border-radius: 4px; font-weight: bold; z-index: 5; }
+        .slide-counter { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: #d4af37; padding: 3px 8px; font-size: 11px; border-radius: 4px; border: 1px solid #d4af37; z-index: 5; }
         
         .slider-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
         .slider-card h3 { color: #d4af37; font-size: 18px; margin-bottom: 5px; }
@@ -55,7 +55,7 @@
 </div>
 
 <div class="slider-card" id="sliderContainer">
-    <div class="badge">🔥 خصم خاص</div>
+    <div class="badge">🔥 عرض خاص</div>
     <div class="slide-counter" id="slideIndicator">قطعة (1 من 1)</div>
     <img id="slideImg" src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=60" alt="منتج">
     <h3 id="slideTitle">فستان ★</h3>
@@ -67,7 +67,6 @@
 </div>
 
 <script>
-    // جلب المنتجات والأسعار والحسومات المرفوعة من لوحة التاجر والاستوديو مباشرة
     let vendorItems = JSON.parse(localStorage.getItem('vendorStorage')) || JSON.parse(localStorage.getItem('storeFrontDisplayOnly')) || [];
     
     const defaultProducts = [
@@ -91,11 +90,11 @@
     let currentIndex = 0;
 
     function updateSlider() {
-        if(allProducts.length === 0) return;
+        if(!allProducts || allProducts.length === 0) return;
         let p = allProducts[currentIndex];
         
         document.getElementById('slideImg').src = p.image || p.thumb || p.img || 'https://via.placeholder.com/300';
-        document.getElementById('slideTitle'].innerText = p.title || p.name || 'قطعة مميزة';
+        document.getElementById('slideTitle').innerText = p.title || p.name || 'قطعة مميزة';
         document.getElementById('slideDesc').innerText = p.desc || p.description || '📍 معروض من أحدث بضائع المحلات';
         document.getElementById('slidePrice').innerText = p.price ? p.price + ' $' : '';
         document.getElementById('slideOldPrice').innerText = p.oldPrice ? p.oldPrice + ' $' : '';
@@ -106,7 +105,7 @@
 
     if(allProducts.length > 0) {
         updateSlider();
-        setInterval(updateSlider, 10000); // تقلب كل 10 ثواني تلقائياً
+        setInterval(updateSlider, 10000);
     }
 </script>
 
