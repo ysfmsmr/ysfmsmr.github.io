@@ -9,35 +9,42 @@
         body { background-color: #111; color: #fff; text-align: center; }
 
         header { background: #1a1a1a; padding: 15px; border-bottom: 3px solid #d4af37; }
+        
         .nav-links { display: flex; justify-content: center; gap: 8px; padding: 10px; background: #111; flex-wrap: wrap; }
         .nav-links a { background: #d4af37; color: #111; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 12px; }
 
-        .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
+        .container { max-width: 650px; margin: 20px auto; padding: 0 15px; }
 
         .visitors-box { background: #fff; color: #111; padding: 10px; border-radius: 8px; font-weight: bold; margin-bottom: 20px; font-size: 14px; border: 2px solid #d4af37; }
 
-        .section-title { font-size: 18px; color: #d4af37; margin-bottom: 15px; font-weight: bold; }
+        .section-title { font-size: 18px; color: #d4af37; margin: 20px 0 15px 0; font-weight: bold; text-align: right; border-right: 4px solid #d4af37; padding-right: 10px; }
 
-        /* الكرت الأسود الفخم لعرض القطع المرفوعة */
-        .featured-slider-card { background: #000; border: 2px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); text-align: center; position: relative; }
+        /* شاشة العرض المتقلبة التلقائية (سلايدر الدعاية) */
+        .slider-screen-card { background: #000; border: 3px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3); text-align: center; position: relative; }
         
-        .featured-img { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; background: #222; border: 1px solid #d4af37; }
+        .slider-img { width: 100%; height: 240px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; background: #222; border: 1px solid #d4af37; }
         
-        .featured-title { color: #d4af37; font-size: 20px; margin-bottom: 10px; font-weight: bold; }
+        .slider-title { color: #d4af37; font-size: 20px; margin-bottom: 8px; font-weight: bold; }
+        .slider-shop-name { color: #aaa; font-size: 13px; margin-bottom: 8px; }
         
-        .price-box { margin: 10px 0; font-size: 16px; }
+        .price-box { margin: 10px 0; font-size: 17px; }
         .old-price { text-decoration: line-through; color: #888; margin-left: 8px; font-size: 14px; }
-        .current-price { color: #e74c3c; font-weight: bold; font-size: 18px; }
-        .normal-price { color: #2ecc71; font-weight: bold; font-size: 18px; }
+        .current-price { color: #e74c3c; font-weight: bold; font-size: 19px; }
+        .normal-price { color: #2ecc71; font-weight: bold; font-size: 19px; }
 
-        .whatsapp-btn { display: inline-block; width: 100%; padding: 10px; background: #25d366; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 15px; margin-top: 10px; }
+        .whatsapp-btn { display: inline-block; width: 100%; padding: 11px; background: #25d366; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 15px; margin-top: 10px; transition: 0.3s; }
+        .whatsapp-btn:hover { background: #1ebe5d; }
         
-        .empty-featured { color: #aaa; padding: 30px; font-size: 14px; }
+        .empty-display { color: #aaa; padding: 35px; font-size: 14px; }
 
-        .categories-section { margin-top: 30px; }
-        .category-card { background: #1a1a1a; border: 1px solid #d4af37; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-decoration: none; color: #fff; display: block; }
-        .category-card h3 { color: #d4af37; font-size: 16px; margin-bottom: 5px; }
-        .category-card p { color: #aaa; font-size: 12px; }
+        /* شبكة المحلات والأقسام الثابتة بالأسفل */
+        .shops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .shop-card { background: #1a1a1a; border: 2px solid #d4af37; border-radius: 10px; padding: 15px; text-align: right; display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; transition: 0.3s; }
+        .shop-card:hover { background: #222; }
+        .shop-thumb { width: 70px; height: 70px; object-fit: cover; border-radius: 6px; border: 1px solid #d4af37; background: #333; flex-shrink: 0; }
+        .shop-info h3 { color: #d4af37; font-size: 16px; margin-bottom: 4px; }
+        .shop-info p { color: #ccc; font-size: 12px; margin-bottom: 4px; }
+        .shop-info .shop-latest-item { color: #2ecc71; font-size: 11px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -58,66 +65,110 @@
         👀 عدد زوار المول الكلي: <span id="visitorCount">135</span> زائر
     </div>
 
-    <div class="section-title">🔥 أبرز القطع والحسومات الفاخرة في المول</div>
-
-    <!-- الكرت الفخم الذي سيعرض المنتجات المرفوعة ديناميكياً -->
-    <div class="featured-slider-card" id="featuredContainer">
-        <!-- يتم تعبئتها تلقائياً -->
+    <!-- شاشة العرض المتقلبة في الأعلى للدعاية -->
+    <div class="section-title">🔥 شاشة العرض الدعائية (تقلب تلقائياً)</div>
+    <div class="slider-screen-card" id="sliderContainer">
+        <!-- يتم تعبئتها تلقائياً بالتدوير -->
     </div>
 
-    <div class="section-title">أقسام ومتاجر المول</div>
-    
-    <div class="categories-section">
-        <a href="shop_shoes.html" class="category-card">
-            <h3>👞 أزياء وأحذية</h3>
-            <p>أحدث صيحات الموضة والألبسة والأحذية</p>
-        </a>
+    <!-- محلات وأقسام المول الثابتة في الأسفل وكل محل معروضة واجهته وقطعته -->
+    <div class="section-title">🏬 أقسام ومحلات المول الثابتة</div>
+    <div class="shops-grid" id="shopsGridContainer">
+        <!-- يتم عرض المحلات هنا مع أحدث قطعة لكل محل -->
     </div>
 
 </div>
 
 <script>
-    function loadFeaturedProduct() {
-        const container = document.getElementById('featuredContainer');
-        let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
+    let currentSlideIndex = 0;
+    let productsCache = [];
+    let sliderTimer = null;
 
-        if (products.length === 0) {
+    function initMallHome() {
+        productsCache = JSON.parse(localStorage.getItem('vendorProducts')) || [];
+        
+        renderSlider();
+        renderShopsList();
+
+        // تشغيل المؤقت لتقليب شاشة العرض تلقائياً كل 3.5 ثانية
+        if (productsCache.length > 1) {
+            if (sliderTimer) clearInterval(sliderTimer);
+            sliderTimer = setInterval(() => {
+                currentSlideIndex = (currentSlideIndex + 1) % productsCache.length;
+                renderSlider();
+            }, 3500);
+        }
+    }
+
+    function renderSlider() {
+        const container = document.getElementById('sliderContainer');
+        if (productsCache.length === 0) {
             container.innerHTML = `
-                <div class="empty-featured">
-                    لا توجد بضائع مرفوعة حالياً.<br>
-                    اذهب إلى <b>"لوحة التاجر"</b> وارفع أول منتج مع صورة ليظهر هنا فوراً! 🚀
+                <div class="empty-display">
+                    لا توجد بضائع مرفوعة حالياً للدعاية.<br>
+                    اذهب إلى <b>"لوحة التاجر"</b> وارفع منتجات مع صور لتظهر في شاشة العرض والدعاية! 🚀
                 </div>
             `;
             return;
         }
 
-        // جلب أحدث منتج مرفوع
-        let latestProd = products[products.length - 1];
-        let hasDiscount = latestProd.discountPrice && latestProd.discountPrice < latestProd.price;
-        let displayPrice = hasDiscount ? latestProd.discountPrice : latestProd.price;
-        let imgSrc = latestProd.image ? latestProd.image : 'https://via.placeholder.com/400x220?text=مول+لبنان';
+        if (currentSlideIndex >= productsCache.length) currentSlideIndex = 0;
+        let prod = productsCache[currentSlideIndex];
+        let hasDiscount = prod.discountPrice && prod.discountPrice < prod.price;
+        let displayPrice = hasDiscount ? prod.discountPrice : prod.price;
+        let imgSrc = prod.image ? prod.image : 'https://via.placeholder.com/500x240?text=مول+لبنان';
 
         let vendorPhone = "96170000000"; 
-        let message = encodeURIComponent(`مرحباً، أرغب بطلب قطعة "${latestProd.name}" بسعر ${displayPrice}$`);
+        let message = encodeURIComponent(`مرحباً، أرغب بطلب قطعة "${prod.name}" بسعر ${displayPrice}$`);
         let whatsappUrl = `https://wa.me/${vendorPhone}?text=${message}`;
 
         container.innerHTML = `
-            ${hasDiscount ? '<div style="position:absolute; top:15px; left:15px; background:#e74c3c; color:#fff; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:bold;">🔥 خصم خاص</div>' : ''}
-            <img src="${imgSrc}" alt="${latestProd.name}" class="featured-img">
-            <div class="featured-title">⭐ ${latestProd.name}</div>
+            ${hasDiscount ? '<div style="position:absolute; top:15px; left:15px; background:#e74c3c; color:#fff; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:bold; z-index:2;">🔥 خصم خاص</div>' : ''}
+            <img src="${imgSrc}" alt="${prod.name}" class="slider-img">
+            <div class="slider-title">⭐ ${prod.name}</div>
+            <div class="slider-shop-name">📍 معروض في: متجر الأحذية والأزياء الراقية</div>
             <div class="price-box">
                 ${hasDiscount ? `
-                    <span class="old-price">${latestProd.price} $</span>
-                    <span class="current-price">${latestProd.discountPrice} $</span>
+                    <span class="old-price">${prod.price} $</span>
+                    <span class="current-price">${prod.discountPrice} $</span>
                 ` : `
-                    <span class="normal-price">${latestProd.price} $</span>
+                    <span class="normal-price">${prod.price} $</span>
                 `}
             </div>
             <a href="${whatsappUrl}" target="_blank" class="whatsapp-btn">اطلب عبر واتساب 💬</a>
         `;
     }
 
-    window.onload = loadFeaturedProduct;
+    function renderShopsList() {
+        const gridContainer = document.getElementById('shopsGridContainer');
+        
+        // جلب آخر قطعة مرفوعة لتكون واجهة المحل الثابتة
+        let latestProd = productsCache.length > 0 ? productsCache[productsCache.length - 1] : null;
+        let latestImg = latestProd && latestProd.image ? latestProd.image : 'https://via.placeholder.com/70x70?text=متجر';
+        let latestText = latestProd ? `أبرز معروضات المحل: ${latestProd.name} (${latestProd.price}$)` : 'لا توجد منتجات معروضة حالياً';
+
+        gridContainer.innerHTML = `
+            <a href="shop_shoes.html" class="shop-card">
+                <img src="${latestImg}" alt="متجر الأحذية" class="shop-thumb">
+                <div class="shop-info">
+                    <h3>👞 قسم الأحذية والأزياء</h3>
+                    <p>أحدث صيحات الموضة والألبسة الفاخرة</p>
+                    <div class="shop-latest-item">✨ ${latestText}</div>
+                </div>
+            </a>
+            
+            <a href="shop_shoes.html" class="shop-card">
+                <img src="https://via.placeholder.com/70x70?text=عطور" alt="متجر العطور" class="shop-thumb">
+                <div class="shop-info">
+                    <h3>💎 قسم العطور والرشات الفاخرة</h3>
+                    <p>أرقى أنواع العطور الشرقية والغربية</p>
+                    <div class="shop-latest-item">✨ متوفر الآن في المول</div>
+                </div>
+            </a>
+        `;
+    }
+
+    window.onload = initMallHome;
 </script>
 
 </body>
