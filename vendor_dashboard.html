@@ -1,34 +1,24 @@
-<!-- استبدل الكود المسؤول عن عرض قسم الأحذية أو المتاجر في الصفحة الرئيسية بهذا الكود البرمجي الدقيق -->
-
-<script>
-    // جلب بيانات واجهة المحل الخاصة بالمتاجر (المربع التحتاني)
-    let storeFrontData = JSON.parse(localStorage.getItem('storeFrontProducts')) || [];
+// زر عرض في واجهة المحل الخاصة (المربع التحتاني)
+function sendToStoreFront(index) {
+    let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
+    let storeFront = JSON.parse(localStorage.getItem('storeFrontDisplayOnly')) || [];
     
-    // جلب بيانات الشاشة الرئيسية للمول (السلايدر المتحرك فوق)
-    let mainScreenData = JSON.parse(localStorage.getItem('vendorProducts')) || [];
+    // بنقدر نخليها قطعة وحدة ثابتة أو مصفوفة، خلينا نخليها تخزن آخر قطعة خاصة بالمحل فقط
+    storeFront = [storage[index]]; // حتكون قطعة ثابتة خاصة بالمحل حصرياً
+    
+    localStorage.setItem('storeFrontDisplayOnly', JSON.stringify(storeFront));
+    alert('تم تحديث واجهة المحل الخاصة بنجاح! 🏪');
+    loadDashboard();
+}
 
-    // مثال على كيفية تحديث عرض "قسم الأحذية والأزياء" بالمربع التحتاني ليأخذ من واجهة المحل فقط:
-    function renderStoreFrontSection() {
-        let lastItemText = "المحل جاهز لاستقبال بضائعكم";
-        
-        if (storeFrontData.length > 0) {
-            // خذ آخر قطعة أضافها التاجر لواجهة محله الخاصة
-            let latestItem = storeFrontData[storeFrontData.length - 1];
-            let price = latestItem.discountPrice ? latestItem.discountPrice : latestItem.price;
-            lastItemText = `✨ آخر قطعة: ${latestItem.name} (${price}$)`;
-        }
-
-        // تحديث النص داخل مربّع القسم التحتاني
-        // (تأكد أن الـ ID عندك بالموقع مطابق أو عدله حسب مسمى العناصر عندك)
-        let sectionElement = document.getElementById('shoesSectionDescription'); 
-        if(sectionElement) {
-            sectionElement.innerHTML = lastItemText;
-        }
-    }
-
-    // تشغيل الدالة عند تحميل الصفحة
-    window.onload = function() {
-        if(typeof loadMainSlider === 'function') loadMainSlider(); // السلايدر اللي فوق
-        renderStoreFrontSection(); // المربع التحتاني الخاص بالمحل
-    };
-</script>
+// زر عرض في الشاشة الرئيسية (السلايدر فوق)
+function sendToMainScreen(index) {
+    let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
+    let mainScreen = JSON.parse(localStorage.getItem('mainSliderProducts')) || [];
+    
+    mainScreen.push(storage[index]); // السلايدر المتحرك
+    
+    localStorage.setItem('mainSliderProducts', JSON.stringify(mainScreen));
+    alert('تم النشر على الشاشة الرئيسية للمول بنجاح! 🚀');
+    loadDashboard();
+}
