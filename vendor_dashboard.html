@@ -1,24 +1,24 @@
-// زر عرض في واجهة المحل الخاصة (المربع التحتاني)
+// كود زر إرسال المنتج لواجهة المحل الخاصة (المربع التحتاني)
 function sendToStoreFront(index) {
     let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
     let storeFront = JSON.parse(localStorage.getItem('storeFrontDisplayOnly')) || [];
     
-    // بنقدر نخليها قطعة وحدة ثابتة أو مصفوفة، خلينا نخليها تخزن آخر قطعة خاصة بالمحل فقط
-    storeFront = [storage[index]]; // حتكون قطعة ثابتة خاصة بالمحل حصرياً
+    // نقل المنتج المحدد لواجهة المحل فقط
+    storeFront = [storage[index]]; 
     
     localStorage.setItem('storeFrontDisplayOnly', JSON.stringify(storeFront));
-    alert('تم تحديث واجهة المحل الخاصة بنجاح! 🏪');
+    alert('تم النشر في واجهة المحل الخاصة بنجاح!');
     loadDashboard();
 }
 
-// زر عرض في الشاشة الرئيسية (السلايدر فوق)
+// كود زر إرسال المنتج للسلايدر الرئيسي (الشاشة الرئيسية فوق)
 function sendToMainScreen(index) {
     let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
     let mainScreen = JSON.parse(localStorage.getItem('mainSliderProducts')) || [];
     
-    mainScreen.push(storage[index]); // السلايدر المتحرك
+    mainScreen.push(storage[index]);
     
     localStorage.setItem('mainSliderProducts', JSON.stringify(mainScreen));
-    alert('تم النشر على الشاشة الرئيسية للمول بنجاح! 🚀');
+    alert('تم النشر في الشاشة الرئيسية للمول بنجاح!');
     loadDashboard();
 }
