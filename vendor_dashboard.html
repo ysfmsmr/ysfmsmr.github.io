@@ -65,7 +65,6 @@
             return;
         }
 
-        // تحويل الصورة المرفوعة إلى نظام Base64 لتخزينها وعرضها
         if (imageFile) {
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -74,7 +73,6 @@
             };
             reader.readAsDataURL(imageFile);
         } else {
-            // إذا لم يرفع صورة، نضع صورة افتراضية
             saveProductData(name, price, discountPrice, '');
         }
     }
@@ -92,7 +90,6 @@
         products.push(newProduct);
         localStorage.setItem('vendorProducts', JSON.stringify(products));
 
-        // إظهار رسالة النجاح وتفريغ الحقول
         const successMsg = document.getElementById('successMsg');
         successMsg.style.display = 'block';
         document.getElementById('prodName').value = '';
