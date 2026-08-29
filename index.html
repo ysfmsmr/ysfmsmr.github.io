@@ -1,30 +1,55 @@
-    function renderShops() {
-        const grid = document.getElementById('shopsGridContainer');
-        
-        // جلب القطعة الخاصة بواجهة المحل المستقلة حصرياً
-        let storeFrontItem = JSON.parse(localStorage.getItem('storeFrontDisplayOnly')) || [];
-        let latestProd = storeFrontItem.length > 0 ? storeFrontItem[0] : null;
-        
-        let latestThumb = latestProd && latestProd.image ? latestProd.image : 'https://via.placeholder.com/70x70?text=متجر';
-        let latestDesc = latestProd ? `آخر قطعة: ${latestProd.name} (${latestProd.price}$)` : 'المحل جاهز لاستقبال بضائعكم';
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مول لبنان - الصفحة الرئيسية</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f4f4; color: #222; }
+        header { background: #111; color: #fff; padding: 25px; text-align: center; border-bottom: 4px solid #d4af37; }
+        header h1 { color: #d4af37; font-size: 26px; margin-bottom: 5px; }
+        header p { color: #aaa; font-size: 14px; }
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 15px; }
+        .shops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .shop-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-top: 4px solid #d4af37; text-align: center; padding: 20px; }
+        .shop-card h3 { font-size: 20px; color: #111; margin-bottom: 10px; }
+        .shop-card p { color: #666; font-size: 14px; margin-bottom: 15px; }
+        .shop-btn { display: inline-block; width: 100%; padding: 12px; background: #d4af37; color: #111; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 15px; transition: 0.3s; }
+        .shop-btn:hover { background: #c29f30; }
+    </style>
+</head>
+<body>
 
-        grid.innerHTML = `
-            <a href="shop_shoes.html" class="shop-card">
-                <img src="${latestThumb}" alt="أحذية" class="shop-thumb">
-                <div class="shop-info">
-                    <h3>👞 قسم الأحذية والأزياء</h3>
-                    <p>أحدث صيحات الموضة والقطع الفاخرة</p>
-                    <div class="shop-latest-item">✨ ${latestDesc}</div>
-                </div>
-            </a>
-            
-            <a href="shop_shoes.html" class="shop-card">
-                <img src="https://via.placeholder.com/70x70?text=عطور" alt="عطور" class="shop-thumb">
-                <div class="shop-info">
-                    <h3>💎 قسم العطور والرشات</h3>
-                    <p>أرقى أنواع العطور الشرقية والغربية</p>
-                    <div class="shop-latest-item">✨ متوفر الآن في المول</div>
-                </div>
-            </a>
-        `;
-    }
+<header>
+    <h1>🛒 مول لبنان</h1>
+    <p>منصة التسوق المتكاملة - وجهتك الأولى لكل البضائع</p>
+</header>
+
+<div class="container">
+    <div class="shops-grid" id="shopsGridContainer">
+        <!-- قسم الأحذية -->
+        <div class="shop-card">
+            <h3>👞 قسم الأحذية والأزياء</h3>
+            <p>أرقى الموديلات والمصنوعات الفاخرة للرجال والنساء</p>
+            <a href="shop_shoes.html" class="shop-btn">تصفح القسم 🛍️</a>
+        </div>
+
+        <!-- قسم العطور -->
+        <div class="shop-card">
+            <h3>💎 قسم العطور والرشات</h3>
+            <p>أرقى أنواع العطور الشرقية والغربية الفاخرة</p>
+            <a href="shop_perfumes.html" class="shop-btn">تصفح القسم 🛍️</a>
+        </div>
+
+        <!-- لوحة البائع -->
+        <div class="shop-card" style="border-top-color: #25d366;">
+            <h3>📊 لوحة تحكم البائع</h3>
+            <p>إدارة المنتجات، الأسعار، وإضافة البضائع بكل سهولة</p>
+            <a href="vendor_dashboard.html" class="shop-btn" style="background: #25d366; color: #fff;">دخول اللوحة ⚙️</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
