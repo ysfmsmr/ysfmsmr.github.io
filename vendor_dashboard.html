@@ -6,132 +6,104 @@
     <title>لوحة تحكم التاجر - مول لبنان</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f4f4; color: #222; }
-        
+        body { background-color: #f4f6f9; color: #333; }
         header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 4px solid #d4af37; position: relative; }
-        header h1 { font-size: 24px; color: #d4af37; margin-bottom: 5px; }
-        
+        header h1 { font-size: 22px; color: #d4af37; }
         .back-btn { position: absolute; top: 15px; right: 15px; background: #d4af37; color: #111; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 13px; }
-        
-        .container { max-width: 800px; margin: 30px auto; padding: 0 15px; }
-        
-        .card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 25px; }
-        .card h3 { margin-bottom: 15px; color: #111; border-right: 4px solid #d4af37; padding-right: 8px; }
-
-        .form-group { margin-bottom: 15px; text-align: right; }
-        label { display: block; margin-bottom: 6px; font-weight: bold; color: #333; font-size: 14px; }
-        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; background: #fafafa; }
-        input:focus { border-color: #d4af37; outline: none; background: #fff; }
-
-        .submit-btn { width: 100%; padding: 12px; background: #d4af37; color: #111; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .submit-btn:hover { background: #111; color: #d4af37; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; text-align: right; }
-        th, td { padding: 10px; border-bottom: 1px solid #eee; font-size: 14px; }
-        th { background: #111; color: #d4af37; }
-        
-        .badge-discount { background: #e74c3c; color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
-        .btn-delete { background: #c0392b; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 13px; }
+        .container { max-width: 600px; margin: 30px auto; padding: 0 15px; }
+        .card { background: #fff; border-radius: 10px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; border-top: 3px solid #d4af37; }
+        .card h3 { margin-bottom: 15px; color: #111; font-size: 18px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
+        .btn { background: #d4af37; color: #111; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: #c19b2e; }
+        .success-msg { color: #27ae60; font-weight: bold; margin-top: 10px; text-align: center; display: none; }
     </style>
 </head>
 <body>
 
 <header>
     <a href="index.html" class="back-btn">🏠 الرئيسية</a>
-    <h1>🏷️ لوحة تحكم التاجر والبضائع</h1>
+    <h1>🛍️ لوحة تحكم التاجر - إضافة منتج مع صورة</h1>
 </header>
 
 <div class="container">
-    <!-- إضافة منتج جديد أو حسم -->
     <div class="card">
-        <h3>إضافة منتج جديد أو وضع حسومات</h3>
-        <form id="productForm" onsubmit="addProduct(event)">
-            <div class="form-group">
-                <label>اسم المنتج:</label>
-                <input type="text" id="prodName" required placeholder="مثال: حذاء رياضي / قميص رجالي">
-            </div>
-            <div class="form-group">
-                <label>السعر الأساسي ($):</label>
-                <input type="number" id="prodPrice" required placeholder="مثال: 25">
-            </div>
-            <div class="form-group">
-                <label>سعر الحسم (اختياري - إذا كان هناك خصم):</label>
-                <input type="number" id="prodDiscountPrice" placeholder="مثال: 20 (أتركه فارغاً إن لم يوجد حسم)">
-            </div>
-            <button type="submit" class="submit-btn">إضافة المنتج للمول 🚀</button>
-        </form>
-    </div>
-
-    <!-- قائمة منتجات التاجر الحالية -->
-    <div class="card">
-        <h3>منتجاتك المعروضة في المتجر</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>اسم المنتج</th>
-                    <th>السعر الأصلي</th>
-                    <th>السعر بعد الحسم</th>
-                    <th>الحالة</th>
-                    <th>إجراء</th>
-                </tr>
-            </thead>
-            <tbody id="productsTable">
-                <!-- المنتجات بتظهر هون تلقائياً -->
-            </tbody>
-        </table>
+        <h3>إضافة بضاعة جديدة للمتجر</h3>
+        <div class="form-group">
+            <label>اسم المنتج أو البضاعة:</label>
+            <input type="text" id="prodName" placeholder="مثال: حذاء رياضي فخم / فستان سهرة">
+        </div>
+        <div class="form-group">
+            <label>السعر الأساسي ($):</label>
+            <input type="number" id="prodPrice" placeholder="مثال: 50">
+        </div>
+        <div class="form-group">
+            <label>سعر الخصم (اختياري - اتركه فارغاً إذا لم يوجد):</label>
+            <input type="number" id="prodDiscount" placeholder="مثال: 40">
+        </div>
+        <div class="form-group">
+            <label>صورة المنتج من جهازك أو هاتفك:</label>
+            <input type="file" id="prodImageFile" accept="image/*">
+        </div>
+        <button class="btn" onclick="addProduct()">نشر المنتج في المول 🚀</button>
+        <div id="successMsg" class="success-msg">تم نشر المنتج بنجاح وأصبح ظاهراً في المول! ✅</div>
     </div>
 </div>
 
 <script>
-    function loadProducts() {
-        const tableBody = document.getElementById('productsTable');
-        let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
-        
-        if (products.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#777; padding:15px;">لا توجد منتجات مضافة حالياً.</td></tr>`;
+    function addProduct() {
+        const name = document.getElementById('prodName').value.trim();
+        const price = document.getElementById('prodPrice').value.trim();
+        const discountPrice = document.getElementById('prodDiscount').value.trim();
+        const imageFile = document.getElementById('prodImageFile').files[0];
+        const successMsg = document.getElementById('successMsg');
+
+        if (!name || !price) {
+            alert('يرجى إدخال اسم المنتج والسعر على الأقل!');
             return;
         }
 
-        tableBody.innerHTML = "";
-        products.forEach((prod, index) => {
-            let hasDiscount = prod.discountPrice && prod.discountPrice < prod.price;
-            tableBody.innerHTML = `
-                <tr>
-                    <td><b>${prod.name}</b></td>
-                    <td><span style="${hasDiscount ? 'text-decoration: line-through; color: #888;' : ''}">${prod.price} $</span></td>
-                    <td>${hasDiscount ? `<span style="color: #e74c3c; font-weight: bold;">${prod.discountPrice} $</span>` : '-'}</td>
-                    <td>${hasDiscount ? '<span class="badge-discount">🔥 يوجد حسم</span>' : '<span style="color: #27ae60;">عادي</span>'}</td>
-                    <td><button class="btn-delete" onclick="deleteProduct(${index})">حذف 🗑️</button></td>
-                </tr>
-            `;
-        });
+        // تحويل الصورة المرفوعة إلى نظام Base64 لتخزينها وعرضها
+        if (imageFile) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageUrl = e.target.result;
+                saveProductData(name, price, discountPrice, imageUrl);
+            };
+            reader.readAsDataURL(imageFile);
+        } else {
+            // إذا لم يرفع صورة، نضع صورة افتراضية
+            saveProductData(name, price, discountPrice, '');
+        }
     }
 
-    function addProduct(event) {
-        event.preventDefault();
+    function saveProductData(name, price, discountPrice, imageUrl) {
+        let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
         
-        const name = document.getElementById('prodName').value;
-        const price = parseFloat(document.getElementById('prodPrice').value);
-        const discountInput = document.getElementById('prodDiscountPrice').value;
-        const discountPrice = discountInput ? parseFloat(discountInput) : null;
+        const newProduct = {
+            name: name,
+            price: price,
+            discountPrice: discountPrice,
+            image: imageUrl
+        };
 
-        let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
-        products.push({ name, price, discountPrice });
+        products.push(newProduct);
         localStorage.setItem('vendorProducts', JSON.stringify(products));
 
-        document.getElementById('productForm').reset();
-        loadProducts();
-        alert("تم إضافة المنتج وتفعيل عرضه بنجاح يا أبو الزوز! 🎯");
-    }
+        // إظهار رسالة النجاح وتفريغ الحقول
+        const successMsg = document.getElementById('successMsg');
+        successMsg.style.display = 'block';
+        document.getElementById('prodName').value = '';
+        document.getElementById('prodPrice').value = '';
+        document.getElementById('prodDiscount').value = '';
+        document.getElementById('prodImageFile').value = '';
 
-    function deleteProduct(index) {
-        let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
-        products.splice(index, 1);
-        localStorage.setItem('vendorProducts', JSON.stringify(products));
-        loadProducts();
+        setTimeout(() => {
+            successMsg.style.display = 'none';
+        }, 3000);
     }
-
-    window.onload = loadProducts;
 </script>
 
 </body>
