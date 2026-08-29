@@ -1,280 +1,34 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم التاجر - مول لبنان الإلكتروني</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #111; color: #fff; text-align: center; }
-
-        header { background: #1a1a1a; padding: 15px; border-bottom: 3px solid #d4af37; }
-        
-        .nav-links { display: flex; justify-content: center; gap: 8px; padding: 10px; background: #111; flex-wrap: wrap; }
-        .nav-links a { background: #d4af37; color: #111; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 12px; }
-
-        .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
-
-        .dashboard-box { background: #1a1a1a; border: 2px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 25px; text-align: right; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
-        
-        .form-title { color: #d4af37; font-size: 18px; margin-bottom: 15px; font-weight: bold; border-bottom: 1px solid #333; padding-bottom: 8px; text-align: center; }
-        
-        label { display: block; margin-bottom: 6px; font-size: 13px; color: #ddd; font-weight: bold; }
-        input, textarea { width: 100%; padding: 10px; margin-bottom: 15px; background: #222; border: 1px solid #444; color: #fff; border-radius: 6px; font-size: 14px; }
-        input:focus, textarea:focus { border-color: #d4af37; outline: none; }
-
-        .submit-btn { background: #d4af37; color: #111; border: none; padding: 12px; width: 100%; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; }
-        .submit-btn:hover { background: #c5a028; }
-
-        /* أقسام الإدارة والتحكم المنفصلة */
-        .manage-section { margin-top: 25px; text-align: right; }
-        .manage-title { color: #d4af37; font-size: 16px; margin-bottom: 12px; font-weight: bold; border-right: 4px solid #d4af37; padding-right: 8px; }
-        
-        .manage-item-card { background: #222; border: 1px solid #444; border-radius: 8px; padding: 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-        .manage-item-info { display: flex; align-items: center; gap: 10px; overflow: hidden; }
-        .manage-thumb { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #d4af37; flex-shrink: 0; background: #111; }
-        .manage-details h4 { color: #fff; font-size: 14px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
-        .manage-details p { color: #d4af37; font-size: 12px; }
-
-        .action-btns { display: flex; gap: 4px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
-        
-        .btn-store { background: #2980b9; color: #fff; border: none; padding: 5px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
-        .btn-main { background: #27ae60; color: #fff; border: none; padding: 5px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
-        .btn-del { background: #c0392b; color: #fff; border: none; padding: 5px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
-        .btn-remove { background: #e67e22; color: #fff; border: none; padding: 5px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
-
-        .empty-msg { color: #888; font-size: 13px; text-align: center; padding: 15px; background: #1a1a1a; border-radius: 6px; border: 1px dashed #444; }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1 style="color: #d4af37; font-size: 18px;">📦 لوحة تحكم التاجر</h1>
-    <p style="color: #aaa; font-size: 11px; margin-top: 2px;">إدارة مستقلة: المخزن، واجهة المحل، والشاشة الرئيسية</p>
-</header>
-
-<div class="nav-links">
-    <a href="index.html">🏠 الرئيسية</a>
-    <a href="shop_shoes.html">👞 الأحذية</a>
-    <a href="vendor_dashboard.html">📦 لوحة التاجر</a>
-    <a href="admin_panel.html">⚙️ الإدارة</a>
-</div>
-
-<div class="container">
-
-    <!-- نموذج إضافة بضاعة جديدة لصندوق المخزن فقط -->
-    <div class="dashboard-box">
-        <div class="form-title">1️⃣ إضافة بضاعة جديدة لصندوق المخزن</div>
-        
-        <label>اسم المنتج أو البضاعة:</label>
-        <input type="text" id="productName" placeholder="مثال: حذاء رجالي فخم / عطر فاخر">
-
-        <label>السعر الأساسي ($):</label>
-        <input type="number" id="productPrice" placeholder="مثال: 50">
-
-        <label>سعر الخصم (اختياري):</label>
-        <input type="number" id="discountPrice" placeholder="مثال: 40">
-
-        <label>صورة المنتج:</label>
-        <input type="file" id="productImage" accept="image/*">
-
-        <button class="submit-btn" onclick="addNewProductToStorage()">حفظ في المخزن 📦</button>
-    </div>
-
-    <!-- 2️⃣ واجهة المحل الخاصة (داخل متجره) -->
-    <div class="manage-section">
-        <div class="manage-title">🏪 البضاعة المعروضة داخل (واجهة المحل الخاصة)</div>
-        <div id="storeFrontList"></div>
-    </div>
-
-    <!-- 3️⃣ الشاشة الرئيسية العامة للمول (السلايدر فوق) -->
-    <div class="manage-section" style="margin-top: 30px;">
-        <div class="manage-title">🖥️ القطع المعروضة في (الشاشة الرئيسية للمول)</div>
-        <div id="mainScreenList"></div>
-    </div>
-
-    <!-- 4️⃣ صندوق المخزن الأساسي -->
-    <div class="manage-section" style="margin-top: 30px; border-top: 1px dashed #444; padding-top: 20px;">
-        <div class="manage-title">🗄️ صندوق بضائعي المخزنة (الكل)</div>
-        <div id="vendorStorageList"></div>
-    </div>
-
-</div>
+<!-- استبدل الكود المسؤول عن عرض قسم الأحذية أو المتاجر في الصفحة الرئيسية بهذا الكود البرمجي الدقيق -->
 
 <script>
-    function loadDashboard() {
-        let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
-        let storeFront = JSON.parse(localStorage.getItem('storeFrontProducts')) || [];
-        let mainScreen = JSON.parse(localStorage.getItem('vendorProducts')) || [];
+    // جلب بيانات واجهة المحل الخاصة بالمتاجر (المربع التحتاني)
+    let storeFrontData = JSON.parse(localStorage.getItem('storeFrontProducts')) || [];
+    
+    // جلب بيانات الشاشة الرئيسية للمول (السلايدر المتحرك فوق)
+    let mainScreenData = JSON.parse(localStorage.getItem('vendorProducts')) || [];
 
-        let storageContainer = document.getElementById('vendorStorageList');
-        let storeContainer = document.getElementById('storeFrontList');
-        let mainContainer = document.getElementById('mainScreenList');
-
-        // 1. عرض واجهة المحل الخاصة
-        if (storeFront.length === 0) {
-            storeContainer.innerHTML = `<div class="empty-msg">لا توجد بضاعة معروضة في واجهة المحل حالياً. انشر من صندوقك أدناه!</div>`;
-        } else {
-            let html = '';
-            storeFront.forEach((prod, index) => {
-                let img = prod.image || 'https://via.placeholder.com/50?text=صورة';
-                let priceTxt = prod.discountPrice ? `${prod.discountPrice}$` : `${prod.price}$`;
-                html += `
-                    <div class="manage-item-card" style="border-color: #2980b9;">
-                        <div class="manage-item-info">
-                            <img src="${img}" class="manage-thumb">
-                            <div class="manage-details">
-                                <h4>${prod.name}</h4>
-                                <p>السعر: ${priceTxt}</p>
-                            </div>
-                        </div>
-                        <button class="btn-remove" onclick="removeFromStoreFront(${index})">إزالة من المحل ⏹️</button>
-                    </div>
-                `;
-            });
-            storeContainer.innerHTML = html;
+    // مثال على كيفية تحديث عرض "قسم الأحذية والأزياء" بالمربع التحتاني ليأخذ من واجهة المحل فقط:
+    function renderStoreFrontSection() {
+        let lastItemText = "المحل جاهز لاستقبال بضائعكم";
+        
+        if (storeFrontData.length > 0) {
+            // خذ آخر قطعة أضافها التاجر لواجهة محله الخاصة
+            let latestItem = storeFrontData[storeFrontData.length - 1];
+            let price = latestItem.discountPrice ? latestItem.discountPrice : latestItem.price;
+            lastItemText = `✨ آخر قطعة: ${latestItem.name} (${price}$)`;
         }
 
-        // 2. عرض الشاشة الرئيسية العامة
-        if (mainScreen.length === 0) {
-            mainContainer.innerHTML = `<div class="empty-msg">لا توجد بضاعة معروضة حالياً على الشاشة الرئيسية للمول.</div>`;
-        } else {
-            let html = '';
-            mainScreen.forEach((prod, index) => {
-                let img = prod.image || 'https://via.placeholder.com/50?text=صورة';
-                let priceTxt = prod.discountPrice ? `${prod.discountPrice}$` : `${prod.price}$`;
-                html += `
-                    <div class="manage-item-card" style="border-color: #27ae60;">
-                        <div class="manage-item-info">
-                            <img src="${img}" class="manage-thumb">
-                            <div class="manage-details">
-                                <h4>${prod.name}</h4>
-                                <p>السعر: ${priceTxt}</p>
-                            </div>
-                        </div>
-                        <button class="btn-remove" onclick="removeFromMainScreen(${index})">إزالة من الشاشة ⏹️</button>
-                    </div>
-                `;
-            });
-            mainContainer.innerHTML = html;
-        }
-
-        // 3. عرض صندوق المخزن الأساسي
-        if (storage.length === 0) {
-            storageContainer.innerHTML = `<div class="empty-msg">المخزن فارغ حالياً. أضف بضاعة جديدة من النموذج بالأعلى!</div>`;
-            return;
-        }
-
-        let storageHtml = '';
-        storage.forEach((prod, index) => {
-            let img = prod.image || 'https://via.placeholder.com/50?text=صورة';
-            let priceTxt = prod.discountPrice ? `${prod.discountPrice}$` : `${prod.price}$`;
-            storageHtml += `
-                <div class="manage-item-card">
-                    <div class="manage-item-info">
-                        <img src="${img}" class="manage-thumb">
-                        <div class="manage-details">
-                            <h4>${prod.name}</h4>
-                            <p>السعر: ${priceTxt}</p>
-                        </div>
-                    </div>
-                    <div class="action-btns">
-                        <button class="btn-store" onclick="sendToStoreFront(${index})">عرض بالمحل 🏪</button>
-                        <button class="btn-main" onclick="sendToMainScreen(${index})">عرض بالمول 🖥️</button>
-                        <button class="btn-del" onclick="deleteFromStorage(${index})">حذف نهائي 🗑️</button>
-                    </div>
-                </div>
-            `;
-        });
-        storageContainer.innerHTML = storageHtml;
-    }
-
-    function addNewProductToStorage() {
-        let name = document.getElementById('productName').value.trim();
-        let price = document.getElementById('productPrice').value.trim();
-        let discountPrice = document.getElementById('discountPrice').value.trim();
-        let imageInput = document.getElementById('productImage');
-
-        if (!name || !price) {
-            alert('الرجاء إدخال اسم المنتج والسعر الأساسي!');
-            return;
-        }
-
-        if (imageInput.files && imageInput.files[0]) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                saveToStorage(name, price, discountPrice, e.target.result);
-            };
-            reader.readAsDataURL(imageInput.files[0]);
-        } else {
-            saveToStorage(name, price, discountPrice, '');
+        // تحديث النص داخل مربّع القسم التحتاني
+        // (تأكد أن الـ ID عندك بالموقع مطابق أو عدله حسب مسمى العناصر عندك)
+        let sectionElement = document.getElementById('shoesSectionDescription'); 
+        if(sectionElement) {
+            sectionElement.innerHTML = lastItemText;
         }
     }
 
-    function saveToStorage(name, price, discountPrice, image) {
-        let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
-        storage.push({ name, price, discountPrice, image });
-        localStorage.setItem('vendorStorage', JSON.stringify(storage));
-
-        alert('تم حفظ المنتج في مخزن المتجر بنجاح! 📦');
-        document.getElementById('productName').value = '';
-        document.getElementById('productPrice').value = '';
-        document.getElementById('discountPrice').value = '';
-        document.getElementById('productImage').value = '';
-        loadDashboard();
-    }
-
-    // إرسال لواجهة المحل الخاصة
-    function sendToStoreFront(index) {
-        let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
-        let storeFront = JSON.parse(localStorage.getItem('storeFrontProducts')) || [];
-        storeFront.push(storage[index]);
-        localStorage.setItem('storeFrontProducts', JSON.stringify(storeFront));
-        alert('تم عرض القطعة في واجهة المحل بنجاح! 🏪');
-        loadDashboard();
-    }
-
-    // إرسال للشاشة الرئيسية للمول
-    function sendToMainScreen(index) {
-        let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
-        let mainScreen = JSON.parse(localStorage.getItem('vendorProducts')) || [];
-        mainScreen.push(storage[index]);
-        localStorage.setItem('vendorProducts', JSON.stringify(mainScreen));
-        alert('تم نشر القطعة على الشاشة الرئيسية للمول بنجاح! 🚀');
-        loadDashboard();
-    }
-
-    // إزالة من واجهة المحل
-    function removeFromStoreFront(index) {
-        let storeFront = JSON.parse(localStorage.getItem('storeFrontProducts')) || [];
-        storeFront.splice(index, 1);
-        localStorage.setItem('storeFrontProducts', JSON.stringify(storeFront));
-        loadDashboard();
-        alert('تمت الإزالة من واجهة المحل الخاصة.');
-    }
-
-    // إزالة من الشاشة الرئيسية
-    function removeFromMainScreen(index) {
-        let mainScreen = JSON.parse(localStorage.getItem('vendorProducts')) || [];
-        mainScreen.splice(index, 1);
-        localStorage.setItem('vendorProducts', JSON.stringify(mainScreen));
-        loadDashboard();
-        alert('تمت الإزالة من الشاشة الرئيسية للمول.');
-    }
-
-    // حذف نهائي من المخزن
-    function deleteFromStorage(index) {
-        if (confirm('هل أنت متأكد من الحذف النهائي من المخزن؟')) {
-            let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
-            storage.splice(index, 1);
-            localStorage.setItem('vendorStorage', JSON.stringify(storage));
-            loadDashboard();
-            alert('تم الحذف النهائي من المخزن.');
-        }
-    }
-
-    window.onload = loadDashboard;
+    // تشغيل الدالة عند تحميل الصفحة
+    window.onload = function() {
+        if(typeof loadMainSlider === 'function') loadMainSlider(); // السلايدر اللي فوق
+        renderStoreFrontSection(); // المربع التحتاني الخاص بالمحل
+    };
 </script>
-
-</body>
-</html>
