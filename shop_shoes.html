@@ -14,20 +14,22 @@
         .back-btn { position: absolute; top: 15px; right: 15px; background: #d4af37; color: #111; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 13px; }
 
         .container { max-width: 1000px; margin: 30px auto; padding: 0 15px; }
-
         .section-title { font-size: 20px; color: #111; margin-bottom: 20px; border-right: 4px solid #d4af37; padding-right: 10px; }
 
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-        .product-card { background: #fff; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid #d4af37; position: relative; }
-        .product-card h3 { font-size: 18px; color: #111; margin-bottom: 10px; }
-        .price-box { margin: 15px 0; font-size: 16px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .product-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid #d4af37; position: relative; text-align: center; padding-bottom: 15px; }
+        
+        .product-img { width: 100%; height: 180px; object-fit: cover; background: #eee; border-bottom: 1px solid #eee; }
+        
+        .product-card h3 { font-size: 18px; color: #111; margin: 15px 10px 10px 10px; }
+        .price-box { margin: 10px 0; font-size: 16px; }
         .old-price { text-decoration: line-through; color: #888; margin-left: 8px; font-size: 14px; }
         .current-price { color: #e74c3c; font-weight: bold; font-size: 18px; }
         .normal-price { color: #27ae60; font-weight: bold; font-size: 18px; }
         
-        .badge-discount { position: absolute; top: 10px; left: 10px; background: #e74c3c; color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+        .badge-discount { position: absolute; top: 10px; left: 10px; background: #e74c3c; color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; z-index: 2; }
 
-        .buy-btn { display: inline-block; width: 100%; padding: 10px; background: #25d366; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px; transition: 0.3s; margin-top: 10px; border: none; cursor: pointer; text-align: center; }
+        .buy-btn { display: inline-block; width: 90%; padding: 10px; background: #25d366; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px; transition: 0.3s; margin-top: 10px; text-align: center; }
         .buy-btn:hover { background: #1ebe5d; }
 
         .empty-msg { grid-column: 1 / -1; text-align: center; padding: 40px; color: #777; font-size: 16px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
@@ -41,10 +43,10 @@
 </header>
 
 <div class="container">
-    <div class="section-title">أرقى الموديلات والبضائع المضافة</div>
+    <div class="section-title">أرقى الموديلات والبضائع المصورة</div>
     
     <div class="products-grid" id="shopProductsContainer">
-        <!-- جلب المنتجات تلقائياً -->
+        <!-- جلب المنتجات مع صورها تلقائياً -->
     </div>
 </div>
 
@@ -54,7 +56,7 @@
         let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
 
         if (products.length === 0) {
-            container.innerHTML = `<div class="empty-msg">لا توجد أحذية أو بضائع معروضة في هذا القسم حالياً.</div>`;
+            container.innerHTML = `<div class="empty-msg">لا توجد بضائع مصورة معروضة في هذا القسم حالياً.</div>`;
             return;
         }
 
@@ -63,13 +65,17 @@
             let hasDiscount = prod.discountPrice && prod.discountPrice < prod.price;
             let displayPrice = hasDiscount ? prod.discountPrice : prod.price;
             
-            let vendorPhone = "96170000000"; // رقم واتساب افتراضي للتاجر
-            let message = encodeURIComponent(`مرحباً، قسم الأحذية في مول لبنان، أرغب بطلب قطعة "${prod.name}" بسعر ${displayPrice}$`);
+            // صورة افتراضية إذا لم يرفع التاجر صورة
+            let imgSrc = prod.image ? prod.image : 'https://via.placeholder.com/240x180?text=مول+لبنان';
+
+            let vendorPhone = "96170000000"; 
+            let message = encodeURIComponent(`مرحباً، أرغب بطلب قطعة "${prod.name}" بسعر ${displayPrice}$`);
             let whatsappUrl = `https://wa.me/${vendorPhone}?text=${message}`;
 
             html += `
                 <div class="product-card">
                     ${hasDiscount ? '<span class="badge-discount">🔥 خصم خاص</span>' : ''}
+                    <img src="${imgSrc}" alt="${prod.name}" class="product-img">
                     <h3>${prod.name}</h3>
                     <div class="price-box">
                         ${hasDiscount ? `
