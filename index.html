@@ -58,18 +58,17 @@
     <div class="badge">🔥 عرض خاص</div>
     <div class="slide-counter" id="slideIndicator">قطعة (1 من 1)</div>
     <img id="slideImg" src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=60" alt="منتج">
-    <h3 id="slideTitle">جاري التحميل...</h3>
+    <h3 id="slideTitle">فستان فخم</h3>
     <p id="slideDesc">📍 معروض من أحدث بضائع المحلات والتجار</p>
     <div class="price-box">
-        <span class="old-price" id="slideOldPrice"></span>
-        <span id="slidePrice"></span>
+        <span class="old-price" id="slideOldPrice">20 $</span>
+        <span id="slidePrice">10 $</span>
     </div>
 </div>
 
 <script>
-    // جلب البضائع من التخزين المحلي للتاجر أو الاستوديو بدقة
-    let vendorItems = JSON.parse(localStorage.getItem('vendorStorage')) || JSON.parse(localStorage.getItem('storeFrontDisplayOnly')) || [];
-
+    let vendorItems = JSON.parse(localStorage.getItem('vendorStorage')) || [];
+    
     const defaultProducts = [
         {
             title: "فستان أطفال فخم ★",
@@ -94,18 +93,11 @@
         if(!allProducts || allProducts.length === 0) return;
         let p = allProducts[currentIndex];
         
-        // ربط صحيح ودقيق للأنشطة والأسماء والصور بدون تداخل
-        let imgSource = p.image || p.img || p.thumb || 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=60';
-        let titleText = p.title || p.name || 'قطعة مميزة';
-        let descText = p.desc || p.description || '📍 معروض من أحدث بضائع المحلات';
-        let priceText = p.price ? p.price + ' $' : '';
-        let oldPriceText = p.oldPrice ? p.oldPrice + ' $' : '';
-
-        document.getElementById('slideImg').src = imgSource;
-        document.getElementById('slideTitle').innerText = titleText;
-        document.getElementById('slideDesc').innerText = descText;
-        document.getElementById('slidePrice').innerText = priceText;
-        document.getElementById('slideOldPrice').innerText = oldPriceText;
+        document.getElementById('slideImg').src = p.image || p.img || 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=60';
+        document.getElementById('slideTitle').innerText = p.title || p.name || 'قطعة مميزة';
+        document.getElementById('slideDesc').innerText = p.desc || p.description || '📍 معروض من أحدث بضائع المحلات';
+        document.getElementById('slidePrice').innerText = p.price ? p.price + ' $' : '';
+        document.getElementById('slideOldPrice').innerText = p.oldPrice ? p.oldPrice + ' $' : '';
         document.getElementById('slideIndicator').innerText = `قطعة (${currentIndex + 1} من ${allProducts.length})`;
         
         currentIndex = (currentIndex + 1) % allProducts.length;
