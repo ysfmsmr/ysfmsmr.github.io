@@ -47,15 +47,13 @@
         .delete-btn:hover { background: #962d22; }
 
         .empty-msg { color: #888; font-size: 13px; text-align: center; padding: 15px; background: #1a1a1a; border-radius: 6px; border: 1px dashed #444; }
-        
-        .active-display-box { background: #1f1f1f; border: 1px dashed #d4af37; padding: 12px; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
     </style>
 </head>
 <body>
 
 <header>
     <h1 style="color: #d4af37; font-size: 18px;">📦 لوحة تحكم التاجر</h1>
-    <p style="color: #aaa; font-size: 11px; margin-top: 2px;">إدارة منتجات العرض والصندوق في مول لبنان الفخم</p>
+    <p style="color: #aaa; font-size: 11px; margin-top: 2px;">إدارة المخزن وشاشة العرض في مول لبنان الفخم</p>
 </header>
 
 <div class="nav-links">
@@ -67,7 +65,7 @@
 
 <div class="container">
 
-    <!-- نموذج رفع منتج جديد -->
+    <!-- نموذج إضافة بضاعة لصندوق المتجر فقط (بدون نشر تلقائي) -->
     <div class="dashboard-box">
         <div class="form-title">إضافة بضاعة جديدة لصندوق المتجر</div>
         
@@ -83,7 +81,7 @@
         <label>صورة المنتج من جهازك أو هاتفك:</label>
         <input type="file" id="productImage" accept="image/*">
 
-        <button class="submit-btn" onclick="addNewProduct()">إضافة لصندوق المتجر 🚀</button>
+        <button class="submit-btn" onclick="addNewProductToStorage()">إضافة لصندوق المتجر 📦</button>
     </div>
 
     <!-- قسم القطع المعروضة حالياً على واجهة المول -->
@@ -139,7 +137,7 @@
 
         // 2. عرض صندوق البضائع المخزنة
         if (storageProducts.length === 0) {
-            storageContainer.innerHTML = `<div class="empty-msg">صندوقك فارغ حالياً. أضف بضاعة جديدة من النموذج بالأعلى!</div>`;
+            storageContainer.innerHTML = `<div class="empty-msg">صندوقك فارغ حالياً. أضف بضاعة جديدة من النموذج بالأعلـى!</div>`;
             return;
         }
 
@@ -167,7 +165,7 @@
         storageContainer.innerHTML = storageHtml;
     }
 
-    function addNewProduct() {
+    function addNewProductToStorage() {
         let name = document.getElementById('productName').value.trim();
         let price = document.getElementById('productPrice').value.trim();
         let discountPrice = document.getElementById('discountPrice').value.trim();
@@ -181,15 +179,15 @@
         if (imageInput.files && imageInput.files[0]) {
             let reader = new FileReader();
             reader.onload = function(e) {
-                saveToStorageOnly(name, price, discountPrice, e.target.result);
+                saveToStorage(name, price, discountPrice, e.target.result);
             };
             reader.readAsDataURL(imageInput.files[0]);
         } else {
-            saveToStorageOnly(name, price, discountPrice, '');
+            saveToStorage(name, price, discountPrice, '');
         }
     }
 
-    function saveToStorageOnly(name, price, discountPrice, image) {
+    function saveToStorage(name, price, discountPrice, image) {
         let storageProducts = JSON.parse(localStorage.getItem('vendorStorage')) || [];
         
         let newProd = {
@@ -202,7 +200,7 @@
         storageProducts.push(newProd);
         localStorage.setItem('vendorStorage', JSON.stringify(storageProducts));
 
-        alert('تم حفظ المنتج في صندوق متجرك بنجاح! 📦');
+        alert('تم حفظ المنتج في صندوق متجرك بنجاح (دون نشر تلقائي)! 📦');
         
         document.getElementById('productName').value = '';
         document.getElementById('productPrice').value = '';
@@ -212,22 +210,21 @@
         loadVendorDashboard();
     }
 
-    // نقل القطعة من الصندوق إلى واجهة العرض الرئيسية
+    // نقل القطعة من الصندوق إلى الشاشة الرئيسية عند الضغط حصراً على زر "عرض 🖥️"
     function sendToDisplay(index) {
         let storageProducts = JSON.parse(localStorage.getItem('vendorStorage')) || [];
         let activeProducts = JSON.parse(localStorage.getItem('vendorProducts')) || [];
 
         let selectedProduct = storageProducts[index];
         
-        // إضافتها لواجهة العرض
         activeProducts.push(selectedProduct);
         localStorage.setItem('vendorProducts', JSON.stringify(activeProducts));
 
-        alert('تم نشر القطعة على الشاشة الرئيسية للمول بنجاح! 🚀');
+        alert('تم اختيار القطعة ونشرها على الشاشة الرئيسية بنجاح! 🚀');
         loadVendorDashboard();
     }
 
-    // إزالة القطعة من الشاشة الرئيسية فقط (تبقى بالصندوق)
+    // إزالة القطعة من الشاشة الرئيسية فقط
     function removeFromActive(index) {
         let activeProducts = JSON.parse(localStorage.getItem('vendorProducts')) || [];
         activeProducts.splice(index, 1);
