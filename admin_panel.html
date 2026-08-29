@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم الإدارية - مول لبنان</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f4f4; color: #222; }
+        
+        header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 4px solid #d4af37; position: relative; }
+        header h1 { font-size: 24px; color: #d4af37; margin-bottom: 5px; }
+        
+        .back-btn { position: absolute; top: 15px; right: 15px; background: #d4af37; color: #111; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 13px; }
+        
+        .container { max-width: 800px; margin: 30px auto; padding: 0 15px; }
+        
+        /* صندوق تسجيل الدخول للأدمن */
+        .login-box { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; max-width: 400px; margin: 50px auto; }
+        .login-box h2 { margin-bottom: 20px; color: #111; }
+        .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px; text-align: center; }
+        .login-box button { width: 100%; padding: 12px; background: #d4af37; color: #111; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        
+        /* لوحة التحكم الرئيسية */
+        #adminDashboard { display: none; }
+        .card { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .card h3 { margin-bottom: 15px; color: #111; border-right: 4px solid #d4af37; padding-right: 8px; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; text-align: right; }
+        th, td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+        th { background: #111; color: #d4af37; }
+        
+        .btn-approve { background: #27ae60; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-reject { background: #c0392b; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 5px; }
+        
+        .no-data { text-align: center; color: #777; padding: 20px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-btn">🏠 الرئيسية</a>
+    <h1>⚙️ لوحة تحكم الإدارة</h1>
+</header>
+
+<div class="container">
+    <!-- شاشة تسجيل الدخول بكلمة السر الخاصة بك -->
+    <div class="login-box" id="loginBox">
+        <h2>دخول المدير (Admin)</h2>
+        <input type="password" id="adminPass" placeholder="أدخل كلمة المرور السرية">
+        <button onclick="checkLogin()">دخول للوحة التحكم 🔓</button>
+        <p id="loginError" style="color: red; margin-top: 10px; font-size: 13px;"></p>
+    </div>
+
+    <!-- محتوى لوحة التحكم يظهر بعد كلمة السر -->
+    <div id="adminDashboard">
+        <div class="card">
+            <h3>طلبات الانضمام والمحلات الجديدة المعلقة</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>اسم التاجر</th>
+                        <th>اسم المحل</th>
+                        <th>رقم الواتساب</th>
+                        <th>الوصف</th>
+                        <th>الإجراء</th>
+                    </tr>
+                </thead>
+                <tbody id="requestsTable">
+                    <!-- الطلبات بتظهر هون تلقائياً -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // كلمة المرور السرية الخاصة فيك (يمكنك تغييرها لاحقاً لأي كلمة تحبها)
+    const SECRET_PASSWORD = "123";
+
+    function checkLogin() {
+        const enteredPass = document.getElementById('adminPass').value;
+        if (enteredPass === SECRET_PASSWORD) {
+            document.getElementById('loginBox').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            loadRequests();
+        } else {
+            document.getElementById('loginError').innerText = "كلمة المرور غير صحيحة يا أبو الزوز!";
+        }
+    }
+
+    function loadRequests() {
+        const tableBody = document.getElementById('requestsTable');
+        let requests = JSON.parse(localStorage.getItem('mallRequests')) || [];
+        
+        if (requests.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="5" class="no-data">لا توجد طلبات انضمام جديدة حالياً.</td></tr>`;
+            return;
+        }
+
+        tableBody.innerHTML = "";
+        requests.forEach((req, index) => {
+            tableBody.innerHTML += `
+                <tr>
+                    <td><b>${req.owner}</b></td>
+                    <td>${req.shop}</td>
+                    <td><a href="https://wa.me/${req.phone}" target="_blank">${req.phone}</a></td>
+                    <td>${req.desc || 'بدون وصف'}</td>
+                    <td>
+                        <button class="btn-approve" onclick="approveShop(${index})">موافقة ✅</button>
+                        <button class="btn-reject" onclick="deleteRequest(${index})">رفض ❌</button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function approveShop(index) {
+        let requests = JSON.parse(localStorage.getItem('mallRequests')) || [];
+        const approved = requests[index];
+        
+        // حفظ المحل بالمتاجر المفعلة رسمياً
+        let activeShops = JSON.parse(localStorage.getItem('activeShops')) || [];
+        activeShops.push(approved);
+        localStorage.setItem('activeShops', JSON.stringify(activeShops));
+
+        // حذف الطلب من قائمة الانتظار
+        requests.splice(index, 1);
+        localStorage.setItem('mallRequests', JSON.stringify(requests));
+        
+        alert("تمت الموافقة وتفعيل المتجر بنجاح يا أبو الزوز! 🚀");
+        loadRequests();
+    }
+
+    function deleteRequest(index) {
+        let requests = JSON.parse(localStorage.getItem('mallRequests')) || [];
+        requests.splice(index, 1);
+        localStorage.setItem('mallRequests', JSON.stringify(requests));
+        loadRequests();
+    }
+</script>
+
+</body>
+</html>
