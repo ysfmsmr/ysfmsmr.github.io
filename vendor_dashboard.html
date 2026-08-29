@@ -26,27 +26,36 @@
         .submit-btn { background: #d4af37; color: #111; border: none; padding: 12px; width: 100%; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; }
         .submit-btn:hover { background: #c5a028; }
 
-        /* قسم إدارة الحذف والتبديل المرتب */
-        .products-manage-section { margin-top: 30px; text-align: right; }
+        /* أقسام الإدارة والتحكم */
+        .manage-section { margin-top: 25px; text-align: right; }
         .manage-title { color: #d4af37; font-size: 16px; margin-bottom: 12px; font-weight: bold; border-right: 4px solid #d4af37; padding-right: 8px; }
         
         .manage-item-card { background: #222; border: 1px solid #444; border-radius: 8px; padding: 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
         .manage-item-info { display: flex; align-items: center; gap: 10px; overflow: hidden; }
         .manage-thumb { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #d4af37; flex-shrink: 0; background: #111; }
-        .manage-details h4 { color: #fff; font-size: 14px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+        .manage-details h4 { color: #fff; font-size: 14px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
         .manage-details p { color: #d4af37; font-size: 12px; }
 
-        .delete-btn { background: #e74c3c; color: #fff; border: none; padding: 7px 12px; border-radius: 5px; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; flex-shrink: 0; }
-        .delete-btn:hover { background: #c0392b; }
+        .action-btns { display: flex; gap: 5px; flex-shrink: 0; }
+        .show-btn { background: #27ae60; color: #fff; border: none; padding: 6px 10px; border-radius: 5px; font-size: 11px; font-weight: bold; cursor: pointer; }
+        .show-btn:hover { background: #219653; }
+        
+        .remove-btn { background: #e67e22; color: #fff; border: none; padding: 6px 10px; border-radius: 5px; font-size: 11px; font-weight: bold; cursor: pointer; }
+        .remove-btn:hover { background: #d35400; }
+
+        .delete-btn { background: #c0392b; color: #fff; border: none; padding: 6px 10px; border-radius: 5px; font-size: 11px; font-weight: bold; cursor: pointer; }
+        .delete-btn:hover { background: #962d22; }
 
         .empty-msg { color: #888; font-size: 13px; text-align: center; padding: 15px; background: #1a1a1a; border-radius: 6px; border: 1px dashed #444; }
+        
+        .active-display-box { background: #1f1f1f; border: 1px dashed #d4af37; padding: 12px; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
     </style>
 </head>
 <body>
 
 <header>
     <h1 style="color: #d4af37; font-size: 18px;">📦 لوحة تحكم التاجر</h1>
-    <p style="color: #aaa; font-size: 11px; margin-top: 2px;">إدارة منتجات العرض في مول لبنان الفخم</p>
+    <p style="color: #aaa; font-size: 11px; margin-top: 2px;">إدارة منتجات العرض والصندوق في مول لبنان الفخم</p>
 </header>
 
 <div class="nav-links">
@@ -58,8 +67,9 @@
 
 <div class="container">
 
+    <!-- نموذج رفع منتج جديد -->
     <div class="dashboard-box">
-        <div class="form-title">إضافة بضاعة جديدة للمول</div>
+        <div class="form-title">إضافة بضاعة جديدة لصندوق المتجر</div>
         
         <label>اسم المنتج أو البضاعة:</label>
         <input type="text" id="productName" placeholder="مثال: فستان سهرة فخم / حذاء رياضي">
@@ -73,33 +83,72 @@
         <label>صورة المنتج من جهازك أو هاتفك:</label>
         <input type="file" id="productImage" accept="image/*">
 
-        <button class="submit-btn" onclick="addNewProduct()">نشر المنتج في المول 🚀</button>
+        <button class="submit-btn" onclick="addNewProduct()">إضافة لصندوق المتجر 🚀</button>
     </div>
 
-    <div class="products-manage-section">
-        <div class="manage-title">📋 بضائعي الحالية في شاشة العرض (الإدارة والحذف)</div>
-        <div id="vendorProductsList">
-            </div>
+    <!-- قسم القطع المعروضة حالياً على واجهة المول -->
+    <div class="manage-section">
+        <div class="manage-title">🖥️ القطع المعروضة حالياً على الشاشة الرئيسية</div>
+        <div id="activeDisplayList">
+            <!-- تعبئة تلقائية -->
+        </div>
+    </div>
+
+    <!-- قسم صندوق بضائع التاجر المخزنة -->
+    <div class="manage-section" style="margin-top: 35px;">
+        <div class="manage-title">🗄️ صندوق بضائعي (المخزن داخل المتجر)</div>
+        <div id="vendorStorageList">
+            <!-- تعبئة تلقائية -->
+        </div>
     </div>
 
 </div>
 
 <script>
-    function loadVendorProducts() {
-        let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
-        let listContainer = document.getElementById('vendorProductsList');
+    function loadVendorDashboard() {
+        let storageProducts = JSON.parse(localStorage.getItem('vendorStorage')) || [];
+        let activeProducts = JSON.parse(localStorage.getItem('vendorProducts')) || [];
 
-        if (products.length === 0) {
-            listContainer.innerHTML = `<div class="empty-msg">لا توجد بضائع مرفوعة حالياً. ارفع منتجك الأول ليظهر بالمول!</div>`;
+        let storageContainer = document.getElementById('vendorStorageList');
+        let activeContainer = document.getElementById('activeDisplayList');
+
+        // 1. عرض القطع المعروضة حالياً بالواجهة
+        if (activeProducts.length === 0) {
+            activeContainer.innerHTML = `<div class="empty-msg">لا توجد قطع معروضة حالياً على الشاشة الرئيسية. اختر قطعة من صندوقك أدناه واعرضها!</div>`;
+        } else {
+            let activeHtml = '';
+            activeProducts.forEach((prod, index) => {
+                let img = prod.image ? prod.image : 'https://via.placeholder.com/50?text=صورة';
+                let displayPrice = prod.discountPrice ? `${prod.discountPrice}$ (بدل ${prod.price}$)` : `${prod.price}$`;
+                
+                activeHtml += `
+                    <div class="manage-item-card" style="border-color: #d4af37;">
+                        <div class="manage-item-info">
+                            <img src="${img}" alt="${prod.name}" class="manage-thumb">
+                            <div class="manage-details">
+                                <h4>${prod.name}</h4>
+                                <p>السعر: ${displayPrice}</p>
+                            </div>
+                        </div>
+                        <button class="remove-btn" onclick="removeFromActive(${index})">إزالة من العرض ⏹️</button>
+                    </div>
+                `;
+            });
+            activeContainer.innerHTML = activeHtml;
+        }
+
+        // 2. عرض صندوق البضائع المخزنة
+        if (storageProducts.length === 0) {
+            storageContainer.innerHTML = `<div class="empty-msg">صندوقك فارغ حالياً. أضف بضاعة جديدة من النموذج بالأعلى!</div>`;
             return;
         }
 
-        let html = '';
-        products.forEach((prod, index) => {
+        let storageHtml = '';
+        storageProducts.forEach((prod, index) => {
             let img = prod.image ? prod.image : 'https://via.placeholder.com/50?text=صورة';
             let displayPrice = prod.discountPrice ? `${prod.discountPrice}$ (بدل ${prod.price}$)` : `${prod.price}$`;
             
-            html += `
+            storageHtml += `
                 <div class="manage-item-card">
                     <div class="manage-item-info">
                         <img src="${img}" alt="${prod.name}" class="manage-thumb">
@@ -108,12 +157,14 @@
                             <p>السعر: ${displayPrice}</p>
                         </div>
                     </div>
-                    <button class="delete-btn" onclick="deleteProduct(${index})">حذف 🗑️</button>
+                    <div class="action-btns">
+                        <button class="show-btn" onclick="sendToDisplay(${index})">عرض 🖥️</button>
+                        <button class="delete-btn" onclick="deleteFromStorage(${index})">حذف 🗑️</button>
+                    </div>
                 </div>
             `;
         });
-
-        listContainer.innerHTML = html;
+        storageContainer.innerHTML = storageHtml;
     }
 
     function addNewProduct() {
@@ -130,17 +181,16 @@
         if (imageInput.files && imageInput.files[0]) {
             let reader = new FileReader();
             reader.onload = function(e) {
-                saveProductToStorage(name, price, discountPrice, e.target.result);
+                saveToStorageOnly(name, price, discountPrice, e.target.result);
             };
             reader.readAsDataURL(imageInput.files[0]);
         } else {
-            // إذا لم يختار صورة، يتم حفظ المنتج بدون صورة أو بصورة افتراضية
-            saveProductToStorage(name, price, discountPrice, '');
+            saveToStorageOnly(name, price, discountPrice, '');
         }
     }
 
-    function saveProductToStorage(name, price, discountPrice, image) {
-        let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
+    function saveToStorageOnly(name, price, discountPrice, image) {
+        let storageProducts = JSON.parse(localStorage.getItem('vendorStorage')) || [];
         
         let newProd = {
             name: name,
@@ -149,32 +199,55 @@
             image: image
         };
 
-        products.push(newProd);
-        localStorage.setItem('vendorProducts', JSON.stringify(products));
+        storageProducts.push(newProd);
+        localStorage.setItem('vendorStorage', JSON.stringify(storageProducts));
 
-        alert('تم نشر المنتج بنجاح في المول وسيظهر على شاشة العرض تلقائياً! 🎉');
+        alert('تم حفظ المنتج في صندوق متجرك بنجاح! 📦');
         
-        // تفريغ الحقول وتحديث القائمة
         document.getElementById('productName').value = '';
         document.getElementById('productPrice').value = '';
         document.getElementById('discountPrice').value = '';
         document.getElementById('productImage').value = '';
         
-        loadVendorProducts();
+        loadVendorDashboard();
     }
 
-    function deleteProduct(index) {
-        if (confirm('هل أنت متأكد من رغبتك في حذف هذه القطعة وإزالتها من العرض؟')) {
-            let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
-            products.splice(index, 1);
-            localStorage.setItem('vendorProducts', JSON.stringify(products));
-            loadVendorProducts();
-            alert('تم حذف القطعة وإزالتها من الشاشة الرئيسية بنجاح.');
+    // نقل القطعة من الصندوق إلى واجهة العرض الرئيسية
+    function sendToDisplay(index) {
+        let storageProducts = JSON.parse(localStorage.getItem('vendorStorage')) || [];
+        let activeProducts = JSON.parse(localStorage.getItem('vendorProducts')) || [];
+
+        let selectedProduct = storageProducts[index];
+        
+        // إضافتها لواجهة العرض
+        activeProducts.push(selectedProduct);
+        localStorage.setItem('vendorProducts', JSON.stringify(activeProducts));
+
+        alert('تم نشر القطعة على الشاشة الرئيسية للمول بنجاح! 🚀');
+        loadVendorDashboard();
+    }
+
+    // إزالة القطعة من الشاشة الرئيسية فقط (تبقى بالصندوق)
+    function removeFromActive(index) {
+        let activeProducts = JSON.parse(localStorage.getItem('vendorProducts')) || [];
+        activeProducts.splice(index, 1);
+        localStorage.setItem('vendorProducts', JSON.stringify(activeProducts));
+        loadVendorDashboard();
+        alert('تم إزالة القطعة من الشاشة الرئيسية فقط، وهي محفوظة بصندوقك.');
+    }
+
+    // حذف نهائي من الصندوق
+    function deleteFromStorage(index) {
+        if (confirm('هل أنت متأكد من رغبتك في حذف هذه القطعة نهائياً من صندوق متجرك؟')) {
+            let storageProducts = JSON.parse(localStorage.getItem('vendorStorage')) || [];
+            storageProducts.splice(index, 1);
+            localStorage.setItem('vendorStorage', JSON.stringify(storageProducts));
+            loadVendorDashboard();
+            alert('تم حذف القطعة نهائياً من الصندوق.');
         }
     }
 
-    // تحميل القائمة فور فتح الصفحة
-    window.onload = loadVendorProducts;
+    window.onload = loadVendorDashboard;
 </script>
 
 </body>
