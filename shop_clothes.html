@@ -3,52 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محل الأناقة للملابس - مول لبنان</title>
+    <title>قسم الأزياء والملابس - مول لبنان</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f9f9f9; color: #222; }
-        header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 3px solid #d4af37; }
-        header h1 { color: #d4af37; font-size: 26px; margin-bottom: 5px; }
-        .back-btn { display: inline-block; margin-top: 10px; padding: 6px 15px; background: #d4af37; color: #111; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; }
-        .container { max-width: 1100px; margin: 25px auto; padding: 0 15px; }
-        .section-title { font-size: 20px; font-weight: bold; color: #111; margin-bottom: 20px; border-right: 5px solid #d4af37; padding-right: 10px; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-        .product-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.06); border: 1px solid #eee; text-align: center; padding-bottom: 15px; }
-        .product-img { width: 100%; height: 180px; background: #e5e5e5; display: flex; align-items: center; justify-content: center; font-size: 45px; color: #777; }
-        .product-name { font-size: 16px; font-weight: bold; color: #111; margin: 12px 0 5px 0; }
-        .product-price { font-size: 15px; color: #d4af37; font-weight: bold; margin-bottom: 12px; }
-        .btn-whatsapp { display: inline-block; width: 85%; padding: 8px; background: #25d366; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; }
-        .btn-whatsapp:hover { background: #1ebe5d; }
+
+        header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 4px solid #d4af37; position: relative; }
+        header h1 { font-size: 24px; color: #d4af37; margin-bottom: 5px; }
+        
+        .back-btn { position: absolute; top: 15px; right: 15px; background: #d4af37; color: #111; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 13px; }
+
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 15px; }
+
+        .section-title { font-size: 20px; color: #111; margin-bottom: 20px; border-right: 4px solid #d4af37; padding-right: 10px; }
+
+        /* شبكة عرض المنتجات للزبون */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .product-card { background: #fff; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid #d4af37; position: relative; }
+        .product-card h3 { font-size: 18px; color: #111; margin-bottom: 10px; }
+        .price-box { margin: 15px 0; font-size: 16px; }
+        .old-price { text-decoration: line-through; color: #888; margin-left: 8px; font-size: 14px; }
+        .current-price { color: #e74c3c; font-weight: bold; font-size: 18px; }
+        .normal-price { color: #27ae60; font-weight: bold; font-size: 18px; }
+        
+        .badge-discount { position: absolute; top: 10px; left: 10px; background: #e74c3c; color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+
+        .buy-btn { display: inline-block; width: 100%; padding: 10px; background: #111; color: #d4af37; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px; transition: 0.3s; margin-top: 10px; border: none; cursor: pointer; }
+        .buy-btn:hover { background: #d4af37; color: #111; }
+
+        .empty-msg { grid-column: 1 / -1; text-align: center; padding: 40px; color: #777; font-size: 16px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     </style>
 </head>
 <body>
-    <header>
-        <h1>👔 محل الأناقة للملابس</h1>
-        <p>أرقى الموديلات العصرية والشبابية في لبنان</p>
-        <a href="index.html" class="back-btn">← العودة إلى الرئيسية للمول</a>
-    </header>
-    <div class="container">
-        <h2 class="section-title">تشكيلة الألبسة المتوفرة</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-img">🧥</div>
-                <div class="product-name">جاكيت شتوي فخم</div>
-                <div class="product-price">$45.00</div>
-                <a href="https://wa.me/96100000000?text=مرحباً، أهتم بشراء جاكيت شتوي فخم من محل الأناقة" class="btn-whatsapp" target="_blank">اطلب عبر واتساب 💬</a>
-            </div>
-            <div class="product-card">
-                <div class="product-img">👕</div>
-                <div class="product-name">قميص رجالي رسمي</div>
-                <div class="product-price">$20.00</div>
-                <a href="https://wa.me/96100000000?text=مرحباً، أهتم بشراء قميص رجالي رسمي من محل الأناقة" class="btn-whatsapp" target="_blank">اطلب عبر واتساب 💬</a>
-            </div>
-            <div class="product-card">
-                <div class="product-img">👖</div>
-                <div class="product-name">بنطال جينز عصري</div>
-                <div class="product-price">$25.00</div>
-                <a href="https://wa.me/96100000000?text=مرحباً، أهتم بشراء بنطال جينز عصري من محل الأناقة" class="btn-whatsapp" target="_blank">اطلب عبر واتساب 💬</a>
-            </div>
-        </div>
+
+<header>
+    <a href="index.html" class="back-btn">🏠 الرئيسية</a>
+    <h1>👔 قسم الأزياء والملابس الفاخرة</h1>
+</header>
+
+<div class="container">
+    <div class="section-title">القطع والبضائع المضافة من التجار</div>
+    
+    <div class="products-grid" id="shopProductsContainer">
+        <!-- يتم جلب وعرض بضائع التجار هنا تلقائياً -->
     </div>
+</div>
+
+<script>
+    function loadShopProducts() {
+        const container = document.getElementById('shopProductsContainer');
+        // جلب المنتجات المخزنة من لوحة تحكم التجار
+        let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
+
+        if (products.length === 0) {
+            container.innerHTML = `<div class="empty-msg">لا توجد بضائع أو حسومات معروضة في هذا القسم حالياً. يرجى مراجعة الإدارة أو التجار لاحقاً.</div>`;
+            return;
+        }
+
+        let html = '';
+        products.forEach((prod) => {
+            let hasDiscount = prod.discountPrice && prod.discountPrice < prod.price;
+            
+            html += `
+                <div class="product-card">
+                    ${hasDiscount ? '<span class="badge-discount">🔥 خصم خاص</span>' : ''}
+                    <h3>${prod.name}</h3>
+                    <div class="price-box">
+                        ${hasDiscount ? `
+                            <span class="old-price">${prod.price} $</span>
+                            <span class="current-price">${prod.discountPrice} $</span>
+                        ` : `
+                            <span class="normal-price">${prod.price} $</span>
+                        `}
+                    </div>
+                    <button class="buy-btn" onclick="orderProduct('${prod.name}')">اطلب الآن 🛒</button>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    function orderProduct(productName) {
+        alert(`تم اختيار قطعة "${productName}" بنجاح! سيتم تحويلك لإتمام الطلب أو التواصل مع التاجر عبر مول لبنان.`);
+    }
+
+    window.onload = loadShopProducts;
+</script>
+
 </body>
 </html>
