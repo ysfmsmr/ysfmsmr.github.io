@@ -19,15 +19,15 @@
 
         .section-title { font-size: 18px; color: #d4af37; margin: 20px 0 15px 0; font-weight: bold; text-align: right; border-right: 4px solid #d4af37; padding-right: 10px; }
 
-        /* شاشة العرض المتقلبة التلقائية (سلايدر الدعاية) */
-        .slider-screen-card { background: #000; border: 3px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3); text-align: center; position: relative; }
+        /* شاشة العرض المتقلبة العلوية */
+        .slider-screen-card { background: #000; border: 3px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3); text-align: center; position: relative; min-height: 320px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         
         .slider-img { width: 100%; height: 240px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; background: #222; border: 1px solid #d4af37; }
         
-        .slider-title { color: #d4af37; font-size: 20px; margin-bottom: 8px; font-weight: bold; }
-        .slider-shop-name { color: #aaa; font-size: 13px; margin-bottom: 8px; }
+        .slider-title { color: #d4af37; font-size: 20px; margin-bottom: 6px; font-weight: bold; }
+        .slider-shop-name { color: #aaa; font-size: 13px; margin-bottom: 6px; }
         
-        .price-box { margin: 10px 0; font-size: 17px; }
+        .price-box { margin: 8px 0; font-size: 17px; }
         .old-price { text-decoration: line-through; color: #888; margin-left: 8px; font-size: 14px; }
         .current-price { color: #e74c3c; font-weight: bold; font-size: 19px; }
         .normal-price { color: #2ecc71; font-weight: bold; font-size: 19px; }
@@ -35,9 +35,9 @@
         .whatsapp-btn { display: inline-block; width: 100%; padding: 11px; background: #25d366; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 15px; margin-top: 10px; transition: 0.3s; }
         .whatsapp-btn:hover { background: #1ebe5d; }
         
-        .empty-display { color: #aaa; padding: 35px; font-size: 14px; }
+        .empty-display { color: #aaa; padding: 20px; font-size: 15px; line-height: 1.6; }
 
-        /* شبكة المحلات والأقسام الثابتة بالأسفل */
+        /* شبكة المحلات بالأسفل */
         .shops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
         .shop-card { background: #1a1a1a; border: 2px solid #d4af37; border-radius: 10px; padding: 15px; text-align: right; display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; transition: 0.3s; }
         .shop-card:hover { background: #222; }
@@ -51,10 +51,12 @@
 
 <header>
     <h1 style="color: #d4af37; font-size: 20px;">🛍️ مول لبنان الإلكتروني</h1>
+    <p style="color: #aaa; font-size: 12px; margin-top: 4px;">وجهتك الأولى للتسوق والمتاجر الفاخرة</p>
 </header>
 
 <div class="nav-links">
     <a href="index.html">🏠 الرئيسية</a>
+    <a href="shop_shoes.html">👞 الأحذية</a>
     <a href="vendor_dashboard.html">📦 لوحة التاجر</a>
     <a href="admin_panel.html">⚙️ الإدارة</a>
 </div>
@@ -62,7 +64,7 @@
 <div class="container">
 
     <div class="visitors-box">
-        👀 عدد زوار المول الكلي: <span id="visitorCount">135</span> زائر
+        👀 عدد زوار المول الكلي: <span id="visitorCount">142</span> زائر
     </div>
 
     <!-- شاشة العرض المتقلبة في الأعلى للدعاية -->
@@ -71,10 +73,10 @@
         <!-- يتم تعبئتها تلقائياً بالتدوير -->
     </div>
 
-    <!-- محلات وأقسام المول الثابتة في الأسفل وكل محل معروضة واجهته وقطعته -->
+    <!-- أقسام ومحلات المول الثابتة في الأسفل -->
     <div class="section-title">🏬 أقسام ومحلات المول الثابتة</div>
     <div class="shops-grid" id="shopsGridContainer">
-        <!-- يتم عرض المحلات هنا مع أحدث قطعة لكل محل -->
+        <!-- يتم عرض المحلات هنا -->
     </div>
 
 </div>
@@ -85,13 +87,14 @@
     let sliderTimer = null;
 
     function initMallHome() {
+        // جلب المنتجات المخزنة من لوحة التاجر الصحيحة
         productsCache = JSON.parse(localStorage.getItem('vendorProducts')) || [];
         
         renderSlider();
         renderShopsList();
 
-        // تشغيل المؤقت لتقليب شاشة العرض تلقائياً كل 3.5 ثانية
-        if (productsCache.length > 1) {
+        // تشغيل مؤقت السلايدر ليقلب كل 3.5 ثانية إذا كان هناك أكثر من منتج
+        if (productsCache.length > 0) {
             if (sliderTimer) clearInterval(sliderTimer);
             sliderTimer = setInterval(() => {
                 currentSlideIndex = (currentSlideIndex + 1) % productsCache.length;
@@ -105,8 +108,8 @@
         if (productsCache.length === 0) {
             container.innerHTML = `
                 <div class="empty-display">
-                    لا توجد بضائع مرفوعة حالياً للدعاية.<br>
-                    اذهب إلى <b>"لوحة التاجر"</b> وارفع منتجات مع صور لتظهر في شاشة العرض والدعاية! 🚀
+                    أهلاً بك في مول لبنان الفخم ✨<br>
+                    لا توجد بضائع مرفوعة حالياً. اذهب إلى <b>"لوحة التاجر"</b> وارفع منتجاتك لتظهر هنا على شاشة العرض تلقائياً! 🚀
                 </div>
             `;
             return;
@@ -114,7 +117,7 @@
 
         if (currentSlideIndex >= productsCache.length) currentSlideIndex = 0;
         let prod = productsCache[currentSlideIndex];
-        let hasDiscount = prod.discountPrice && prod.discountPrice < prod.price;
+        let hasDiscount = prod.discountPrice && Number(prod.discountPrice) < Number(prod.price);
         let displayPrice = hasDiscount ? prod.discountPrice : prod.price;
         let imgSrc = prod.image ? prod.image : 'https://via.placeholder.com/500x240?text=مول+لبنان';
 
@@ -126,7 +129,7 @@
             ${hasDiscount ? '<div style="position:absolute; top:15px; left:15px; background:#e74c3c; color:#fff; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:bold; z-index:2;">🔥 خصم خاص</div>' : ''}
             <img src="${imgSrc}" alt="${prod.name}" class="slider-img">
             <div class="slider-title">⭐ ${prod.name}</div>
-            <div class="slider-shop-name">📍 معروض في: متجر الأحذية والأزياء الراقية</div>
+            <div class="slider-shop-name">📍 معروض في: أقسام المول التجاري</div>
             <div class="price-box">
                 ${hasDiscount ? `
                     <span class="old-price">${prod.price} $</span>
@@ -142,7 +145,6 @@
     function renderShopsList() {
         const gridContainer = document.getElementById('shopsGridContainer');
         
-        // جلب آخر قطعة مرفوعة لتكون واجهة المحل الثابتة
         let latestProd = productsCache.length > 0 ? productsCache[productsCache.length - 1] : null;
         let latestImg = latestProd && latestProd.image ? latestProd.image : 'https://via.placeholder.com/70x70?text=متجر';
         let latestText = latestProd ? `أبرز معروضات المحل: ${latestProd.name} (${latestProd.price}$)` : 'لا توجد منتجات معروضة حالياً';
