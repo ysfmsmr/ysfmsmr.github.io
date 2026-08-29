@@ -1,3 +1,5 @@
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -46,7 +48,6 @@
     <div class="section-title">أرقى الموديلات والبضائع المصورة</div>
     
     <div class="products-grid" id="shopProductsContainer">
-        <!-- جلب المنتجات مع صورها تلقائياً -->
     </div>
 </div>
 
@@ -64,8 +65,6 @@
         products.forEach((prod) => {
             let hasDiscount = prod.discountPrice && prod.discountPrice < prod.price;
             let displayPrice = hasDiscount ? prod.discountPrice : prod.price;
-            
-            // صورة افتراضية إذا لم يرفع التاجر صورة
             let imgSrc = prod.image ? prod.image : 'https://via.placeholder.com/240x180?text=مول+لبنان';
 
             let vendorPhone = "96170000000"; 
