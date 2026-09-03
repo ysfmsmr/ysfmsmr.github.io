@@ -3,93 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قسم الأزياء والملابس - مول لبنان</title>
+    <title>قسم الألبسة | مول لبنان</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f9f9f9; color: #222; }
+        :root {
+            --primary: #d4af37;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text: #ffffff;
+            --accent: #25d366;
+        }
 
-        header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 4px solid #d4af37; position: relative; }
-        header h1 { font-size: 24px; color: #d4af37; margin-bottom: 5px; }
-        
-        .back-btn { position: absolute; top: 15px; right: 15px; background: #d4af37; color: #111; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 13px; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
 
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 15px; }
+        header {
+            padding: 10px;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 20px;
+        }
 
-        .section-title { font-size: 20px; color: #111; margin-bottom: 20px; border-right: 4px solid #d4af37; padding-right: 10px; }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
 
-        /* شبكة عرض المنتجات للزبون */
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-        .product-card { background: #fff; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid #d4af37; position: relative; }
-        .product-card h3 { font-size: 18px; color: #111; margin-bottom: 10px; }
-        .price-box { margin: 15px 0; font-size: 16px; }
-        .old-price { text-decoration: line-through; color: #888; margin-left: 8px; font-size: 14px; }
-        .current-price { color: #e74c3c; font-weight: bold; font-size: 18px; }
-        .normal-price { color: #27ae60; font-weight: bold; font-size: 18px; }
-        
-        .badge-discount { position: absolute; top: 10px; left: 10px; background: #e74c3c; color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+        }
 
-        .buy-btn { display: inline-block; width: 100%; padding: 10px; background: #111; color: #d4af37; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px; transition: 0.3s; margin-top: 10px; border: none; cursor: pointer; }
-        .buy-btn:hover { background: #d4af37; color: #111; }
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
 
-        .empty-msg { grid-column: 1 / -1; text-align: center; padding: 40px; color: #777; font-size: 16px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .title {
+            font-size: 14px;
+            margin: 8px 0 4px;
+            font-weight: bold;
+        }
+
+        .vendor-name {
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        .price {
+            color: var(--accent);
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .btn-wa {
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            padding: 8px;
+            display: block;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <a href="index.html" class="back-btn">🏠 الرئيسية</a>
-    <h1>👔 قسم الأزياء والملابس الفاخرة</h1>
-</header>
+    <a href="index.html" class="back-btn">⬅️ العودة للرئيسية</a>
 
-<div class="container">
-    <div class="section-title">القطع والبضائع المضافة من التجار</div>
-    
-    <div class="products-grid" id="shopProductsContainer">
-        <!-- يتم جلب وعرض بضائع التجار هنا تلقائياً -->
+    <header>
+        <h2 style="color: var(--primary); margin: 0;">👗 قسم الألبسة والتشكيلات</h2>
+    </header>
+
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=500" alt="فستان">
+            <div class="title">فستان سهرة فاخر</div>
+            <div class="vendor-name">📍 بوتيك الأناقة - زحلة</div>
+            <div class="price">$70</div>
+            <a href="https://wa.me/96170000000?text=مرحبا،%20اريد%20الاستفسار%20عن%20فستان%20السهرة" class="btn-wa" target="_blank">💬 اطلب عبر الواتساب</a>
+        </div>
+
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" alt="تيشيرت">
+            <div class="title">طقم سبور رجالي</div>
+            <div class="vendor-name">📍 محلات الملوك - بعلبك</div>
+            <div class="price">$25</div>
+            <a href="https://wa.me/96170000000?text=مرحبا،%20اريد%20الاستفسار%20عن%20اللقم%20الرجالي" class="btn-wa" target="_blank">💬 اطلب عبر الواتساب</a>
+        </div>
     </div>
-</div>
-
-<script>
-    function loadShopProducts() {
-        const container = document.getElementById('shopProductsContainer');
-        // جلب المنتجات المخزنة من لوحة تحكم التجار
-        let products = JSON.parse(localStorage.getItem('vendorProducts')) || [];
-
-        if (products.length === 0) {
-            container.innerHTML = `<div class="empty-msg">لا توجد بضائع أو حسومات معروضة في هذا القسم حالياً. يرجى مراجعة الإدارة أو التجار لاحقاً.</div>`;
-            return;
-        }
-
-        let html = '';
-        products.forEach((prod) => {
-            let hasDiscount = prod.discountPrice && prod.discountPrice < prod.price;
-            
-            html += `
-                <div class="product-card">
-                    ${hasDiscount ? '<span class="badge-discount">🔥 خصم خاص</span>' : ''}
-                    <h3>${prod.name}</h3>
-                    <div class="price-box">
-                        ${hasDiscount ? `
-                            <span class="old-price">${prod.price} $</span>
-                            <span class="current-price">${prod.discountPrice} $</span>
-                        ` : `
-                            <span class="normal-price">${prod.price} $</span>
-                        `}
-                    </div>
-                    <button class="buy-btn" onclick="orderProduct('${prod.name}')">اطلب الآن 🛒</button>
-                </div>
-            `;
-        });
-
-        container.innerHTML = html;
-    }
-
-    function orderProduct(productName) {
-        alert(`تم اختيار قطعة "${productName}" بنجاح! سيتم تحويلك لإتمام الطلب أو التواصل مع التاجر عبر مول لبنان.`);
-    }
-
-    window.onload = loadShopProducts;
-</script>
 
 </body>
 </html>
