@@ -1,23 +1,125 @@
-// كود زر إرسال المنتج لواجهة المحل الخاصة (المربع التحتاني)
-function sendToStoreFront(index) {
-    let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
-    let storeFront = JSON.parse(localStorage.getItem('storeFrontDisplayOnly')) || [];
-    
-    storeFront = [storage[index]]; 
-    
-    localStorage.setItem('storeFrontDisplayOnly', JSON.stringify(storeFront));
-    alert('تم النشر في واجهة المحل الخاصة بنجاح!');
-    loadDashboard();
-}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم التاجر - مول لبنان</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
+        body { background-color: #121212; color: #fff; padding: 15px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 420px; background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; }
+        h2 { color: #d4af37; text-align: center; margin-bottom: 20px; font-size: 18px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 13px; color: #bbb; }
+        input, select { width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: #fff; border-radius: 6px; }
+        button { width: 100%; padding: 12px; background: #d4af37; color: #000; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+        button:active { transform: scale(0.98); }
+        .product-list { margin-top: 20px; border-top: 1px solid #333; padding-top: 15px; }
+        .item { background: #222; padding: 10px; border-radius: 6px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .item-info { font-size: 13px; }
+        .delete-btn { background: #e91e63; color: #fff; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; width: auto; margin: 0; }
+        .back-link { display: block; text-align: center; margin-top: 15px; color: #d4af37; text-decoration: none; font-size: 13px; }
+    </style>
+</head>
+<body>
 
-// كود زر إرسال المنتج للسلايدر الرئيسي (الشاشة الرئيسية فوق)
-function sendToMainScreen(index) {
-    let storage = JSON.parse(localStorage.getItem('vendorStorage')) || [];
-    let mainScreen = JSON.parse(localStorage.getItem('mainSliderProducts')) || [];
-    
-    mainScreen.push(storage[index]);
-    
-    localStorage.setItem('mainSliderProducts', JSON.stringify(mainScreen));
-    alert('تم النشر في الشاشة الرئيسية للمول بنجاح!');
-    loadDashboard();
-}
+    <div class="container">
+        <h2>📦 لوحة تحكم التاجر</h2>
+        
+        <div id="status-alert" style="background: #333; padding: 10px; border-radius: 6px; font-size: 12px; text-align: center; margin-bottom: 15px;">
+            حالة الحساب: <span id="account-status" style="color: #00e676; font-weight: bold;">نشط (مدفوع)</span>
+        </div>
+
+        <div class="form-group">
+            <label>اسم المنتج</label>
+            <input type="text" id="p-title" placeholder="مثال: فستان سهرة فاخر">
+        </div>
+
+        <div class="form-group">
+            <label>السعر ($)</label>
+            <input type="number" id="p-price" placeholder="70">
+        </div>
+
+        <div class="form-group">
+            <label>رابط الصورة (URL)</label>
+            <input type="text" id="p-img" placeholder="ضع رابط صورة المنتج هنا">
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="show-on-main" checked> عرض فوري على الواجهة الرئيسية للمول
+            </label>
+        </div>
+
+        <button onclick="addProduct()">إضافة المنتج وعرضه</button>
+
+        <div class="product-list">
+            <h3 style="font-size: 14px; margin-bottom: 10px; color: #ff9800;">منتجاتي المعروضة:</h3>
+            <div id="merchant-items"></div>
+        </div>
+
+        <a href="index.html" class="back-link">⬅ العودة إلى الرئيسية</a>
+    </div>
+
+    <script>
+        // التحقق من حالة اشتراك التاجر من لوحة الإدارة
+        let storeStatus = localStorage.getItem('store_active') !== 'false';
+        if (!storeStatus) {
+            document.getElementById('account-status').innerText = "موقوف (لم يتم دفع الاشتراك)";
+            document.getElementById('account-status').style.color = "#e91e63";
+            alert("عذراً، تم إيقاف حسابك من قبل الإدارة لعدم دفع الاشتراك!");
+        }
+
+        function loadProducts() {
+            let products = JSON.parse(localStorage.getItem('mall_products') || '[]');
+            let container = document.getElementById('merchant-items');
+            container.innerHTML = '';
+            
+            products.forEach((p, index) => {
+                container.innerHTML += `
+                    <div class="item">
+                        <div class="item-info">
+                            <strong>${p.name}</strong><br>
+                            <span>$${p.price}</span>
+                        </div>
+                        <button class="delete-btn" onclick="deleteProduct(${index})">حذف وإزالة</button>
+                    </div>
+                `;
+            });
+        }
+
+        function addProduct() {
+            if (!storeStatus) {
+                alert("لا يمكنك إضافة منتجات، حسابك موقوف من الإدارة!");
+                return;
+            }
+
+            let name = document.getElementById('p-title').value;
+            let price = document.getElementById('p-price').value;
+            let img = document.getElementById('p-img').value;
+
+            if(!name || !price || !img) {
+                alert("الرجاء تعبئة كافة الحقول!");
+                return;
+            }
+
+            let products = JSON.parse(localStorage.getItem('mall_products') || '[]');
+            products.push({ name, price, image: img, store: "متجر التاجر الخاص" });
+            localStorage.setItem('mall_products', JSON.stringify(products));
+
+            alert("تمت إضافة المنتج بنجاح وعرضه على واجهة المول!");
+            loadProducts();
+        }
+
+        function deleteProduct(index) {
+            let products = JSON.parse(localStorage.getItem('mall_products') || '[]');
+            products.splice(index, 1);
+            localStorage.setItem('mall_products', JSON.stringify(products));
+            loadProducts();
+            alert("تم حذف المنتج وإزالته من الشاشة الرئيسية.");
+        }
+
+        loadProducts();
+    </script>
+</body>
+</html>
