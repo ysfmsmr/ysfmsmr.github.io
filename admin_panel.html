@@ -61,4 +61,32 @@
     <a href="index.html" style="color: var(--primary); text-decoration: none;">⬅️ معاينة الموقع الحقيقي</a>
 
 </body>
-</html>
+</html><!-- Firebase SDK & Database Setup -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { 
+    getFirestore, 
+    collection, 
+    doc, 
+    setDoc, 
+    getDoc, 
+    updateDoc, 
+    getDocs, 
+    query, 
+    where 
+  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBa8rb1GogfiLTMNDZ0rSuRRzdjziw0Vlg",
+    authDomain: "mall-lebanon.firebaseapp.com",
+    projectId: "mall-lebanon",
+    storageBucket: "mall-lebanon.firebasestorage.app",
+    messagingSenderId: "1063802042997",
+    appId: "1:1063802042997:web:85aab92a4e1cb2e93a163c"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  window.db = db;
+  console.log("تم اتصال مول لبنان بقاعدة البيانات بنجاح!");
+</script>
