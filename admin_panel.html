@@ -7,12 +7,13 @@
     <style>
         body { font-family: Arial, sans-serif; background-color: #121212; color: #fff; margin: 0; padding: 20px; }
         h1, h2 { color: #d4af37; text-align: center; }
-        .container { max-width: 900px; margin: auto; background: #1e1e1e; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .container { max-width: 950px; margin: auto; background: #1e1e1e; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         th, td { padding: 12px; text-align: center; border-bottom: 1px solid #333; }
         th { background-color: #d4af37; color: #000; }
-        .btn-approve { background-color: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .btn-delete { background-color: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-approve { background-color: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-reject { background-color: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-remove { background-color: #ff4d4d; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
         .back-link { display: block; text-align: center; margin-top: 20px; color: #d4af37; text-decoration: none; font-weight: bold; }
     </style>
 </head>
@@ -20,9 +21,10 @@
 
     <div class="container">
         <h1>⚙️ لوحة تحكم الإدارة - مول لبنان</h1>
-        <p style="text-align: center; color: #aaa;">إدارة طلبات المتاجر وتفعيل حسابات التجار</p>
+        <p style="text-align: center; color: #aaa;">إدارة طلبات المتاجر والمشاركين</p>
 
-        <h2>طلبات الانضمام الجديدة</h2>
+        <!-- قسم طلبات الانضمام الجديدة -->
+        <h2>📥 طلبات الانضمام الجديدة (قيد الانتظار)</h2>
         <table>
             <thead>
                 <tr>
@@ -33,10 +35,27 @@
                     <th>الإجراء</th>
                 </tr>
             </thead>
-            <tbody id="vendorsTableBody">
+            <tbody id="requestsTableBody">
+                <tr><td colspan="5" style="text-align: center; color: #777;">جاري التحميل...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <!-- قسم المحلات والمشاركين المقبولين حالياً -->
+        <h2>🏪 التجار والمحلات المشتركة حالياً في الموقع</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td colspan="5" style="text-align: center; color: #777;">جاري تحميل الطلبات...</td>
+                    <th>اسم التاجر</th>
+                    <th>اسم المحل</th>
+                    <th>رقم الواتساب</th>
+                    <th>وصف البضاعة</th>
+                    <th>الإجراء</th>
                 </tr>
+            </thead>
+            <tbody id="approvedTableBody">
+                <tr><td colspan="5" style="text-align: center; color: #777;">جاري التحميل...</td></tr>
             </tbody>
         </table>
 
@@ -50,7 +69,7 @@
 
         // إعدادات الاتصال بفايربيس الخاصة بمشروعك
         const firebaseConfig = {
-            apiKey: "AIzaSyD...", // استبدل هذه الإعدادات بإعدادات مشروعك الحقيقية إذا لم تكن موجودة
+            apiKey: "AIzaSyD...", // تأكد من وضع مفتاحك الحقيقي هنا
             authDomain: "mall-lebanon.firebaseapp.com",
             projectId: "mall-lebanon",
             storageBucket: "mall-lebanon.appspot.com",
@@ -61,63 +80,116 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        async function loadVendorRequests() {
-            const tableBody = document.getElementById("vendorsTableBody");
+        // 1. جلب طلبات الانضمام المعلقة
+        async function loadRequests() {
+            const tableBody = document.getElementById("requestsTableBody");
             try {
                 const querySnapshot = await getDocs(collection(db, "vendor_requests"));
                 tableBody.innerHTML = "";
                 
                 if (querySnapshot.empty) {
-                    tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #777;">لا توجد طلبات انضمام حالياً</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #777;">لا توجد طلبات انضمام جديدة</td></tr>`;
                     return;
                 }
 
                 querySnapshot.forEach((documentSnap) => {
                     const data = documentSnap.data();
                     const row = document.createElement("tr");
-                    
                     row.innerHTML = `
                         <td>${data.ownerName || 'غير محدد'}</td>
                         <td>${data.shopName || 'غير محدد'}</td>
                         <td>${data.phone || 'غير محدد'}</td>
                         <td>${data.description || 'غير محدد'}</td>
                         <td>
-                            <button class="btn-approve" onclick="approveVendor('${documentSnap.id}', '${data.shopName}', '${data.phone}')">قبول</button>
-                            <button class="btn-delete" onclick="deleteVendorRequest('${documentSnap.id}')">حذف</button>
+                            <button class="btn-approve" onclick="approveVendor('${documentSnap.id}', '${encodeURIComponent(JSON.stringify(data))}')">قبول</button>
+                            <button class="btn-reject" onclick="rejectRequest('${documentSnap.id}')">رفض</button>
                         </td>
                     `;
                     tableBody.appendChild(row);
                 });
             } catch (error) {
-                console.error("خطأ في جلب الطلبات: ", error);
                 tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ff4d4d;">خطأ في الاتصال بقاعدة البيانات</td></tr>`;
             }
         }
 
-        // دالة قبول التاجر ونقله للمتاجر المفعلة
-        window.approveVendor = async function(id, shopName, phone) {
-            if(confirm(`هل أنتแนي من قبول محل "${shopName}"؟`)) {
-                alert(`تم قبول التاجر بنجاح! سيتم ربط حسابه بلوحة التحكم الخاصة به.`);
-                // يمكنك لاحقاً حفظه في جدول المتاجر المعتمدة هنا
-                await deleteVendorRequest(id);
-            }
-        };
+        // 2. جلب المحلات المقبولة والمشاركة فعلياً
+        async function loadApprovedVendors() {
+            const tableBody = document.getElementById("approvedTableBody");
+            try {
+                const querySnapshot = await getDocs(collection(db, "approved_vendors"));
+                tableBody.innerHTML = "";
+                
+                if (querySnapshot.empty) {
+                    tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #777;">لا توجد محلات مفعلة حالياً</td></tr>`;
+                    return;
+                }
 
-        // دالة حذف الطلب
-        window.deleteVendorRequest = async function(id) {
-            if(confirm("هل أنت متأكد من حذف هذا الطلب؟")) {
+                querySnapshot.forEach((documentSnap) => {
+                    const data = documentSnap.data();
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${data.ownerName || 'غير محدد'}</td>
+                        <td>${data.shopName || 'غير محدد'}</td>
+                        <td>${data.phone || 'غير محدد'}</td>
+                        <td>${data.description || 'غير محدد'}</td>
+                        <td>
+                            <button class="btn-remove" onclick="removeVendor('${documentSnap.id}', '${data.shopName}')">إزالة / طرد</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ff4d4d;">خطأ في جلب المشاركين</td></tr>`;
+            }
+        }
+
+        // دالة قبول التاجر ونقله إلى جدول المشاركين النشطين
+        window.approveVendor = async function(id, encodedData) {
+            const data = JSON.parse(decodeURIComponent(encodedData));
+            if(confirm(`هل أنت متأكد من قبول وترخيص محل "${data.shopName}"؟`)) {
                 try {
+                    // حفظه في مجموعة المحلات المقبولة
+                    await setDoc(doc(db, "approved_vendors", id), data);
+                    // حذفه من مجموعة الطلبات المعلقة
                     await deleteDoc(doc(db, "vendor_requests", id));
-                    alert("تم الحذف بنجاح");
-                    loadVendorRequests();
+                    alert("تم قبول التاجر بنجاح وأصبح من المشتركين النشطين!");
+                    loadRequests();
+                    loadApprovedVendors();
                 } catch (error) {
-                    alert("حدث خطأ أثناء الحذف");
+                    alert("حدث خطأ أثناء عملية القبول");
                 }
             }
         };
 
-        // تشغيل الدالة عند تحميل الصفحة
-        loadVendorRequests();
+        // دالة رفض أو حذف الطلب المعلق
+        window.rejectRequest = async function(id) {
+            if(confirm("هل أنت متأكد من رفض وحذف هذا الطلب؟")) {
+                try {
+                    await deleteDoc(doc(db, "vendor_requests", id));
+                    alert("تم رفض الطلب وحذفه بنجاح");
+                    loadRequests();
+                } catch (error) {
+                    alert("حدث خطأ أثناء الرفض");
+                }
+            }
+        };
+
+        // دالة إزالة تاجر مشارك من الموقع نهائياً
+        window.removeVendor = async function(id, shopName) {
+            if(confirm(`⚠️ تحذير: هل أنت متأكد من إزالة وطرد محل "${shopName}" من الموقع؟ سيتم إلغاء تفعيله نهائياً.`)) {
+                try {
+                    await deleteDoc(doc(db, "approved_vendors", id));
+                    alert("تمت إزالة التاجر بنجاح من قائمة المشتركين");
+                    loadApprovedVendors();
+                } catch (error) {
+                    alert("حدث خطأ أثناء الإزالة");
+                }
+            }
+        };
+
+        // تشغيل الدوال عند تحميل الصفحة
+        loadRequests();
+        loadApprovedVendors();
     </script>
 </body>
 </html>
