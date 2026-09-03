@@ -5,109 +5,283 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مول لبنان الإلكتروني</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #111; color: #fff; text-align: center; padding: 10px; }
-        header { padding: 15px; border-bottom: 2px solid #d4af37; margin-bottom: 15px; }
-        header h1 { color: #d4af37; font-size: 22px; margin-bottom: 5px; }
-        header p { color: #aaa; font-size: 12px; }
-        
-        .nav-buttons { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
-        .nav-btn { background: #d4af37; color: #111; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px; }
-        .nav-btn-game { background: #ff4757; color: #fff; }
-        
-        .visitor-counter { background: #fff; color: #111; padding: 10px; border-radius: 8px; font-weight: bold; margin: 15px auto; max-width: 90%; border: 2px solid #d4af37; font-size: 14px; }
-        
-        .section-title { color: #d4af37; font-size: 15px; margin: 15px 0 10px 0; font-weight: bold; }
-        
-        .slider-card { background: #000; border: 2px solid #d4af37; border-radius: 12px; max-width: 350px; margin: 0 auto; padding: 15px; box-shadow: 0 4px 15px rgba(212,175,55,0.2); position: relative; }
-        .badge { position: absolute; top: 10px; right: 10px; background: #ff4757; color: #fff; padding: 3px 8px; font-size: 11px; border-radius: 4px; font-weight: bold; z-index: 5; }
-        .slide-counter { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: #d4af37; padding: 3px 8px; font-size: 11px; border-radius: 4px; border: 1px solid #d4af37; z-index: 5; }
-        
-        .slider-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
-        .slider-card h3 { color: #d4af37; font-size: 18px; margin-bottom: 5px; }
-        .slider-card p { color: #ccc; font-size: 12px; margin-bottom: 8px; }
-        .price-box { font-size: 16px; font-weight: bold; color: #2ed573; }
-        .old-price { text-decoration: line-through; color: #777; font-size: 13px; margin-right: 5px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-align: center;
+            border: 1px solid #333;
+        }
+        /* Header */
+        .header h1 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        .header p {
+            font-size: 12px;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+        .divider {
+            border: none;
+            height: 1px;
+            background-color: #d4af37;
+            margin-bottom: 15px;
+        }
+        /* Navigation Grid */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .nav-btn {
+            padding: 12px 5px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+        .nav-btn span {
+            font-size: 16px;
+        }
+        .btn-home, .btn-shoes, .btn-perfume {
+            background-color: #d4af37;
+            color: #000;
+        }
+        .btn-wheel {
+            background-color: #e91e63;
+            color: #fff;
+        }
+        .btn-merchant {
+            background-color: #8d6e63;
+            color: #fff;
+        }
+        .btn-admin {
+            background-color: #37474f;
+            color: #fff;
+        }
+        .nav-btn:active {
+            transform: scale(0.96);
+        }
+        /* Visitor Counter */
+        .visitor-counter {
+            background-color: #1e1e1e;
+            border: 1px solid #d4af37;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 14px;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        /* Section Title */
+        .section-title {
+            font-size: 13px;
+            color: #ff9800;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        /* Product Card */
+        .product-card {
+            background-color: #000;
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+            text-align: right;
+        }
+        .badge-special {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #e91e63;
+            color: #fff;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        .badge-count {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.7);
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        .product-subtitle {
+            font-size: 12px;
+            color: #ff9800;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .product-image-container {
+            width: 100%;
+            height: 220px;
+            background-color: #222;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .product-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .product-source {
+            font-size: 11px;
+            color: #b0b0b0;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #00e676;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>🛒 مول لبنان الإلكتروني 🛍️</h1>
-    <p>وجهتك الأولى للتسوق والمتاجر الفاخرة</p>
-</header>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🛍️ مول لبنان الإلكتروني 🛒</h1>
+            <p>وجهتك الأولى للتسوق والمتاجر الفاخرة</p>
+        </div>
 
-<div class="nav-buttons">
-    <a href="index.html" class="nav-btn">🏠 الرئيسية</a>
-    <a href="shop_shoes.html" class="nav-btn">👞 الأحذية</a>
-    <a href="shop_perfumes.html" class="nav-btn">💎 العطور</a>
-    <a href="lucky_wheel.html" class="nav-btn nav-btn-game">🎡 دولاب الحظ</a>
-    <a href="vendor_dashboard.html" class="nav-btn">📦 لوحة التاجر</a>
-    <a href="admin_panel.html" class="nav-btn" style="background:#333; color:#fff;">⚙️ الإدارة</a>
-</div>
+        <hr class="divider">
 
-<div class="visitor-counter">
-    👀 عدد زوار المول الكلي: <span id="visitorCount">142</span> زائر
-</div>
+        <!-- Navigation Buttons -->
+        <div class="nav-grid">
+            <button class="nav-btn btn-home" onclick="location.href='index.html'"><span>🏠</span> الرئيسية</button>
+            <button class="nav-btn btn-shoes" onclick="alert('قسم الأحذية')"><span>👞</span> الأحذية</button>
+            <button class="nav-btn btn-perfume" onclick="alert('قسم العطور')"><span>💎</span> العطور</button>
+            <button class="nav-btn btn-wheel" onclick="alert('دولاب الحظ')"><span>🎡</span> دولاب الحظ</button>
+            <button class="nav-btn btn-merchant" onclick="alert('لوحة التاجر')"><span>📦</span> لوحة التاجر</button>
+            <button class="nav-btn btn-admin" onclick="alert('لوحة الإدارة')"><span>⚙️</span> الإدارة</button>
+        </div>
 
-<div class="section-title">
-    🔥 أحدث القطع المعروضة من المحلات (تقلب كل 10 ثوانٍ)
-</div>
+        <!-- Visitor Counter -->
+        <div class="visitor-counter">
+            👀 عدد زوار المول الكلي: <span id="visitor-count">142</span> زائر
+        </div>
 
-<div class="slider-card" id="sliderContainer">
-    <div class="badge">🔥 عرض خاص</div>
-    <div class="slide-counter" id="slideIndicator">قطعة (1 من 1)</div>
-    <img id="slideImg" src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=60" alt="منتج">
-    <h3 id="slideTitle">فستان فخم</h3>
-    <p id="slideDesc">📍 معروض من أحدث بضائع المحلات والتجار</p>
-    <div class="price-box">
-        <span class="old-price" id="slideOldPrice">20 $</span>
-        <span id="slidePrice">10 $</span>
+        <!-- Section Title -->
+        <div class="section-title">
+            🔥 أحدث القطع المعروضة من المحلات (تقلب كل 10 ثوانٍ)
+        </div>
+
+        <!-- Product Card -->
+        <div class="product-card" id="product-slider-card">
+            <div class="badge-count" id="p-count">قطعة (3 من 4)</div>
+            <div class="badge-special">⭐ عرض خاص</div>
+            
+            <div class="product-subtitle">
+                <span>🔥</span> | أحدث القطع المعروضة من المحلات
+            </div>
+
+            <div class="product-image-container">
+                <img id="p-img" src="" alt="صورة المنتج">
+            </div>
+
+            <div class="product-name" id="p-name">فستان</div>
+            <div class="product-source" id="p-store">📍 معروض من أحدث بضائع المحلات</div>
+            <div class="product-price" id="p-price">$ 70</div>
+        </div>
     </div>
-</div>
 
-<script>
-    let vendorItems = JSON.parse(localStorage.getItem('vendorStorage')) || [];
-    
-    const defaultProducts = [
-        {
-            title: "فستان أطفال فخم ★",
-            desc: "📍 معروض من أحدث بضائع المحلات والتجار",
-            price: "10",
-            oldPrice: "20",
-            image: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=60"
-        },
-        {
-            title: "حذاء رجالي جلد فاخر 👞",
-            desc: "📍 مصنع خصيصاً لأجل إطلالتك الراسخة",
-            price: "25",
-            oldPrice: "40",
-            image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&auto=format&fit=crop&q=60"
+    <script>
+        // مصفوفة المنتجات التي تقلب كل 10 ثوانٍ كما طلبت
+        const products = [
+            {
+                name: "فستان نسائي فاخر",
+                price: "$ 70",
+                store: "معروض من أحدث بضائع المحلات",
+                image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&auto=format&fit=crop&q=60"
+            },
+            {
+                name: "حذاء رياضي أنيق",
+                price: "$ 45",
+                store: "معروض من محلات الأحذية العصرية",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60"
+            },
+            {
+                name: "عطر فرنسي مركّز",
+                price: "$ 60",
+                store: "معروض من متجر العطور الفاخرة",
+                image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&auto=format&fit=crop&q=60"
+            },
+            {
+                name: "جاكيت شتوي راقي",
+                price: "$ 90",
+                store: "معروض من بوتيك الموضة والأزياء",
+                image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&auto=format&fit=crop&q=60"
+            }
+        ];
+
+        let currentIndex = 2; // نبدأ بالقطعة رقم 3 (index 2) كما ظهرت في صورتك
+
+        function updateProductDisplay() {
+            const p = products[currentIndex];
+            document.getElementById('p-name').innerText = p.name;
+            document.getElementById('p-price').innerText = p.price;
+            document.getElementById('p-store').innerText = `📍 ${p.store}`;
+            document.getElementById('p-img').src = p.image;
+            document.getElementById('p-count').innerText = `قطعة (${currentIndex + 1} من ${products.length})`;
         }
-    ];
 
-    let allProducts = vendorItems.length > 0 ? vendorItems : defaultProducts;
-    let currentIndex = 0;
+        // تقليب المنتجات تلقائياً كل 10 ثوانٍ
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % products.length;
+            updateProductDisplay();
+        }, 10000);
 
-    function updateSlider() {
-        if(!allProducts || allProducts.length === 0) return;
-        let p = allProducts[currentIndex];
-        
-        document.getElementById('slideImg').src = p.image || p.img || 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=60';
-        document.getElementById('slideTitle').innerText = p.title || p.name || 'قطعة مميزة';
-        document.getElementById('slideDesc').innerText = p.desc || p.description || '📍 معروض من أحدث بضائع المحلات';
-        document.getElementById('slidePrice').innerText = p.price ? p.price + ' $' : '';
-        document.getElementById('slideOldPrice').innerText = p.oldPrice ? p.oldPrice + ' $' : '';
-        document.getElementById('slideIndicator').innerText = `قطعة (${currentIndex + 1} من ${allProducts.length})`;
-        
-        currentIndex = (currentIndex + 1) % allProducts.length;
-    }
-
-    if(allProducts.length > 0) {
-        updateSlider();
-        setInterval(updateSlider, 10000);
-    }
-</script>
-
+        // التشغيل الأولي عند فتح الصفحة
+        updateProductDisplay();
+    </script>
 </body>
 </html>
