@@ -10,7 +10,6 @@
             --dark-bg: #121212;
             --card-bg: #1e1e1e;
             --text: #ffffff;
-            --accent: #015d64;
             --whatsapp: #25d366;
         }
         body {
@@ -171,13 +170,12 @@
     </div>
 
     <script>
-        // قائمة المنتجات المعروضة على الشاشة العملاقة (يمكنك تعديلها أو إضافة منتجات التجار)
         const featuredProducts = [
             {
                 name: "حذاء رجالي جلد طبيعي فاخر",
                 store: "محل الهرمل للأحذية",
                 price: "25 $",
-                defaultPhone: "96181703239" // رقم احتياطي في حال لم يحدد التاجر رقمه
+                defaultPhone: "96181703239"
             },
             {
                 name: "عطر عربي مركز يدوم طويلاً",
@@ -199,9 +197,9 @@
             const container = document.getElementById('bigScreenContainer');
             const waBtn = document.getElementById('bigScreenWaBtn');
             
+            if (!container || !waBtn) return;
+
             const product = featuredProducts[currentIndex];
-            
-            // جلب رقم الواتساب الخاص بالتاجر المخزن محلياً أو استخدام الافتراضي
             const vendorPhone = localStorage.getItem('vendorWhatsAppNumber') || product.defaultPhone;
 
             container.innerHTML = `
@@ -210,17 +208,17 @@
                 <div class="product-price">${product.price}</div>
             `;
 
-            // ربط زر الواتساب برقم التاجر مع إرسال رسالة جاهزة باسم القطعة
             const message = encodeURIComponent(`مرحباً، أريد طلب هذا المنتج: ${product.name} (${product.store}) المعروض على الشاشة العملاقة.`);
             waBtn.href = `https://wa.me/${vendorPhone}?text=${message}`;
 
-            // الانتقال للقطعة التالية تلقائياً
             currentIndex = (currentIndex + 1) % featuredProducts.length;
         }
 
-        // تشغيل الشاشة وتغيير القطعة كل 4 ثوانٍ
-        setInterval(updateBigScreen, 4000);
-        window.onload = updateBigScreen;
+        // تشغيل الحركة فور تحميل الصفحة وتكرارها كل 4 ثوانٍ
+        window.onload = function() {
+            updateBigScreen();
+            setInterval(updateBigScreen, 4000);
+        };
     </script>
 </body>
 </html>
