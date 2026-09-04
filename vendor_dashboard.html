@@ -60,7 +60,7 @@
         }
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             color: #ccc;
             font-size: 0.9rem;
         }
@@ -94,12 +94,11 @@
             text-align: center;
             background: #333;
             color: white;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
             font-size: 0.9rem;
-            margin-top: 15px;
         }
     </style>
 </head>
@@ -115,38 +114,39 @@
         <!-- بطاقة إعدادات الواتساب -->
         <div class="card">
             <h2>📱 إعدادات رقم الواتساب</h2>
+            
             <div class="form-group">
                 <label for="whatsappNumber">رقم الواتساب الخاص بك (مع رمز الدولة، مثلاً: 96170123456)</label>
-                <input type="text" id="whatsappNumber" placeholder="أدخل رقمك هنا...">
+                <input type="text" id="whatsappNumber" placeholder="00961xxxxxxxx">
             </div>
-            <button class="save-btn" onclick="saveVendorWhatsApp()">حفظ رقم الواتساب</button>
+
+            <button class="save-btn" onclick="saveWhatsAppNumber()">حفظ رقم الواتساب</button>
         </div>
 
-        <!-- زر العودة للرئيسية -->
+        <!-- زر العودة -->
         <a href="index.html" class="back-btn">⬅️ العودة إلى الصفحة الرئيسية للمول</a>
     </div>
 
     <script>
-        // استرجاع الرقم المحفوظ مسبقاً لعرضه في الخانة عند فتح الصفحة
+        // استرجاع الرقم المحفوظ مسبقاً عند تحميل الصفحة
         window.onload = function() {
-            const savedPhone = localStorage.getItem('vendorWhatsAppNumber');
-            if (savedPhone) {
-                document.getElementById('whatsappNumber').value = savedPhone;
+            const savedNumber = localStorage.getItem('vendorWhatsAppNumber');
+            if (savedNumber) {
+                document.getElementById('whatsappNumber').value = savedNumber;
             }
         };
 
-        // دالة حفظ رقم الواتساب في الـ localStorage
-        function saveVendorWhatsApp() {
-            const phoneInput = document.getElementById('whatsappNumber').value.trim();
+        // دالة حفظ رقم الواتساب في التخزين المحلي
+        function saveWhatsAppNumber() {
+            const numberInput = document.getElementById('whatsappNumber').value.trim();
             
-            if (!phoneInput) {
-                alert('الرجاء إدخال رقم واتساب صحيح!');
+            if (!numberInput) {
+                alert('الرجاء إدخال رقم الواتساب أولاً!');
                 return;
             }
 
-            // تخزين الرقم
-            localStorage.setItem('vendorWhatsAppNumber', phoneInput);
-            alert('✅ تم حفظ رقم الواتساب بنجاح! سيتم تحويل طلبات الزبائن مباشرة إلى هذا الرقم.');
+            localStorage.setItem('vendorWhatsAppNumber', numberInput);
+            alert('✅ تم حفظ رقم الواتساب بنجاح!\n\nسيتم توجيه طلبات الزبائن مباشرة إلى هذا الرقم.');
         }
     </script>
 </body>
