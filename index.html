@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مول لبنان | المتجر الرئيسي</title>
+    <title>مول لبنان | المنصة الرئيسية</title>
     <style>
         :root {
             --primary: #d4af37;
@@ -34,12 +34,29 @@
         header h1 {
             font-size: 1.5rem;
             color: var(--primary);
-            margin: 0 0 10px 0;
+            margin: 0 0 5px 0;
         }
         header p {
             color: #aaa;
             margin: 0;
             font-size: 0.9rem;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .nav-buttons a {
+            flex: 1;
+            text-align: center;
+            background: var(--accent);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
         .card {
             background: var(--card-bg);
@@ -71,7 +88,7 @@
         .product-price {
             color: var(--primary);
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .product-desc {
             color: #ccc;
@@ -89,22 +106,6 @@
             font-weight: bold;
             font-size: 0.95rem;
         }
-        .nav-links {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .nav-links a {
-            flex: 1;
-            text-align: center;
-            background: var(--card-bg);
-            color: var(--primary);
-            padding: 10px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            border: 1px solid var(--accent);
-        }
     </style>
 </head>
 <body>
@@ -116,8 +117,8 @@
             <p>منصتك المتكاملة للتسوق والطلب المباشر</p>
         </header>
 
-        <!-- روابط تنقل سريعة -->
-        <div class="nav-links">
+        <!-- أزرار التنقل بين لوحة التاجر ودخول التجار -->
+        <div class="nav-buttons">
             <a href="vendor_dashboard.html">لوحة التاجر</a>
             <a href="vendor_login.html">دخول التجار</a>
         </div>
@@ -125,24 +126,20 @@
         <!-- قسم المنتجات المعروضة -->
         <div class="card">
             <h2>المنتجات المتوفرة</h2>
-            <div id="productsContainer">
-                <!-- منتج تجريبي افتراضي يختبر الربط الفوري -->
-                <div class="product-item">
-                    <div class="product-title">كنافة بالجبن البلدي الممتاز</div>
-                    <div class="product-price">السعر: 5$</div>
-                    <div class="product-desc">كنافة ساخنة ومطمطمة على اصولها مع القطر الساخن.</div>
-                    <a href="#" class="whatsapp-order-btn" onclick="orderViaWhatsApp('كنافة بالجبن البلدي الممتاز', '5$')">
-                        🛒 اطلب عبر الواتساب
-                    </a>
-                </div>
+            <div class="product-item">
+                <div class="product-title">كنافة بالجبن البلدي الممتاز</div>
+                <div class="product-price">السعر: 5$</div>
+                <div class="product-desc">كنافة ساخنة ومطمطمة على اصولها مع القطر الساخن.</div>
+                <a href="#" class="whatsapp-order-btn" onclick="orderViaWhatsApp('كنافة بالجبن البلدي الممتاز', '5$')">
+                    🛒 اطلب عبر الواتساب
+                </a>
             </div>
         </div>
     </div>
 
     <script>
-        // دالة توليد رابط الواتساب الديناميكي وسحب رقم التاجر المسجل مسبقاً
+        // دالة ربط الطلب برقم الواتساب المحفوظ للتاجر
         function orderViaWhatsApp(productName, productPrice) {
-            // جلب رقم التاجر المخزن في المتصفح
             const vendorPhone = localStorage.getItem('vendorWhatsAppNumber');
 
             if (!vendorPhone) {
@@ -150,10 +147,7 @@
                 return;
             }
 
-            // تجهيز نص الرسالة للتاجر
             const message = `مرحباً، أرغب في طلب المنتج التالي:\n\n📦 المنتج: ${productName}\n💰 السعر: ${productPrice}\n\nيرجى تأكيد الطلب.`;
-            
-            // فتح تطبيق أو موقع واتساب بالرقم المحدد والرسالة الجاهزة
             const whatsappURL = `https://wa.me/${vendorPhone}?text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, '_blank');
         }
