@@ -144,14 +144,14 @@
         <!-- حقل البحث -->
         <input type="text" class="search-box" placeholder="ابحث عن قطعة، محل، أو صنف...">
 
-        <!-- أقسام التنقل -->
+        <!-- أقسام التنقل (مربوطة بأسماء الملفات الصحيحة على المستودع) -->
         <div class="nav-grid">
             <a href="index.html" class="nav-btn">🏠 الرئيسية</a>
-            <a href="shoes.html" class="nav-btn">👟 الأحذية</a>
-            <a href="perfumes.html" class="nav-btn">💎 العطور</a>
-            <a href="clothes.html" class="nav-btn">👕 الألبسة</a>
+            <a href="shop_shoes.html" class="nav-btn">👟 الأحذية</a>
+            <a href="shop_perfumes.html" class="nav-btn">💎 العطور</a>
+            <a href="shop_clothes.html" class="nav-btn">👕 الألبسة</a>
             <a href="vendor_dashboard.html" class="nav-btn">📦 لوحة التاجر</a>
-            <a href="admin.html" class="nav-btn">⚙️ الإدارة</a>
+            <a href="admin_panel.html" class="nav-btn">⚙️ الإدارة</a>
         </div>
 
         <!-- بانر تسجيل التجار -->
@@ -162,33 +162,16 @@
         <!-- الشاشة العملاقة (العروض المميزة المتحركة) -->
         <div class="big-screen-card">
             <h2>🔥 الشاشة العملاقة: العروض المميزة</h2>
-            <div id="bigScreenContainer" class="product-display">
-                <!-- سيتم عرض المنتجات هنا ديناميكياً وتقليبها تلقائياً -->
-            </div>
+            <div id="bigScreenContainer" class="product-display"></div>
             <a id="bigScreenWaBtn" href="#" target="_blank" class="wa-btn">💬 اطلب الآن عبر الواتساب من المحل</a>
         </div>
     </div>
 
     <script>
         const featuredProducts = [
-            {
-                name: "حذاء رجالي جلد طبيعي فاخر",
-                store: "محل الهرمل للأحذية",
-                price: "25 $",
-                defaultPhone: "96181703239"
-            },
-            {
-                name: "عطر عربي مركز يدوم طويلاً",
-                store: "عطور البقاع الملكية",
-                price: "15 $",
-                defaultPhone: "96181703239"
-            },
-            {
-                name: "طقم رياضي رجالي شتوي",
-                store: "ألبسة زحلة الحديثة",
-                price: "30 $",
-                defaultPhone: "96181703239"
-            }
+            { name: "حذاء رجالي جلد طبيعي فاخر", store: "محل الهرمل للأحذية", price: "25 $", defaultPhone: "96181703239" },
+            { name: "عطر عربي مركز يدوم طويلاً", store: "عطور البقاع الملكية", price: "15 $", defaultPhone: "96181703239" },
+            { name: "طقم رياضي رجالي شتوي", store: "ألبسة زحلة الحديثة", price: "30 $", defaultPhone: "96181703239" }
         ];
 
         let currentIndex = 0;
@@ -196,7 +179,6 @@
         function updateBigScreen() {
             const container = document.getElementById('bigScreenContainer');
             const waBtn = document.getElementById('bigScreenWaBtn');
-            
             if (!container || !waBtn) return;
 
             const product = featuredProducts[currentIndex];
@@ -214,7 +196,6 @@
             currentIndex = (currentIndex + 1) % featuredProducts.length;
         }
 
-        // تشغيل الحركة فور تحميل الصفحة وتكرارها كل 4 ثوانٍ
         window.onload = function() {
             updateBigScreen();
             setInterval(updateBigScreen, 4000);
