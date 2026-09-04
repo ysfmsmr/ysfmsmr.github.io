@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إدارة مول لبنان</title>
+    <title>لوحة التحكم وإدارة البضائع</title>
     <style>
         :root {
             --primary: #d4af37;
             --dark-bg: #121212;
             --card-bg: #1e1e1e;
             --text: #ffffff;
+            --danger: #e74c3c;
         }
         body {
             font-family: 'Cairo', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
         }
         .container {
             max-width: 600px;
@@ -29,25 +30,60 @@
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary);
         }
         header h1 {
             color: var(--primary);
             margin: 0;
             font-size: 1.3rem;
         }
-        .card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
+        header p {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin: 5px 0 0;
         }
-        .card h2 {
+        .section-title {
             color: var(--primary);
             font-size: 1.1rem;
-            margin-top: 0;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-info h3 {
+            margin: 0 0 5px;
+            font-size: 1rem;
+        }
+        .product-info p {
+            margin: 0;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        .delete-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .empty-msg {
+            text-align: center;
+            color: #777;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
         }
         .back-btn {
             display: block;
@@ -65,15 +101,51 @@
 <body>
     <div class="container">
         <header>
-            <h1>⚙️ لوحة الإدارة العامة - مول لبنان</h1>
+            <h1>⚙️ لوحة التحكم وإدارة البضائع</h1>
+            <p>إدارة ومتابعة المنتجات والطلبات المعروضة في مول لبنان</p>
         </header>
 
-        <div class="card">
-            <h2>📊 حالة النظام</h2>
-            <p>جميع أقسام المول والشاشة العملاقة وربط الواتساب تعمل بكفاءة تامة.</p>
+        <div class="section-title">📦 المنتجات المضافة من التجار</div>
+        <div id="adminProductsList">
+            <!-- سيتم تحميل المنتجات هنا تلقائياً -->
         </div>
 
-        <a href="index.html" class="back-btn">⬅️ العودة إلى الصفحة الرئيسية</a>
+        <a href="index.html" class="back-btn">⬅️ العودة للرئيسية</a>
     </div>
+
+    <script>
+        function loadAdminProducts() {
+            const container = document.getElementById('adminProductsList');
+            let products = JSON.parse(localStorage.getItem('mallProducts')) || [];
+
+            if (products.length === 0) {
+                container.innerHTML = `<div class="empty-msg">لا يوجد منتجات مضافة من التجار حالياً.</div>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            products.forEach((product, index) => {
+                container.innerHTML += `
+                    <div class="card">
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <p>المحل: ${product.store} | السعر: ${product.price}</p>
+                            <p style="color: #25d366; font-size: 0.8rem; margin-top:3px;">هاتف: ${product.phone}</p>
+                        </div>
+                        <button class="delete-btn" onclick="deleteProduct(${index})">حذف</button>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteProduct(index) {
+            let products = JSON.parse(localStorage.getItem('mallProducts')) || [];
+            products.splice(index, 1);
+            localStorage.setItem('mallProducts', JSON.stringify(products));
+            loadAdminProducts();
+        }
+
+        window.onload = loadAdminProducts;
+    </script>
 </body>
 </html>
