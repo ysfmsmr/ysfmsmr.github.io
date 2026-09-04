@@ -11,13 +11,14 @@
             --card-bg: #1e1e1e;
             --text: #ffffff;
             --accent: #015d64;
+            --whatsapp: #25d366;
         }
         body {
             font-family: 'Cairo', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text);
             margin: 0;
-            padding: 15px;
+            padding: 10px;
         }
         .container {
             max-width: 600px;
@@ -26,20 +27,15 @@
         header {
             text-align: center;
             background: var(--card-bg);
-            padding: 20px;
+            padding: 15px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             margin-bottom: 15px;
         }
         header h1 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
-            margin: 0 0 5px 0;
-        }
-        header p {
-            color: #aaa;
             margin: 0;
-            font-size: 0.9rem;
         }
         .search-box {
             width: 100%;
@@ -48,156 +44,183 @@
             border: 1px solid #333;
             background: #252525;
             color: white;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            text-align: right;
+            font-size: 1rem;
             box-sizing: border-box;
+            margin-bottom: 15px;
+            text-align: right;
         }
-        .categories-grid {
+        .nav-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-        .category-btn {
+        .nav-btn {
             background: var(--card-bg);
             border: 1px solid var(--primary);
-            border-radius: 10px;
-            padding: 15px 10px;
-            text-align: center;
             color: var(--text);
+            padding: 12px 5px;
+            border-radius: 8px;
+            text-align: center;
             text-decoration: none;
-            font-weight: bold;
             font-size: 0.9rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: 0.2s;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
         }
-        .category-btn:hover {
-            background: var(--primary);
-            color: #000;
-        }
-        .promo-banner-link {
-            display: block;
-            text-decoration: none;
-            margin-bottom: 20px;
-        }
-        .promo-banner {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+        .vendor-banner {
+            background: linear-gradient(135deg, #d4af37, #aa820a);
             color: #000;
             padding: 15px;
             border-radius: 10px;
             text-align: center;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
-        .card {
+        .big-screen-card {
             background: var(--card-bg);
-            padding: 20px;
+            border: 2px solid var(--primary);
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            padding: 15px;
+            text-align: center;
             margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
         }
-        .card h2 {
-            font-size: 1.1rem;
+        .big-screen-card h2 {
             color: var(--primary);
+            font-size: 1.1rem;
             margin-top: 0;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 8px;
+            margin-bottom: 15px;
         }
-        .product-item {
+        .product-display {
             background: #252525;
             padding: 15px;
             border-radius: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #333;
+            margin-bottom: 10px;
         }
         .product-title {
             font-size: 1.1rem;
             font-weight: bold;
-            color: white;
             margin-bottom: 5px;
         }
+        .product-store {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
         .product-price {
-            color: var(--primary);
+            color: #2ecc71;
+            font-size: 1.1rem;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
         }
-        .product-desc {
-            color: #ccc;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-        }
-        .whatsapp-order-btn {
-            display: block;
-            text-align: center;
-            background: #25d366;
+        .wa-btn {
+            background: var(--whatsapp);
             color: white;
-            padding: 10px;
+            border: none;
+            padding: 10px 15px;
             border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
             font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- رأس الصفحة -->
         <header>
-            <h1>مول لبنان الإلكتروني 🛍️</h1>
-            <p>سوق البقاع بين يديك (زحلة - بعلبك - الهرمل)</p>
+            <h1>مول لبنان الإلكتروني</h1>
         </header>
 
-        <!-- شريط البحث -->
+        <!-- حقل البحث -->
         <input type="text" class="search-box" placeholder="ابحث عن قطعة، محل، أو صنف...">
 
-        <!-- شبكة الأقسام والأزرار -->
-        <div class="categories-grid">
-            <a href="shop_perfumes.html" class="category-btn">💎 العطور</a>
-            <a href="shop_shoes.html" class="category-btn">👟 الأحذية</a>
-            <a href="index.html" class="category-btn">🏠 الرئيسية</a>
-            <a href="admin_panel.html" class="category-btn">⚙️ الإدارة</a>
-            <a href="vendor_dashboard.html" class="category-btn">📦 لوحة التاجر</a>
-            <a href="shop_clothes.html" class="category-btn">👔 الألبسة</a>
+        <!-- أقسام التنقل -->
+        <div class="nav-grid">
+            <a href="index.html" class="nav-btn">🏠 الرئيسية</a>
+            <a href="shoes.html" class="nav-btn">👟 الأحذية</a>
+            <a href="perfumes.html" class="nav-btn">💎 العطور</a>
+            <a href="clothes.html" class="nav-btn">👕 الألبسة</a>
+            <a href="vendor_dashboard.html" class="nav-btn">📦 لوحة التاجر</a>
+            <a href="admin.html" class="nav-btn">⚙️ الإدارة</a>
         </div>
 
-        <!-- بانر أصحاب المحلات موجه إلى صفحة التسجيل register.html -->
-        <a href="register.html" class="promo-banner-link">
-            <div class="promo-banner">
-                ✨ أصحاب المحلات: اضغط هنا للاشتراك والانضمام للمول
-            </div>
+        <!-- بانر تسجيل التجار -->
+        <a href="register.html" class="vendor-banner">
+            ✨ أصحاب المحلات: اضغط هنا للاشتراك والانضمام للمول
         </a>
 
-        <!-- الشاشة العملاقة: العروض المميزة -->
-        <div class="card">
+        <!-- الشاشة العملاقة (العروض المميزة المتحركة) -->
+        <div class="big-screen-card">
             <h2>🔥 الشاشة العملاقة: العروض المميزة</h2>
-            
-            <div class="product-item">
-                <div class="product-title">حذاء رجالي جلد طبيعي</div>
-                <div class="product-desc" style="color: #aaa; font-size: 0.85rem; margin-bottom: 5px;">المحل: محل الهرمل للأحذية</div>
-                <div class="product-price">25$ <span style="text-decoration: line-through; color: #777; font-size: 0.85rem;">35$</span></div>
-                <a href="#" class="whatsapp-order-btn" onclick="orderViaWhatsApp('حذاء رجالي جلد طبيعي', '25$')">
-                    💬 اطلب الآن عبر الواتساب من المحل
-                </a>
+            <div id="bigScreenContainer" class="product-display">
+                <!-- سيتم عرض المنتجات هنا ديناميكياً وتقليبها تلقائياً -->
             </div>
+            <a id="bigScreenWaBtn" href="#" target="_blank" class="wa-btn">💬 اطلب الآن عبر الواتساب من المحل</a>
         </div>
     </div>
 
     <script>
-        // دالة ربط الطلب برقم الواتساب المحفوظ للتاجر
-        function orderViaWhatsApp(productName, productPrice) {
-            const vendorPhone = localStorage.getItem('vendorWhatsAppNumber');
-
-            if (!vendorPhone) {
-                alert('عذراً، لم يتم ضبط رقم واتساب للتاجر بعد! يرجى من التاجر تسجيل بياناته في صفحة الانضمام أولاً.');
-                return;
+        // قائمة المنتجات المعروضة على الشاشة العملاقة (يمكنك تعديلها أو إضافة منتجات التجار)
+        const featuredProducts = [
+            {
+                name: "حذاء رجالي جلد طبيعي فاخر",
+                store: "محل الهرمل للأحذية",
+                price: "25 $",
+                defaultPhone: "96181703239" // رقم احتياطي في حال لم يحدد التاجر رقمه
+            },
+            {
+                name: "عطر عربي مركز يدوم طويلاً",
+                store: "عطور البقاع الملكية",
+                price: "15 $",
+                defaultPhone: "96181703239"
+            },
+            {
+                name: "طقم رياضي رجالي شتوي",
+                store: "ألبسة زحلة الحديثة",
+                price: "30 $",
+                defaultPhone: "96181703239"
             }
+        ];
 
-            const message = `مرحباً، أرغب في طلب المنتج التالي:\n\n📦 المنتج: ${productName}\n💰 السعر: ${productPrice}\n\nيرجى تأكيد الطلب.`;
-            const whatsappURL = `https://wa.me/${vendorPhone}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappURL, '_blank');
+        let currentIndex = 0;
+
+        function updateBigScreen() {
+            const container = document.getElementById('bigScreenContainer');
+            const waBtn = document.getElementById('bigScreenWaBtn');
+            
+            const product = featuredProducts[currentIndex];
+            
+            // جلب رقم الواتساب الخاص بالتاجر المخزن محلياً أو استخدام الافتراضي
+            const vendorPhone = localStorage.getItem('vendorWhatsAppNumber') || product.defaultPhone;
+
+            container.innerHTML = `
+                <div class="product-title">${product.name}</div>
+                <div class="product-store">المحل: ${product.store}</div>
+                <div class="product-price">${product.price}</div>
+            `;
+
+            // ربط زر الواتساب برقم التاجر مع إرسال رسالة جاهزة باسم القطعة
+            const message = encodeURIComponent(`مرحباً، أريد طلب هذا المنتج: ${product.name} (${product.store}) المعروض على الشاشة العملاقة.`);
+            waBtn.href = `https://wa.me/${vendorPhone}?text=${message}`;
+
+            // الانتقال للقطعة التالية تلقائياً
+            currentIndex = (currentIndex + 1) % featuredProducts.length;
         }
+
+        // تشغيل الشاشة وتغيير القطعة كل 4 ثوانٍ
+        setInterval(updateBigScreen, 4000);
+        window.onload = updateBigScreen;
     </script>
 </body>
 </html>
