@@ -23,7 +23,7 @@
         <form id="login-form">
             <div class="input-group">
                 <label for="email">البريد الإلكتروني للتاجر</label>
-                <input type="email5" id="email" required placeholder="vendor@lebanonmall.com">
+                <input type="email" id="email" required placeholder="vendor@lebanonmall.com">
             </div>
             <div class="input-group">
                 <label for="password">كلمة المرور</label>
@@ -64,7 +64,6 @@
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 alert("تم تسجيل الدخول بنجاح! أهلاً بك يا تاجر: " + userCredential.user.email);
-                // هنا سنقوم لاحقاً بتوجيهه إلى لوحة التحكم الخاصة بمنتجاته
             } catch (error) {
                 errorMsg.textContent = "خطأ في البريد الإلكتروني أو كلمة المرور: " + error.message;
             }
