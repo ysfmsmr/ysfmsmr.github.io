@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم وإدارة البضائع</title>
+    <title>لوحة التحكم الإدارية - مول لبنان</title>
     <style>
         :root {
             --primary: #d4af37;
@@ -43,12 +43,49 @@
             font-size: 0.85rem;
             margin: 5px 0 0;
         }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .stat-card h3 {
+            margin: 0;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        .stat-card .number {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
         .section-title {
             color: var(--primary);
             font-size: 1.1rem;
             margin-bottom: 10px;
             border-bottom: 1px solid #333;
             padding-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .action-btn {
+            background: var(--primary);
+            color: #000;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
         }
         .card {
             background: var(--card-bg);
@@ -59,14 +96,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-right: 4px solid var(--primary);
         }
         .product-info h3 {
             margin: 0 0 5px;
             font-size: 1rem;
-            color: var(--primary);
+            color: var(--text);
         }
         .product-info p {
-            margin: 0;
+            margin: 2px 0;
             color: #aaa;
             font-size: 0.85rem;
         }
@@ -104,25 +142,44 @@
 <body>
     <div class="container">
         <header>
-            <h1>⚙️ لوحة التحكم وإدارة البضائع</h1>
-            <p>إدارة ومتابعة المنتجات المعروضة في مول لبنان</p>
+            <h1>⚙️ لوحة التحكم والإدارة العامة</h1>
+            <p>مول لبنان الإلكتروني - إدارة العمليات والبضائع</p>
         </header>
 
-        <div class="section-title">📦 المنتجات المضافة من التجار</div>
+        <!-- إحصائيات سريعة -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>إجمالي المنتجات</h3>
+                <div class="number" id="totalProductsCount">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>حالة النظام</h3>
+                <div class="number" style="color: #2ecc71; font-size: 1rem; margin-top: 8px;">يعمل بانتظام</div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <span>📦 المنتجات المعروضة من التجار</span>
+            <button class="action-btn" onclick="loadAdminData()">تحديث البيانات</button>
+        </div>
+        
         <div id="adminProductsList"></div>
 
         <a href="index.html" class="back-btn">⬅️ العودة للرئيسية</a>
     </div>
 
     <script>
-        function loadAdminProducts() {
+        function loadAdminData() {
             const container = document.getElementById('adminProductsList');
-            // فحص عدة مفاتيح محتملة للتأكد من جلب البيانات أياً كان اسم المفتاح القديم
+            const countElem = document.getElementById('totalProductsCount');
+            
             let products = JSON.parse(localStorage.getItem('mallProducts')) || 
                            JSON.parse(localStorage.getItem('vendorProducts')) || [];
 
+            countElem.innerText = products.length;
+
             if (products.length === 0) {
-                container.innerHTML = `<div class="empty-msg">لا يوجد منتجات مضافة من التجار حالياً.<br>جرب تسجيل منتج جديد من لوحة التاجر لتظهر هنا فوراً.</div>`;
+                container.innerHTML = `<div class="empty-msg">لا توجد منتجات مضافة حالياً.<br>قم بإضافة منتج من لوحة التاجر ليظهر هنا فوراً.</div>`;
                 return;
             }
 
@@ -132,8 +189,9 @@
                     <div class="card">
                         <div class="product-info">
                             <h3>${product.name || product.productName || 'منتج بدون اسم'}</h3>
-                            <p>المحل: ${product.store || product.storeName || 'غير محدد'} | السعر: ${product.price || 'غير محدد'}</p>
-                            <p style="color: var(--whatsapp); font-size: 0.8rem; margin-top:4px;">هاتف: ${product.phone || product.vendorPhone || 'غير متوفر'}</p>
+                            <p>المحل: ${product.store || product.storeName || 'غير محدد'}</p>
+                            <p>السعر: <span style="color: #2ecc71; font-weight: bold;">${product.price || 'غير محدد'}</span></p>
+                            <p style="color: var(--whatsapp); font-size: 0.8rem; margin-top:4px;">هاتف الواتساب: ${product.phone || product.vendorPhone || 'غير متوفر'}</p>
                         </div>
                         <button class="delete-btn" onclick="deleteProduct(${index})">حذف</button>
                     </div>
@@ -142,14 +200,17 @@
         }
 
         function deleteProduct(index) {
+            if (!confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) return;
+
             let products = JSON.parse(localStorage.getItem('mallProducts')) || 
                            JSON.parse(localStorage.getItem('vendorProducts')) || [];
+            
             products.splice(index, 1);
             localStorage.setItem('mallProducts', JSON.stringify(products));
-            loadAdminProducts();
+            loadAdminData();
         }
 
-        window.onload = loadAdminProducts;
+        window.onload = loadAdminData;
     </script>
 </body>
 </html>
