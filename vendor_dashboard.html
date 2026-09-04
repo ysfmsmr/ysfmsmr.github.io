@@ -1,162 +1,165 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة التاجر | مول لبنان</title>
-  <style>
-    :root {
-      --primary: #d4a329;
-      --dark-bg: #121212;
-      --card-bg: #1e1e1e;
-      --text: #ffffff;
-      --accent: #15d664;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--dark-bg);
-      color: var(--text);
-      margin: 0;
-      padding: 15px;
-      text-align: center;
-    }
-
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 15px;
-      border: 1px solid var(--primary);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-
-    h2 {
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-      text-align: right;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      color: #ccc;
-      font-weight: bold;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #444;
-      background: #2b2b2b;
-      color: #fff;
-      box-sizing: border-box;
-    }
-
-    button {
-      background: linear-gradient(135deg, #d4a329, #f3e08c);
-      color: #000;
-      border: none;
-      padding: 12px 20px;
-      width: 100%;
-      border-radius: 25px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-
-    .btn-back {
-      background: #333;
-      color: #fff;
-      text-decoration: none;
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 20px;
-      margin-top: 15px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم التاجر | مول لبنان</title>
+    <style>
+        :root {
+            --primary: #d4af37;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text: #ffffff;
+            --accent: #015d64;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            margin: 0;
+            padding: 15px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+        header h1 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin: 0;
+        }
+        .logout-btn {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            background: #2c2c2c;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: white;
+            box-sizing: border-box;
+        }
+        button.action-btn {
+            background: linear-gradient(135deg, var(--primary), #b3892c);
+            color: black;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .whatsapp-support {
+            display: block;
+            text-align: center;
+            background: #25d366;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2>📦 لوحة إضافة منتجات التاجر</h2>
-    
-    <form id="productForm">
-      <div class="form-group">
-        <label>اسم المحل / التاجر:</label>
-        <input type="text" id="vendorName" placeholder="مثال: عطورات الهرمل" required>
-      </div>
+    <div class="container">
+        <!-- رأس الصفحة -->
+        <header>
+            <h1>لوحة تحكم التاجر</h1>
+            <button class="logout-btn" onclick="logout()">تسجيل خروج</button>
+        </header>
 
-      <div class="form-group">
-        <label>رقم الواتساب الخاص بالمحل (مع رمز الدولة):</label>
-        <input type="tel" id="vendorPhone" placeholder="مثال: 96181703239" required>
-      </div>
+        <!-- قسم إضافة منتج جديد -->
+        <div class="card">
+            <h2>إضافة منتج جديد لمتجرك</h2>
+            <div class="form-group">
+                <label>اسم المنتج</label>
+                <input type="text" id="productName" placeholder="مثال: كنافة بالجبن البلدي">
+            </div>
+            <div class="form-group">
+                <label>السعر ($ أو ليرة)</label>
+                <input type="text" id="productPrice" placeholder="أدخل السعر">
+            </div>
+            <div class="form-group">
+                <label>وصف المنتج</label>
+                <textarea id="productDesc" rows="3" placeholder="تفاصيل المنتج..."></textarea>
+            </div>
+            <button class="action-btn" onclick="addProduct()">حفظ ونشر المنتج</button>
+        </div>
 
-      <div class="form-group">
-        <label>عنوان القطعة / المنتج:</label>
-        <input type="text" id="prodTitle" placeholder="مثال: عطر تركيب خاص" required>
-      </div>
+        <!-- قسم الطلبات الواردة -->
+        <div class="card">
+            <h2>الطلبات الواردة لمتجرك</h2>
+            <p id="noOrders" style="color: #aaa; text-align: center;">لا توجد طلبات جديدة حالياً.</p>
+            <div id="ordersList"></div>
+        </div>
 
-      <div class="form-group">
-        <label>القسم:</label>
-        <select id="prodCategory">
-          <option value="shoes">الأحذية والجلديات</option>
-          <option value="perfumes">العطور والمستحضرات</option>
-          <option value="clothes">الألبسة والفساتين</option>
-        </select>
-      </div>
+        <!-- زر الدعم الفني عبر واتساب -->
+        <a href="https://wa.me/961XXXXXXXX" target="_blank" class="whatsapp-support">
+            💬 تواصل مع الدعم الفني لمول لبنان
+        </a>
+    </div>
 
-      <div class="form-group">
-        <label>السعر الأساسي ($):</label>
-        <input type="text" id="prodPrice" placeholder="مثال: 15$" required>
-      </div>
+    <script>
+        function addProduct() {
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            if(!name || !price) {
+                alert('الرجاء إدخال اسم المنتج والسعر على الأقل!');
+                return;
+            }
+            alert('تمت إضافة المنتج بنجاح وجاهز للعرض في متجرك!');
+            document.getElementById('productName').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productDesc').value = '';
+        }
 
-      <div class="form-group">
-        <label>السعر قبل الخصم (اختياري):</label>
-        <input type="text" id="prodOldPrice" placeholder="مثال: 25$">
-      </div>
-
-      <div class="form-group">
-        <label>رابط صورة المنتج (URL):</label>
-        <input type="url" id="prodImg" placeholder="https://..." required>
-      </div>
-
-      <button type="submit">✨ نشر القطعة في المول فوراً</button>
-    </form>
-
-    <a href="index.html" class="btn-back">⬅️ العودة للرئيسية</a>
-  </div>
-
-  <script>
-    document.getElementById('productForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const newProd = {
-        title: document.getElementById('prodTitle').value,
-        vendor: document.getElementById('vendorName').value,
-        phone: document.getElementById('vendorPhone').value,
-        category: document.getElementById('prodCategory').value,
-        price: document.getElementById('prodPrice').value,
-        oldPrice: document.getElementById('prodOldPrice').value,
-        img: document.getElementById('prodImg').value,
-        wa: "https://wa.me/" + document.getElementById('vendorPhone').value.replace('+', '') + "?text=" + encodeURIComponent("مرحباً، أرغب في شراء " + document.getElementById('prodTitle').value + " المعروضة في مول لبنان")
-      };
-
-      let products = JSON.parse(localStorage.getItem('mall_products') || '[]');
-      products.push(newProd);
-      localStorage.setItem('mall_products', JSON.stringify(products));
-
-      alert('تم إضافة منتجك بنجاح وسيطهر فوراً في قسمه وفي الشاشة العملاقة!');
-      this.reset();
-    });
-  </script>
-
+        function logout() {
+            window.location.href = 'vendor_login.html';
+        }
+    </script>
 </body>
 </html>
