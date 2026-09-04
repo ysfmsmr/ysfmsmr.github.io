@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مول لبنان | المنصة الرئيسية</title>
+    <title>مول لبنان الإلكتروني</title>
     <style>
         :root {
             --primary: #d4af37;
@@ -29,7 +29,7 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         header h1 {
             font-size: 1.5rem;
@@ -41,22 +41,50 @@
             margin: 0;
             font-size: 0.9rem;
         }
-        .nav-buttons {
-            display: flex;
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #252525;
+            color: white;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            text-align: right;
+            box-sizing: border-box;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-bottom: 20px;
         }
-        .nav-buttons a {
-            flex: 1;
+        .category-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 15px 10px;
             text-align: center;
-            background: var(--accent);
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
+            color: var(--text);
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+        .category-btn:hover {
+            background: var(--primary);
+            color: #000;
+        }
+        .promo-banner {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #000;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         .card {
             background: var(--card-bg);
@@ -113,25 +141,38 @@
     <div class="container">
         <!-- رأس الصفحة -->
         <header>
-            <h1>مول لبنان</h1>
-            <p>منصتك المتكاملة للتسوق والطلب المباشر</p>
+            <h1>مول لبنان الإلكتروني 🛍️</h1>
+            <p>سوق البقاع بين يديك (زحلة - بعلبك - الهرمل)</p>
         </header>
 
-        <!-- أزرار التنقل بين لوحة التاجر ودخول التجار -->
-        <div class="nav-buttons">
-            <a href="vendor_dashboard.html">لوحة التاجر</a>
-            <a href="vendor_login.html">دخول التجار</a>
+        <!-- شريط البحث -->
+        <input type="text" class="search-box" placeholder="ابحث عن قطعة، محل، أو صنف...">
+
+        <!-- شبكة الأقسام والأزرار -->
+        <div class="categories-grid">
+            <a href="shop_perfumes.html" class="category-btn">💎 العطور</a>
+            <a href="shop_shoes.html" class="category-btn">👟 الأحذية</a>
+            <a href="index.html" class="category-btn">🏠 الرئيسية</a>
+            <a href="admin_panel.html" class="category-btn">⚙️ الإدارة</a>
+            <a href="vendor_dashboard.html" class="category-btn">📦 لوحة التاجر</a>
+            <a href="shop_clothes.html" class="category-btn">👔 الألبسة</a>
         </div>
 
-        <!-- قسم المنتجات المعروضة -->
+        <!-- بانر أصحاب المحلات -->
+        <div class="promo-banner">
+            ✨ أصحاب المحلات: اضغط هنا للاشتراك والانضمام للمول
+        </div>
+
+        <!-- الشاشة العملاقة: العروض المميزة -->
         <div class="card">
-            <h2>المنتجات المتوفرة</h2>
+            <h2>🔥 الشاشة العملاقة: العروض المميزة</h2>
+            
             <div class="product-item">
-                <div class="product-title">كنافة بالجبن البلدي الممتاز</div>
-                <div class="product-price">السعر: 5$</div>
-                <div class="product-desc">كنافة ساخنة ومطمطمة على اصولها مع القطر الساخن.</div>
-                <a href="#" class="whatsapp-order-btn" onclick="orderViaWhatsApp('كنافة بالجبن البلدي الممتاز', '5$')">
-                    🛒 اطلب عبر الواتساب
+                <div class="product-title">حذاء رجالي جلد طبيعي</div>
+                <div class="product-desc" style="color: #aaa; font-size: 0.85rem; margin-bottom: 5px;">المحل: محل الهرمل للأحذية</div>
+                <div class="product-price">25$ <span style="text-decoration: line-through; color: #777; font-size: 0.85rem;">35$</span></div>
+                <a href="#" class="whatsapp-order-btn" onclick="orderViaWhatsApp('حذاء رجالي جلد طبيعي', '25$')">
+                    💬 اطلب الآن عبر الواتساب من المحل
                 </a>
             </div>
         </div>
