@@ -162,8 +162,8 @@
             <a href="shop_clothes.html" class="category-btn">👔 الألبسة</a>
         </div>
 
-        <!-- بانر أصحاب المحلات القابل للضغط -->
-        <a href="vendor_dashboard.html" class="promo-banner-link">
+        <!-- بانر أصحاب المحلات موجه إلى صفحة التسجيل register.html -->
+        <a href="register.html" class="promo-banner-link">
             <div class="promo-banner">
                 ✨ أصحاب المحلات: اضغط هنا للاشتراك والانضمام للمول
             </div>
@@ -190,7 +190,7 @@
             const vendorPhone = localStorage.getItem('vendorWhatsAppNumber');
 
             if (!vendorPhone) {
-                alert('عذراً، لم يتم ضبط رقم واتساب للتاجر بعد! يرجى من التاجر تسجيل رقمه في لوحة التحكم أولاً.');
+                alert('عذراً، لم يتم ضبط رقم واتساب للتاجر بعد! يرجى من التاجر تسجيل بياناته في صفحة الانضمام أولاً.');
                 return;
             }
 
