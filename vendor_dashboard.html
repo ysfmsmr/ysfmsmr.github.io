@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم التاجر | مول لبنان</title>
+    <title>لوحة التاجر | مول لبنان</title>
     <style>
         :root {
             --primary: #d4af37;
@@ -24,28 +24,22 @@
             margin: auto;
         }
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
             background: var(--card-bg);
-            padding: 15px 20px;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             margin-bottom: 20px;
         }
         header h1 {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: var(--primary);
-            margin: 0;
+            margin: 0 0 5px 0;
         }
-        .logout-btn {
-            background: #d9534f;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
+        header p {
+            color: #aaa;
+            margin: 0;
+            font-size: 0.9rem;
         }
         .card {
             background: var(--card-bg);
@@ -67,39 +61,45 @@
         label {
             display: block;
             margin-bottom: 5px;
+            color: #ccc;
             font-size: 0.9rem;
         }
-        input, textarea {
+        input[type="text"] {
             width: 100%;
             padding: 12px;
-            background: #2c2c2c;
-            border: 1px solid #444;
             border-radius: 8px;
+            border: 1px solid #333;
+            background: #252525;
             color: white;
+            font-size: 1rem;
             box-sizing: border-box;
+            text-align: right;
         }
-        button.action-btn {
-            background: linear-gradient(135deg, var(--primary), #b3892c);
-            color: black;
-            border: none;
+        .save-btn {
+            display: block;
             width: 100%;
+            text-align: center;
+            background: var(--primary);
+            color: #000;
             padding: 12px;
             border-radius: 8px;
+            border: none;
             font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
-            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
-        .whatsapp-support {
+        .back-btn {
             display: block;
             text-align: center;
-            background: #25d366;
+            background: #333;
             color: white;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -109,92 +109,44 @@
         <!-- رأس الصفحة -->
         <header>
             <h1>لوحة تحكم التاجر</h1>
-            <button class="logout-btn" onclick="logout()">تسجيل خروج</button>
+            <p>إدارة إعدادات المتجر ورقم الواتساب لاستقبال الطلبات</p>
         </header>
 
-        <!-- قسم إعدادات التاجر ورقم الواتساب -->
+        <!-- بطاقة إعدادات الواتساب -->
         <div class="card">
-            <h2>إعدادات التواصل (رقم الواتساب)</h2>
+            <h2>📱 إعدادات رقم الواتساب</h2>
             <div class="form-group">
-                <label>رقم الواتساب الخاص بك (مع رمز الدولة، مثلاً: 96170123456)</label>
-                <input type="text" id="vendorWhatsApp" placeholder="أدخل رقم الواتساب لاستقبال طلبات الزبائن">
+                <label for="whatsappNumber">رقم الواتساب الخاص بك (مع رمز الدولة، مثلاً: 96170123456)</label>
+                <input type="text" id="whatsappNumber" placeholder="أدخل رقمك هنا...">
             </div>
-            <button class="action-btn" onclick="saveWhatsAppNumber()">حفظ رقم الواتساب</button>
+            <button class="save-btn" onclick="saveVendorWhatsApp()">حفظ رقم الواتساب</button>
         </div>
 
-        <!-- قسم إضافة منتج جديد -->
-        <div class="card">
-            <h2>إضافة منتج جديد لمتجرك</h2>
-            <div class="form-group">
-                <label>اسم المنتج</label>
-                <input type="text" id="productName" placeholder="مثال: كنافة بالجبن البلدي">
-            </div>
-            <div class="form-group">
-                <label>السعر ($ أو ليرة)</label>
-                <input type="text" id="productPrice" placeholder="أدخل السعر">
-            </div>
-            <div class="form-group">
-                <label>وصف المنتج</label>
-                <textarea id="productDesc" rows="3" placeholder="تفاصيل المنتج..."></textarea>
-            </div>
-            <button class="action-btn" onclick="addProduct()">حفظ ونشر المنتج</button>
-        </div>
-
-        <!-- قسم الطلبات الواردة -->
-        <div class="card">
-            <h2>الطلبات الواردة لمتجرك</h2>
-            <p id="noOrders" style="color: #aaa; text-align: center;">لا توجد طلبات جديدة حالياً.</p>
-            <div id="ordersList"></div>
-        </div>
-
-        <!-- زر الدعم الفني عبر واتساب -->
-        <a href="https://wa.me/961XXXXXXXX" target="_blank" class="whatsapp-support">
-            💬 تواصل مع الدعم الفني لمول لبنان
-        </a>
+        <!-- زر العودة للرئيسية -->
+        <a href="index.html" class="back-btn">⬅️ العودة إلى الصفحة الرئيسية للمول</a>
     </div>
 
     <script>
-        // استرجاع الرقم المحفوظ مسبقاً عند فتح الصفحة
+        // استرجاع الرقم المحفوظ مسبقاً لعرضه في الخانة عند فتح الصفحة
         window.onload = function() {
-            const savedNumber = localStorage.getItem('vendorWhatsAppNumber');
-            if (savedNumber) {
-                document.getElementById('vendorWhatsApp').value = savedNumber;
+            const savedPhone = localStorage.getItem('vendorWhatsAppNumber');
+            if (savedPhone) {
+                document.getElementById('whatsappNumber').value = savedPhone;
             }
-        }
+        };
 
-        // حفظ رقم الواتساب في ذاكرة المتصفح مؤقتاً لحين ربطه بقاعدة البيانات
-        function saveWhatsAppNumber() {
-            const phone = document.getElementById('vendorWhatsApp').value;
-            if(!phone) {
-                alert('الرجاء إدخال رقم الواتساب أولاً!');
-                return;
-            }
-            localStorage.setItem('vendorWhatsAppNumber', phone);
-            alert('تم حفظ رقم الواتساب بنجاح! سيتم تحويل طلبات الزبائن إليه تلقائياً.');
-        }
-
-        function addProduct() {
-            const name = document.getElementById('productName').value;
-            const price = document.getElementById('productPrice').value;
-            const vendorPhone = localStorage.getItem('vendorWhatsAppNumber');
+        // دالة حفظ رقم الواتساب في الـ localStorage
+        function saveVendorWhatsApp() {
+            const phoneInput = document.getElementById('whatsappNumber').value.trim();
             
-            if(!name || !price) {
-                alert('الرجاء إدخال اسم المنتج والسعر على الأقل!');
-                return;
-            }
-            if(!vendorPhone) {
-                alert('تنبيه: يرجى حفظ رقم الواتساب الخاص بك في الأعلى أولاً لكي يتمكن الزبائن من مراسلتك!');
+            if (!phoneInput) {
+                alert('الرجاء إدخال رقم واتساب صحيح!');
                 return;
             }
 
-            alert('تمت إضافة المنتج بنجاح وجاهز لعرضه مع رابط واتساب الخاص بك!');
-            document.getElementById('productName').value = '';
-            document.getElementById('productPrice').value = '';
-            document.getElementById('productDesc').value = '';
-        }
-
-        function logout() {
-            window.location.href = 'vendor_login.html';
+            // تخزين الرقم
+            localStorage.setItem('vendorWhatsAppNumber', phoneInput);
+            alert('✅ تم حفظ رقم الواتساب بنجاح! سيتم تحويل طلبات الزبائن مباشرة إلى هذا الرقم.');
         }
     </script>
 </body>
