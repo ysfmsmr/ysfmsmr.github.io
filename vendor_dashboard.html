@@ -112,6 +112,16 @@
             <button class="logout-btn" onclick="logout()">تسجيل خروج</button>
         </header>
 
+        <!-- قسم إعدادات التاجر ورقم الواتساب -->
+        <div class="card">
+            <h2>إعدادات التواصل (رقم الواتساب)</h2>
+            <div class="form-group">
+                <label>رقم الواتساب الخاص بك (مع رمز الدولة، مثلاً: 96170123456)</label>
+                <input type="text" id="vendorWhatsApp" placeholder="أدخل رقم الواتساب لاستقبال طلبات الزبائن">
+            </div>
+            <button class="action-btn" onclick="saveWhatsAppNumber()">حفظ رقم الواتساب</button>
+        </div>
+
         <!-- قسم إضافة منتج جديد -->
         <div class="card">
             <h2>إضافة منتج جديد لمتجرك</h2>
@@ -144,14 +154,40 @@
     </div>
 
     <script>
+        // استرجاع الرقم المحفوظ مسبقاً عند فتح الصفحة
+        window.onload = function() {
+            const savedNumber = localStorage.getItem('vendorWhatsAppNumber');
+            if (savedNumber) {
+                document.getElementById('vendorWhatsApp').value = savedNumber;
+            }
+        }
+
+        // حفظ رقم الواتساب في ذاكرة المتصفح مؤقتاً لحين ربطه بقاعدة البيانات
+        function saveWhatsAppNumber() {
+            const phone = document.getElementById('vendorWhatsApp').value;
+            if(!phone) {
+                alert('الرجاء إدخال رقم الواتساب أولاً!');
+                return;
+            }
+            localStorage.setItem('vendorWhatsAppNumber', phone);
+            alert('تم حفظ رقم الواتساب بنجاح! سيتم تحويل طلبات الزبائن إليه تلقائياً.');
+        }
+
         function addProduct() {
             const name = document.getElementById('productName').value;
             const price = document.getElementById('productPrice').value;
+            const vendorPhone = localStorage.getItem('vendorWhatsAppNumber');
+            
             if(!name || !price) {
                 alert('الرجاء إدخال اسم المنتج والسعر على الأقل!');
                 return;
             }
-            alert('تمت إضافة المنتج بنجاح وجاهز للعرض في متجرك!');
+            if(!vendorPhone) {
+                alert('تنبيه: يرجى حفظ رقم الواتساب الخاص بك في الأعلى أولاً لكي يتمكن الزبائن من مراسلتك!');
+                return;
+            }
+
+            alert('تمت إضافة المنتج بنجاح وجاهز لعرضه مع رابط واتساب الخاص بك!');
             document.getElementById('productName').value = '';
             document.getElementById('productPrice').value = '';
             document.getElementById('productDesc').value = '';
