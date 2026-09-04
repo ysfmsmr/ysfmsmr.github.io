@@ -1,253 +1,162 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مول لبنان الإلكتروني | Mall Lebanon</title>
-  <style>
-    :root {
-      --primary: #d4a329;
-      --dark-bg: #121212;
-      --card-bg: #1e1e1e;
-      --text: #ffffff;
-      --accent: #15d664;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--dark-bg);
-      color: var(--text);
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    header {
-      background: linear-gradient(135deg, #000000, #2c2c2c);
-      padding: 20px;
-      border-bottom: 2px solid var(--primary);
-    }
-
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-      color: var(--primary);
-      margin-bottom: 5px;
-    }
-
-    .sub-logo {
-      font-size: 14px;
-      color: #ccc;
-    }
-
-    .search-bar {
-      margin: 15px auto;
-      max-width: 90%;
-    }
-
-    .search-bar input {
-      width: 85%;
-      padding: 10px;
-      border-radius: 20px;
-      border: 1px solid var(--primary);
-      background: #2b2b2b;
-      color: #fff;
-      text-align: center;
-    }
-
-    .categories-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      padding: 15px;
-      max-width: 95%;
-      margin: 0 auto;
-    }
-
-    .cat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--primary);
-      border-radius: 12px;
-      padding: 12px 5px;
-      text-align: center;
-      text-decoration: none;
-      color: #fff;
-      font-weight: bold;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .vendor-btn {
-      background: linear-gradient(135deg, #d4a329, #f3e08c);
-      color: #000;
-      padding: 14px;
-      margin: 15px auto;
-      width: 85%;
-      border-radius: 25px;
-      font-weight: bold;
-      display: block;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(212, 163, 41, 0.4);
-    }
-
-    .grand-slider {
-      width: 90%;
-      margin: 20px auto;
-      background: var(--card-bg);
-      border: 2px solid var(--primary);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(212, 163, 41, 0.3);
-    }
-
-    .slide-content {
-      padding: 15px;
-    }
-
-    .slide-img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 10px;
-      background-color: #2a2a2a;
-      display: block;
-    }
-
-    .price-tag {
-      font-size: 18px;
-      color: var(--accent);
-      font-weight: bold;
-      margin: 10px 0;
-    }
-
-    .old-price {
-      text-decoration: line-through;
-      color: #888;
-      font-size: 14px;
-      margin-left: 8px;
-    }
-
-    .btn-whatsapp {
-      background-color: var(--accent);
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 25px;
-      font-weight: bold;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مول لبنان | المتجر الرئيسي</title>
+    <style>
+        :root {
+            --primary: #d4af37;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text: #ffffff;
+            --accent: #015d64;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            margin: 0;
+            padding: 15px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        header {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+        header h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0 0 10px 0;
+        }
+        header p {
+            color: #aaa;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+        }
+        .product-item {
+            background: #252525;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+        }
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+        .product-price {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .product-desc {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        .whatsapp-order-btn {
+            display: block;
+            text-align: center;
+            background: #25d366;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            flex: 1;
+            text-align: center;
+            background: var(--card-bg);
+            color: var(--primary);
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--accent);
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">🛍️ مول لبنان الإلكتروني</div>
-    <div class="sub-logo">سوق البقاع بين يديك (زحلة - بعلبك - الهرمل)</div>
-    <div class="search-bar">
-      <input type="text" placeholder="ابحث عن قطعة، محل، أو صنف...">
+    <div class="container">
+        <!-- رأس الصفحة -->
+        <header>
+            <h1>مول لبنان</h1>
+            <p>منصتك المتكاملة للتسوق والطلب المباشر</p>
+        </header>
+
+        <!-- روابط تنقل سريعة -->
+        <div class="nav-links">
+            <a href="vendor_dashboard.html">لوحة التاجر</a>
+            <a href="vendor_login.html">دخول التجار</a>
+        </div>
+
+        <!-- قسم المنتجات المعروضة -->
+        <div class="card">
+            <h2>المنتجات المتوفرة</h2>
+            <div id="productsContainer">
+                <!-- منتج تجريبي افتراضي يختبر الربط الفوري -->
+                <div class="product-item">
+                    <div class="product-title">كنافة بالجبن البلدي الممتاز</div>
+                    <div class="product-price">السعر: 5$</div>
+                    <div class="product-desc">كنافة ساخنة ومطمطمة على اصولها مع القطر الساخن.</div>
+                    <a href="#" class="whatsapp-order-btn" onclick="orderViaWhatsApp('كنافة بالجبن البلدي الممتاز', '5$')">
+                        🛒 اطلب عبر الواتساب
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <!-- الأزرار الرئيسية -->
-  <div class="categories-grid">
-    <a href="index.html" class="cat-card">
-      <div style="font-size: 24px;">🏠</div>
-      <div>الرئيسية</div>
-    </a>
+    <script>
+        // دالة توليد رابط الواتساب الديناميكي وسحب رقم التاجر المسجل مسبقاً
+        function orderViaWhatsApp(productName, productPrice) {
+            // جلب رقم التاجر المخزن في المتصفح
+            const vendorPhone = localStorage.getItem('vendorWhatsAppNumber');
 
-    <a href="shop_shoes.html" class="cat-card">
-      <div style="font-size: 24px;">👟</div>
-      <div>الأحذية</div>
-    </a>
+            if (!vendorPhone) {
+                alert('عذراً، لم يتم ضبط رقم واتساب للتاجر بعد! يرجى من التاجر تسجيل رقمه في لوحة التحكم أولاً.');
+                return;
+            }
 
-    <a href="shop_perfumes.html" class="cat-card">
-      <div style="font-size: 24px;">💎</div>
-      <div>العطور</div>
-    </a>
-
-    <a href="shop_clothes.html" class="cat-card">
-      <div style="font-size: 24px;">👔</div>
-      <div>الألبسة</div>
-    </a>
-
-    <a href="vendor_dashboard.html" class="cat-card">
-      <div style="font-size: 24px;">📦</div>
-      <div>لوحة التاجر</div>
-    </a>
-
-    <a href="admin_panel.html" class="cat-card">
-      <div style="font-size: 24px;">⚙️</div>
-      <div>الإدارة</div>
-    </a>
-  </div>
-
-  <!-- زر الاشتراك لأصحاب المحلات -->
-  <a href="register.html" class="vendor-btn">✨ أصحاب المحلات: اضغط هنا للاشتراك والانضمام للمول</a>
-
-  <!-- الشاشة العملاقة للعروض -->
-  <h3 style="color: var(--primary);">🔥 الشاشة العملاقة: العروض المميزة</h3>
-  <div class="grand-slider">
-    <div class="slide-content">
-      <img src="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=600" id="slideImg" class="slide-img" alt="عرض مميز">
-      <h4 id="slideTitle">جاري تحميل أحدث القطع...</h4>
-      <p id="slideVendor" style="color: #bbb; font-size: 13px;"></p>
-      <div class="price-tag">
-        <span id="slideNewPrice">---</span>
-        <span id="slideOldPrice" class="old-price"></span>
-      </div>
-      <a id="slideWaBtn" href="#" class="btn-whatsapp" target="_blank">💬 اطلب الآن عبر الواتساب من المحل</a>
-    </div>
-  </div>
-
-  <script>
-    const defaultProducts = [
-      {
-        title: "حذاء رجالي جلد طبيعي",
-        vendor: "محل الهرمل للأحذية",
-        price: "25$",
-        oldPrice: "35$",
-        img: "https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=600",
-        wa: "https://wa.me/96181703239?text=" + encodeURIComponent("مرحباً، أرغب في شراء حذاء رجالي جلد طبيعي من مول لبنان")
-      },
-      {
-        title: "عطر تركيب خاص - ثبات عالي",
-        vendor: "عطورات الهرمل",
-        price: "15$",
-        oldPrice: "25$",
-        img: "https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=600",
-        wa: "https://wa.me/96181703239?text=" + encodeURIComponent("مرحباً، أرغب في شراء عطر تركيب خاص من مول لبنان")
-      }
-    ];
-
-    let userProducts = JSON.parse(localStorage.getItem('mall_products') || '[]');
-    let allProducts = userProducts.concat(defaultProducts);
-
-    let currentIndex = 0;
-
-    function updateSlider() {
-      if(allProducts.length === 0) return;
-      const prod = allProducts[currentIndex];
-      
-      const imgElem = document.getElementById('slideImg');
-      imgElem.src = prod.img;
-
-      document.getElementById('slideTitle').innerText = prod.title;
-      document.getElementById('slideVendor').innerText = "المحل: " + prod.vendor;
-      document.getElementById('slideNewPrice').innerText = prod.price;
-      document.getElementById('slideOldPrice').innerText = prod.oldPrice || '';
-      document.getElementById('slideWaBtn').href = prod.wa;
-
-      currentIndex = (currentIndex + 1) % allProducts.length;
-    }
-
-    updateSlider();
-    setInterval(updateSlider, 4000);
-  </script>
-
+            // تجهيز نص الرسالة للتاجر
+            const message = `مرحباً، أرغب في طلب المنتج التالي:\n\n📦 المنتج: ${productName}\n💰 السعر: ${productPrice}\n\nيرجى تأكيد الطلب.`;
+            
+            // فتح تطبيق أو موقع واتساب بالرقم المحدد والرسالة الجاهزة
+            const whatsappURL = `https://wa.me/${vendorPhone}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
 </body>
 </html>
