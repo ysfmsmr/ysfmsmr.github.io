@@ -1,109 +1,122 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قسم العطور والمستحضرات | مول لبنان</title>
-    <style>
-        :root {
-            --primary: #d4af37;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text: #ffffff;
-            --accent: #25d366;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قسم العطور والمستحضرات | مول لبنان</title>
+  <style>
+    :root {
+      --primary: #d4a329;
+      --dark-bg: #121212;
+      --card-bg: #1e1e1e;
+      --text: #ffffff;
+      --accent: #15d664;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text);
-            margin: 0;
-            padding: 15px;
-            text-align: center;
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text);
+      margin: 0;
+      padding: 15px;
+      text-align: center;
+    }
 
-        header {
-            padding: 10px;
-            border-bottom: 2px solid var(--primary);
-            margin-bottom: 20px;
-        }
+    header {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--primary);
+    }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
-        }
+    h2 { color: var(--primary); margin-bottom: 5px; }
 
-        .product-card {
-            background: var(--card-bg);
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 10px;
-            text-align: center;
-        }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 15px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-        .product-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
+    .prod-card {
+      background: var(--card-bg);
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
 
-        .title {
-            font-size: 14px;
-            margin: 8px 0 4px;
-            font-weight: bold;
-        }
+    .prod-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
 
-        .vendor-name {
-            font-size: 11px;
-            color: #aaa;
-        }
+    .prod-title { font-size: 18px; font-weight: bold; margin: 10px 0 5px 0; }
+    .vendor-title { color: #aaa; font-size: 13px; margin-bottom: 10px; }
+    .price-tag { color: var(--accent); font-size: 18px; font-weight: bold; }
+    
+    .btn-wa {
+      background-color: var(--accent);
+      color: #fff;
+      display: block;
+      padding: 10px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 10px;
+    }
 
-        .price {
-            color: var(--accent);
-            font-weight: bold;
-            margin: 5px 0;
-        }
-
-        .btn-wa {
-            background: var(--accent);
-            color: #fff;
-            text-decoration: none;
-            padding: 8px;
-            display: block;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-
-        .back-btn {
-            display: inline-block;
-            margin-bottom: 15px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
+    .btn-home {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 20px;
+    }
+  </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-btn">⬅️ العودة للرئيسية</a>
+  <header>
+    <h2>💎 قسم العطور والمستحضرات</h2>
+    <p style="color: #ccc; font-size: 14px;">أرقى أنواع العطور العالمية والتركيب والزيوت الفاخرة</p>
+  </header>
 
-    <header>
-        <h2 style="color: var(--primary); margin: 0;">🧪 قسم العطورات والمستحضرات</h2>
-    </header>
+  <div class="products-grid" id="perfumesGrid">
+    <!-- المنتجات ستظهر هنا تلقائياً -->
+  </div>
 
-    <div class="products-grid">
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500" alt="عطر">
-            <div class="title">عطر تركيب خاص - ثبات عالي</div>
-            <div class="vendor-name">📍 عطورات الهرمل</div>
-            <div class="price">$15</div>
-            <a href="https://wa.me/96170000000?text=مرحبا،%20اريد%20الاستفسار%20عن%20العطر" class="btn-wa" target="_blank">💬 اطلب عبر الواتساب</a>
-        </div>
-    </div>
+  <a href="index.html" class="btn-home">⬅️ العودة للرئيسية</a>
+
+  <script>
+    const defaultPerfumes = [
+      {
+        title: "عطر تركيب خاص - ثبات عالي",
+        vendor: "عطورات الهرمل",
+        price: "15$",
+        img: "https://via.placeholder.com/300x200/15d664/000000?text=عطر+تركيب",
+        wa: "https://wa.me/96181703239?text=" + encodeURIComponent("مرحباً، أرغب في شراء عطر تركيب خاص من مول لبنان")
+      }
+    ];
+
+    let userProducts = JSON.parse(localStorage.getItem('mall_products') || '[]');
+    let perfumeProducts = userProducts.filter(p => p.category === 'perfumes').concat(defaultPerfumes);
+
+    const grid = document.getElementById('perfumesGrid');
+    grid.innerHTML = perfumeProducts.map(p => `
+      <div class="prod-card">
+        <img src="${p.img}" class="prod-img" alt="${p.title}">
+        <div class="prod-title">${p.title}</div>
+        <div class="vendor-title">المحل: ${p.vendor}</div>
+        <div class="price-tag">${p.price}</div>
+        <a href="${p.wa}" target="_blank" class="btn-wa">💬 اطلب عبر الواتساب</a>
+      </div>
+    `).join('');
+  </script>
 
 </body>
 </html>
