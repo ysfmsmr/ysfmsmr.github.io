@@ -11,6 +11,7 @@
             --card-bg: #1e1e1e;
             --text: #ffffff;
             --danger: #e74c3c;
+            --whatsapp: #25d366;
         }
         body {
             font-family: 'Cairo', sans-serif;
@@ -62,6 +63,7 @@
         .product-info h3 {
             margin: 0 0 5px;
             font-size: 1rem;
+            color: var(--primary);
         }
         .product-info p {
             margin: 0;
@@ -81,9 +83,10 @@
         .empty-msg {
             text-align: center;
             color: #777;
-            padding: 20px;
+            padding: 25px;
             background: var(--card-bg);
             border-radius: 10px;
+            font-size: 0.95rem;
         }
         .back-btn {
             display: block;
@@ -102,13 +105,11 @@
     <div class="container">
         <header>
             <h1>⚙️ لوحة التحكم وإدارة البضائع</h1>
-            <p>إدارة ومتابعة المنتجات والطلبات المعروضة في مول لبنان</p>
+            <p>إدارة ومتابعة المنتجات المعروضة في مول لبنان</p>
         </header>
 
         <div class="section-title">📦 المنتجات المضافة من التجار</div>
-        <div id="adminProductsList">
-            <!-- سيتم تحميل المنتجات هنا تلقائياً -->
-        </div>
+        <div id="adminProductsList"></div>
 
         <a href="index.html" class="back-btn">⬅️ العودة للرئيسية</a>
     </div>
@@ -116,10 +117,12 @@
     <script>
         function loadAdminProducts() {
             const container = document.getElementById('adminProductsList');
-            let products = JSON.parse(localStorage.getItem('mallProducts')) || [];
+            // فحص عدة مفاتيح محتملة للتأكد من جلب البيانات أياً كان اسم المفتاح القديم
+            let products = JSON.parse(localStorage.getItem('mallProducts')) || 
+                           JSON.parse(localStorage.getItem('vendorProducts')) || [];
 
             if (products.length === 0) {
-                container.innerHTML = `<div class="empty-msg">لا يوجد منتجات مضافة من التجار حالياً.</div>`;
+                container.innerHTML = `<div class="empty-msg">لا يوجد منتجات مضافة من التجار حالياً.<br>جرب تسجيل منتج جديد من لوحة التاجر لتظهر هنا فوراً.</div>`;
                 return;
             }
 
@@ -128,9 +131,9 @@
                 container.innerHTML += `
                     <div class="card">
                         <div class="product-info">
-                            <h3>${product.name}</h3>
-                            <p>المحل: ${product.store} | السعر: ${product.price}</p>
-                            <p style="color: #25d366; font-size: 0.8rem; margin-top:3px;">هاتف: ${product.phone}</p>
+                            <h3>${product.name || product.productName || 'منتج بدون اسم'}</h3>
+                            <p>المحل: ${product.store || product.storeName || 'غير محدد'} | السعر: ${product.price || 'غير محدد'}</p>
+                            <p style="color: var(--whatsapp); font-size: 0.8rem; margin-top:4px;">هاتف: ${product.phone || product.vendorPhone || 'غير متوفر'}</p>
                         </div>
                         <button class="delete-btn" onclick="deleteProduct(${index})">حذف</button>
                     </div>
@@ -139,7 +142,8 @@
         }
 
         function deleteProduct(index) {
-            let products = JSON.parse(localStorage.getItem('mallProducts')) || [];
+            let products = JSON.parse(localStorage.getItem('mallProducts')) || 
+                           JSON.parse(localStorage.getItem('vendorProducts')) || [];
             products.splice(index, 1);
             localStorage.setItem('mallProducts', JSON.stringify(products));
             loadAdminProducts();
