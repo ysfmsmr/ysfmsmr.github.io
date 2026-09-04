@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم التاجر | مول لبنان v2</title>
+    <title>لوحة التاجر - إضافة منتج</title>
     <style>
         :root {
             --primary: #d4af37;
             --dark-bg: #121212;
             --card-bg: #1e1e1e;
             --text: #ffffff;
-            --accent: #015d64;
+            --whatsapp: #25d366;
         }
         body {
             font-family: 'Cairo', sans-serif;
@@ -32,28 +32,16 @@
             margin-bottom: 20px;
         }
         header h1 {
-            font-size: 1.5rem;
             color: var(--primary);
-            margin: 0 0 5px 0;
-        }
-        header p {
-            color: #aaa;
             margin: 0;
-            font-size: 0.9rem;
+            font-size: 1.3rem;
         }
-        .card {
+        .form-card {
             background: var(--card-bg);
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             margin-bottom: 20px;
-        }
-        .card h2 {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-top: 0;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 8px;
         }
         .form-group {
             margin-bottom: 15px;
@@ -61,10 +49,10 @@
         label {
             display: block;
             margin-bottom: 5px;
-            color: #ccc;
+            color: var(--primary);
             font-size: 0.9rem;
         }
-        input[type="text"], select {
+        input {
             width: 100%;
             padding: 12px;
             border-radius: 8px;
@@ -75,92 +63,86 @@
             box-sizing: border-box;
             text-align: right;
         }
-        .save-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background: var(--primary);
-            color: #000;
+        .submit-btn {
+            background: var(--whatsapp);
+            color: white;
+            border: none;
             padding: 12px;
             border-radius: 8px;
-            border: none;
-            font-weight: bold;
             font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            width: 100%;
         }
         .back-btn {
             display: block;
             text-align: center;
             background: #333;
             color: white;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.9rem;
             margin-top: 15px;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
         <header>
-            <h1>لوحة تحكم التاجر - مول لبنان</h1>
-            <p>إدارة بيانات المتجر ورقم الواتساب لاستقبال الطلبات</p>
+            <h1>📦 لوحة إضافة منتج للتاجر</h1>
         </header>
 
-        <div class="card">
-            <h2>📝 بيانات المتجر والاتصال</h2>
-            
+        <div class="form-card">
             <div class="form-group">
-                <label for="storeName">اسم المحل أو المتجر:</label>
+                <label>اسم المحل / المتجر</label>
                 <input type="text" id="storeName" placeholder="مثال: محل الهرمل للأحذية">
             </div>
-
             <div class="form-group">
-                <label for="storeCity">المنطقة في البقاع:</label>
-                <select id="storeCity">
-                    <option value="الهرمل">الهرمل</option>
-                    <option value="بعلبك">بعلبك</option>
-                    <option value="زحلة">زحلة</option>
-                </select>
+                <label>اسم المنتج</label>
+                <input type="text" id="productName" placeholder="مثال: حذاء رجالي فاخر">
             </div>
-
             <div class="form-group">
-                <label for="whatsappNumber">رقم الواتساب (مثال: 96170123456):</label>
-                <input type="text" id="whatsappNumber" placeholder="961xxxxxxxx">
+                <label>السعر ($)</label>
+                <input type="text" id="productPrice" placeholder="مثال: 25 $">
             </div>
-
-            <button class="save-btn" onclick="saveVendorData()">حفظ بيانات التاجر</button>
+            <div class="form-group">
+                <label>رقم الواتساب للتاجر (مع رمز الدولة)</label>
+                <input type="text" id="vendorPhone" placeholder="96181703239">
+            </div>
+            <button class="submit-btn" onclick="addNewProduct()">إضافة المنتج ونشره بالمول</button>
         </div>
 
-        <a href="index.html" class="back-btn">⬅️ العودة إلى الصفحة الرئيسية للمول</a>
+        <a href="index.html" class="back-btn">⬅️ العودة للرئيسية</a>
     </div>
 
     <script>
-        window.onload = function() {
-            document.getElementById('whatsappNumber').value = localStorage.getItem('vendorWhatsAppNumber') || '';
-            document.getElementById('storeName').value = localStorage.getItem('vendorStoreName') || '';
-            document.getElementById('storeCity').value = localStorage.getItem('vendorCity') || 'الهرمل';
-        };
+        function addNewProduct() {
+            const store = document.getElementById('storeName').value.trim();
+            const name = document.getElementById('productName.value' || 'productName').value.trim(); // تم تعديلها لتكون دقيقة
+            const price = document.getElementById('productPrice').value.trim();
+            const phone = document.getElementById('vendorPhone').value.trim();
 
-        function saveVendorData() {
-            const storeName = document.getElementById('storeName').value.trim();
-            const storeCity = document.getElementById('storeCity').value;
-            const whatsappNumber = document.getElementById('whatsappNumber').value.trim();
-            
-            if (!storeName || !whatsappNumber) {
-                alert('الرجاء إدخال اسم المحل ورقم الواتساب!');
+            if (!store || !name || !price || !phone) {
+                alert('الرجاء تعبئة كافة الحقول بشكل صحيح!');
                 return;
             }
 
-            localStorage.setItem('vendorStoreName', storeName);
-            localStorage.setItem('vendorCity', storeCity);
-            localStorage.setItem('vendorWhatsAppNumber', whatsappNumber);
+            const actualName = document.getElementById('productName').value.trim();
 
-            alert('✅ تم حفظ بيانات التاجر بنجاح!');
+            let products = JSON.parse(localStorage.getItem('mallProducts')) || [];
+            products.push({
+                store: store,
+                name: actualName,
+                price: price,
+                phone: phone
+            });
+
+            localStorage.setItem('mallProducts', JSON.stringify(products));
+            localStorage.setItem('vendorWhatsAppNumber', phone);
+
+            alert('تم نشر المنتج بنجاح وأصبح ظاهراً في لوحة الإدارة والشاشة العملاقة!');
+            window.location.href = 'index.html';
         }
     </script>
 </body>
