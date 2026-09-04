@@ -55,7 +55,6 @@
       text-align: center;
     }
 
-    /* شبكة الأزرار الرئيسية */
     .categories-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -94,7 +93,6 @@
       box-shadow: 0 4px 10px rgba(212, 163, 41, 0.4);
     }
 
-    /* الشاشة العملاقة */
     .grand-slider {
       width: 90%;
       margin: 20px auto;
@@ -103,7 +101,6 @@
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(212, 163, 41, 0.3);
-      position: relative;
     }
 
     .slide-content {
@@ -154,7 +151,7 @@
     </div>
   </header>
 
-  <!-- شبكة الأزرار الستة الشغالة والمرتبطة بصفحاتك -->
+  <!-- الأزرار الرئيسية -->
   <div class="categories-grid">
     <a href="index.html" class="cat-card">
       <div style="font-size: 24px;">🏠</div>
@@ -187,53 +184,67 @@
     </a>
   </div>
 
-  <!-- زر أصحاب المحلات -->
+  <!-- زر الاشتراك للأصحاب المحلات -->
   <a href="register.html" class="vendor-btn">✨ أصحاب المحلات: اضغط هنا للاشتراك والانضمام للمول</a>
 
-  <!-- الشاشة العملاقة للعروض المميزة -->
+  <!-- الشاشة العملاقة للعروض -->
   <h3 style="color: var(--primary);">🔥 الشاشة العملاقة: العروض المميزة</h3>
   <div class="grand-slider">
     <div class="slide-content">
-      <img src="https://via.placeholder.com/400x250" id="slideImg" class="slide-img" alt="عرض مميز">
+      <img src="https://via.placeholder.com/400x250?text=جاري+تحميل+العروض" id="slideImg" class="slide-img" alt="عرض مميز">
       <h4 id="slideTitle">جاري تحميل أحدث القطع...</h4>
       <p id="slideVendor" style="color: #bbb; font-size: 13px;"></p>
       <div class="price-tag">
         <span id="slideNewPrice">---</span>
         <span id="slideOldPrice" class="old-price"></span>
       </div>
-      <a id="slideWaBtn" href="#" class="btn-whatsapp" target="_blank">💬 الطلب الآن عبر الواتساب</a>
+      <a id="slideWaBtn" href="#" class="btn-whatsapp" target="_blank">💬 اطلب الآن عبر الواتساب من المحل</a>
     </div>
   </div>
 
   <script>
-    // عينة من المنتجات المميزة للعرض التلقائي
-    const featuredProducts = [
+    // المنتجات الافتراضية
+    const defaultProducts = [
       {
         title: "حذاء رجالي جلد طبيعي",
         vendor: "محل الهرمل للأحذية",
         price: "25$",
         oldPrice: "35$",
         img: "https://via.placeholder.com/400x250/d4a329/000000?text=حذاء+رجالي",
-        wa: "https://wa.me/96100000000"
+        wa: "https://wa.me/96181703239?text=" + encodeURIComponent("مرحباً، أرغب في شراء حذاء رجالي جلد طبيعي من مول لبنان")
+      },
+      {
+        title: "عطر تركيب خاص - ثبات عالي",
+        vendor: "عطورات الهرمل",
+        price: "15$",
+        oldPrice: "25$",
+        img: "https://via.placeholder.com/400x250/15d664/000000?text=عطر+تركيب",
+        wa: "https://wa.me/96181703239?text=" + encodeURIComponent("مرحباً، أرغب في شراء عطر تركيب خاص من مول لبنان")
       }
     ];
 
+    // جلب المنتجات المضافة من قبل التجار
+    let userProducts = JSON.parse(localStorage.getItem('mall_products') || '[]');
+    let allProducts = userProducts.concat(defaultProducts);
+
     let currentIndex = 0;
+
     function updateSlider() {
-      if(featuredProducts.length === 0) return;
-      const prod = featuredProducts[currentIndex];
+      if(allProducts.length === 0) return;
+      const prod = allProducts[currentIndex];
+      
       document.getElementById('slideImg').src = prod.img;
       document.getElementById('slideTitle').innerText = prod.title;
       document.getElementById('slideVendor').innerText = "المحل: " + prod.vendor;
       document.getElementById('slideNewPrice').innerText = prod.price;
-      document.getElementById('slideOldPrice').innerText = prod.oldPrice;
+      document.getElementById('slideOldPrice').innerText = prod.oldPrice || '';
       document.getElementById('slideWaBtn').href = prod.wa;
-      
-      currentIndex = (currentIndex + 1) % featuredProducts.length;
+
+      currentIndex = (currentIndex + 1) % allProducts.length;
     }
 
     updateSlider();
-    setInterval(updateSlider, 4000);
+    setInterval(updateSlider, 4000); // تبديل العروض كل 4 ثوانٍ
   </script>
 
 </body>
