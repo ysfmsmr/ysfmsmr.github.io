@@ -184,14 +184,14 @@
     </a>
   </div>
 
-  <!-- زر الاشتراك للأصحاب المحلات -->
+  <!-- زر الاشتراك لأصحاب المحلات -->
   <a href="register.html" class="vendor-btn">✨ أصحاب المحلات: اضغط هنا للاشتراك والانضمام للمول</a>
 
   <!-- الشاشة العملاقة للعروض -->
   <h3 style="color: var(--primary);">🔥 الشاشة العملاقة: العروض المميزة</h3>
   <div class="grand-slider">
     <div class="slide-content">
-      <img src="https://via.placeholder.com/400x250?text=جاري+تحميل+العروض" id="slideImg" class="slide-img" alt="عرض مميز">
+      <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500" id="slideImg" class="slide-img" alt="عرض مميز">
       <h4 id="slideTitle">جاري تحميل أحدث القطع...</h4>
       <p id="slideVendor" style="color: #bbb; font-size: 13px;"></p>
       <div class="price-tag">
@@ -203,14 +203,14 @@
   </div>
 
   <script>
-    // المنتجات الافتراضية
+    // المنتجات الافتراضية بصور حقيقية
     const defaultProducts = [
       {
         title: "حذاء رجالي جلد طبيعي",
         vendor: "محل الهرمل للأحذية",
         price: "25$",
         oldPrice: "35$",
-        img: "https://via.placeholder.com/400x250/d4a329/000000?text=حذاء+رجالي",
+        img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500",
         wa: "https://wa.me/96181703239?text=" + encodeURIComponent("مرحباً، أرغب في شراء حذاء رجالي جلد طبيعي من مول لبنان")
       },
       {
@@ -218,7 +218,7 @@
         vendor: "عطورات الهرمل",
         price: "15$",
         oldPrice: "25$",
-        img: "https://via.placeholder.com/400x250/15d664/000000?text=عطر+تركيب",
+        img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500",
         wa: "https://wa.me/96181703239?text=" + encodeURIComponent("مرحباً، أرغب في شراء عطر تركيب خاص من مول لبنان")
       }
     ];
@@ -233,7 +233,12 @@
       if(allProducts.length === 0) return;
       const prod = allProducts[currentIndex];
       
-      document.getElementById('slideImg').src = prod.img;
+      const imgElem = document.getElementById('slideImg');
+      imgElem.src = prod.img;
+      imgElem.onerror = function() {
+        this.src = 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500';
+      };
+
       document.getElementById('slideTitle').innerText = prod.title;
       document.getElementById('slideVendor').innerText = "المحل: " + prod.vendor;
       document.getElementById('slideNewPrice').innerText = prod.price;
