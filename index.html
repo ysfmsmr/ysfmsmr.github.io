@@ -10,14 +10,8 @@
         
         header { background: linear-gradient(135deg, #111 0%, #222 100%); color: #fff; padding: 15px; border-bottom: 4px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         header h1 { font-size: 26px; color: #d4af37; margin-bottom: 3px; font-weight: bold; letter-spacing: 1px; }
-        header p { font-size: 12px; color: #e0e0e0; font-weight: 300; margin-bottom: 10px; }
+        header p { font-size: 12px; color: #e0e0e0; font-weight: 300; }
         
-        /* الشاشة الكبرى المتقلبة الثابتة في الأعلى (ديكور وإعلانات المول) */
-        .mall-showcase { display: grid; grid-template-columns: 2fr 1fr; gap: 4px; max-width: 500px; height: 160px; margin: 0 auto; border-radius: 8px; overflow: hidden; border: 2px solid #d4af37; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4); }
-        .mall-showcase img { width: 100%; height: 100%; object-fit: cover; }
-        .sub-grid { display: flex; flex-direction: column; gap: 4px; height: 100%; }
-        .sub-grid img { height: calc(50% - 2px); }
-
         .nav-bar { background: #1a1a1a; padding: 12px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; border-bottom: 2px solid #333; }
         .nav-btn { background: #d4af37; color: #111; padding: 8px 14px; border-radius: 5px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; transition: 0.2s; }
         .nav-btn:hover { background: #e5c158; transform: translateY(-1px); }
@@ -28,13 +22,17 @@
         
         h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 6px; color: #111; text-align: center; }
         
+        /* الشاشة الكبرى المتقلبة - موجودة في الرئيسية فقط */
+        .slider { width: 100%; height: 260px; background: #111; border: 2px solid #d4af37; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
+        .slider img { width: 100%; height: 175px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; border: 1px solid #d4af37; }
+        .slider span { color: #d4af37; font-size: 15px; }
+
         .form-group { margin-bottom: 12px; text-align: right; }
         .form-group label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 13px; color: #333; }
         .form-group input, .form-group select { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; }
         
         .action-btn { display: block; background: #25d366; color: white; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; width: 100%; border: none; cursor: pointer; text-align: center; margin-top: 8px; transition: 0.2s; }
         .action-btn:hover { opacity: 0.9; }
-        .danger-btn { background: #e74c3c; margin-top: 10px; }
         
         /* مربعات المحلات داخل القسم */
         .vendors-direct-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
@@ -44,7 +42,7 @@
         .vendor-direct-card p { font-size: 12px; color: #ccc; margin-bottom: 12px; }
         .vendor-direct-card span { background: #d4af37; color: #111; padding: 6px 12px; border-radius: 4px; font-weight: bold; font-size: 12px; display: inline-block; }
 
-        /* صفحة التاجر المستقلة (عرض بضائع التاجر حصرياً) */
+        /* صفحة التاجر المنعزلة الخاصة به */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 10px; }
         .card { background: #fafafa; border: 1px solid #e0e0e0; padding: 12px; border-radius: 6px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
         .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 8px; }
@@ -58,21 +56,12 @@
 </head>
 <body>
 
-    <!-- الشاشة الكبرى الثابتة في أعلى المول دائمًا ولا تتأثر بالضغطات -->
     <header>
         <h1>مول لبنان</h1>
         <p>✦ الوجهة الأولى لأرقى الماركات، الألبسة، الأحذية، والعطورات الفاخرة في مكان واحد ✦</p>
-        
-        <div class="mall-showcase">
-            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="ألبسة فاخرة">
-            <div class="sub-grid">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="أحذية فاخرة">
-                <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" alt="عطورات راقية">
-            </div>
-        </div>
     </header>
 
-    <!-- أزرار التنقل الرئيسية -->
+    <!-- الأزرار الرئيسية -->
     <div class="nav-bar">
         <button class="nav-btn" onclick="showSec('home')">الرئيسية</button>
         <button class="nav-btn" onclick="openCategory('clothes')">الألبسة</button>
@@ -83,10 +72,14 @@
     </div>
 
     <div class="container">
-        <!-- الرئيسية -->
+        <!-- الرئيسية: الشاشة المتحركة هنا وحدها فقط -->
         <div id="home" class="section active">
-            <h2 class="sec-title">مرحباً بكم في مول لبنان التجاري</h2>
-            <p style="text-align: center; color: #555; font-size: 14px; line-height: 1.8;">استعراض أقسام المول بالأعلى للاطلاع على محلات التجار المعتمدة وصفحاتهم الخاصة.</p>
+            <h2 class="sec-title">شاشة العرض المتقلبة في المول</h2>
+            <div class="slider" id="sliderBox">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="إعلان التاجر">
+                <span>محل الأناقة للألبسة الراقية - أحدث صيحات الموضة</span>
+            </div>
+            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">اختر من الأقسام بالأعلى (الألبسة، الأحذية، العطورات) لاستعراض محلات التجار وصفحاتهم المنعزلة.</p>
         </div>
 
         <!-- قائمة محلات القسم -->
@@ -97,7 +90,7 @@
             <div class="vendors-direct-grid" id="vendorsDirectGrid"></div>
         </div>
 
-        <!-- صفحة التاجر المنعزلة الخاصة به -->
+        <!-- صفحة التاجر المنعزلة (عرض بضائع التاجر حصرياً) -->
         <div id="vendor-store-page" class="section">
             <button onclick="goBackToCategory()" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة لقائمة المحلات</button>
             <h2 class="sec-title" id="storePageTitle">فترينة المحل</h2>
@@ -176,7 +169,7 @@
             window.scrollTo(0, 0);
         }
 
-        /* قاعدة بيانات المتاجر والمنتجات وأرقام الواتساب لكل تاجر */
+        /* قاعدة بيانات المتاجر والمنتجات وأرقام الواتساب */
         let mallData = {
             clothes: [
                 {
@@ -269,6 +262,23 @@
             openCategory(currentCategory);
         }
 
+        /* الشاشة المتحركة تعمل في الرئيسية فقط */
+        let defaultSlides = [
+            { text: "محل الأناقة للألبسة - أحدث الموضات الصيفية والشتوية", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" },
+            { text: "أحذية الفخامة - راحة وأناقة لا توصف لقدميك", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
+            { text: "عطورات الملك - فخامة العطور الشرقية والفرنسية", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" }
+        ];
+        let current = 0;
+
+        setInterval(() => {
+            let box = document.getElementById('sliderBox');
+            if(!box) return;
+
+            current = (current + 1) % defaultSlides.length;
+            let slide = defaultSlides[current];
+            box.innerHTML = `<img src="${slide.img}" alt="دليل المول"><span>${slide.text}</span>`;
+        }, 3000);
+
         function uploadProd() {
             let storeName = document.getElementById('vStoreName').value;
             let phone = document.getElementById('vPhone').value;
@@ -336,7 +346,7 @@
         }
 
         function refuseItem(btn) {
-            let td = btn.closest('tr').cells[2];
+            let td = btn.closest('tr'].cells[2];
             td.innerText = "مرفوض";
             td.style.color = "red";
             btn.parentElement.innerHTML = "<span style='color:red; font-weight:bold;'>مرفوض</span>";
