@@ -1,122 +1,51 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>قسم الأحذية والجلديات | مول لبنان</title>
-  <style>
-    :root {
-      --primary: #d4a329;
-      --dark-bg: #121212;
-      --card-bg: #1e1e1e;
-      --text: #ffffff;
-      --accent: #15d664;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم الأحذية - مول لبنان</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
+        body { background-color: #f4f4f4; color: #333; direction: rtl; }
+        
+        header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 4px solid #d4af37; }
+        header h1 { font-size: 26px; color: #d4af37; margin-bottom: 5px; }
+        header p { font-size: 14px; color: #ccc; }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--dark-bg);
-      color: var(--text);
-      margin: 0;
-      padding: 15px;
-      text-align: center;
-    }
+        .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+        h2.shop-title { font-size: 22px; margin-bottom: 20px; border-bottom: 2px solid #d4af37; padding-bottom: 5px; color: #222; }
 
-    header {
-      padding: 10px;
-      margin-bottom: 20px;
-      border-bottom: 2px solid var(--primary);
-    }
-
-    h2 { color: var(--primary); margin-bottom: 5px; }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 15px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .prod-card {
-      background: var(--card-bg);
-      border: 1px solid #333;
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-    }
-
-    .prod-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .prod-title { font-size: 18px; font-weight: bold; margin: 10px 0 5px 0; }
-    .vendor-title { color: #aaa; font-size: 13px; margin-bottom: 10px; }
-    .price-tag { color: var(--accent); font-size: 18px; font-weight: bold; }
-    
-    .btn-wa {
-      background-color: var(--accent);
-      color: #fff;
-      display: block;
-      padding: 10px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .btn-home {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #333;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 20px;
-    }
-  </style>
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .product-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; padding: 15px; transition: 0.3s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; }
+        .product-card h3 { font-size: 18px; margin-bottom: 5px; color: #111; }
+        .product-card p { font-size: 14px; color: #666; margin-bottom: 15px; }
+        
+        .whatsapp-btn { display: inline-block; background: #25d366; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; width: 100%; }
+        .whatsapp-btn:hover { background: #1ebe5d; }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h2>👟 قسم الأحذية والجلديات</h2>
-    <p style="color: #ccc; font-size: 14px;">أحدث تشكيلة أحذية من أرقى المحلات في المنطقة</p>
-  </header>
+    <header>
+        <h1>قسم الأحذية - مول لبنان</h1>
+        <p>أرقى الموديلات والاحذية الرياضية والرسمية من مختلف المتاجر</p>
+    </header>
 
-  <div class="products-grid" id="shoesGrid">
-    <!-- المنتجات ستظهر هنا تلقائياً -->
-  </div>
+    <div class="container">
+        <h2 class="shop-title">منتجات الأحذية المتوفرة</h2>
+        <div class="products-grid">
+            
+            <div class="product-card">
+                <img src="https://via.placeholder.300x200?text=Shoes+1" alt="صورة الحذاء">
+                <h3>حذاء رياضي أنيق مريح</h3>
+                <p>السعر: 35$</p>
+                <a href="https://wa.me/96100000000?text=مرحباً، أرغب بالاستفسار عن هذا الحذاء: حذاء رياضي أنيق مريح" class="whatsapp-btn" target="_blank">اطلب عبر واتساب</a>
+            </div>
 
-  <a href="index.html" class="btn-home">⬅️ العودة للرئيسية</a>
-
-  <script>
-    const defaultShoes = [
-      {
-        title: "حذاء رجالي جلد طبيعي",
-        vendor: "محل الهرمل للأحذية",
-        price: "25$",
-        img: "https://via.placeholder.com/300x200/d4a329/000000?text=حذاء+رجالي",
-        wa: "https://wa.me/96181703239?text=" + encodeURIComponent("مرحباً، أرغب في شراء حذاء رجالي جلد طبيعي من مول لبنان")
-      }
-    ];
-
-    let userProducts = JSON.parse(localStorage.getItem('mall_products') || '[]');
-    let shoeProducts = userProducts.filter(p => p.category === 'shoes').concat(defaultShoes);
-
-    const grid = document.getElementById('shoesGrid');
-    grid.innerHTML = shoeProducts.map(p => `
-      <div class="prod-card">
-        <img src="${p.img}" class="prod-img" alt="${p.title}">
-        <div class="prod-title">${p.title}</div>
-        <div class="vendor-title">المحل: ${p.vendor}</div>
-        <div class="price-tag">${p.price}</div>
-        <a href="${p.wa}" target="_blank" class="btn-wa">💬 اطلب عبر الواتساب</a>
-      </div>
-    `).join('');
-  </script>
+        </div>
+    </div>
 
 </body>
 </html>
