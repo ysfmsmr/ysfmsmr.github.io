@@ -3,100 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مول لبنان - Mall Lebanon</title>
+    <title>مول لبنان - المنصة المركزية</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
-        body { background-color: #f4f4f4; color: #333; direction: rtl; }
+        body { background-color: #f4f4f4; color: #333; direction: rtl; text-align: center; }
         
-        /* الهيدر وعنوان المول */
-        header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 4px solid #d4af37; }
-        header h1 { font-size: 28px; color: #d4af37; margin-bottom: 5px; }
+        header { background: #111; color: #fff; padding: 25px; border-bottom: 4px solid #d4af37; }
+        header h1 { font-size: 28px; color: #d4af37; margin-bottom: 8px; }
         header p { font-size: 14px; color: #ccc; }
 
-        /* شريط الأقسام */
-        .nav-categories { display: flex; justify-content: center; background: #222; padding: 10px; gap: 15px; }
-        .nav-categories a { color: #fff; text-decoration: none; padding: 8px 15px; background: #333; border-radius: 5px; font-size: 14px; transition: 0.3s; }
-        .nav-categories a:hover { background: #d4af37; color: #111; }
+        .nav-bar { background: #222; padding: 12px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .nav-btn { background: #d4af37; color: #111; padding: 8px 14px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; }
+        .nav-btn:hover { background: #c19b2e; }
 
-        /* شاشة العرض الكبرى المتقلبة (Slideshow) */
-        .slideshow-container { position: relative; max-width: 1000px; margin: 20px auto; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; }
-        .slide { display: none; }
-        .slide img { width: 100%; max-height: 350px; object-fit: cover; border-radius: 5px; }
-        .slide-title { font-size: 18px; font-weight: bold; margin-top: 10px; color: #111; }
-        .whatsapp-btn { display: inline-block; margin-top: 10px; background: #25d366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
-        .whatsapp-btn:hover { background: #1ebe5d; }
-
-        /* قسم المحلات المشتركة */
-        .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
-        h2.section-title { font-size: 22px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 5px; color: #222; }
+        .container { max-width: 900px; margin: 20px auto; padding: 0 15px; text-align: right; }
+        .section { display: none; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .section.active { display: block; }
         
-        .shops-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .shop-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; padding: 15px; transition: 0.3s; }
-        .shop-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
-        .shop-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; }
-        .shop-card h3 { font-size: 18px; margin-bottom: 5px; color: #111; }
-        .shop-card p { font-size: 13px; color: #666; margin-bottom: 10px; }
-        .visit-btn { display: inline-block; background: #111; color: #d4af37; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-size: 14px; }
-        .visit-btn:hover { background: #d4af37; color: #111; }
+        h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 5px; color: #111; text-align: center; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; margin-top: 15px; }
+        .card { background: #fafafa; border: 1px solid #ddd; border-radius: 6px; padding: 15px; text-align: center; }
+        .card h3 { font-size: 16px; margin-bottom: 5px; color: #111; }
+        .card p { font-size: 13px; color: #666; margin-bottom: 12px; }
+
+        .action-btn { display: inline-block; background: #25d366; color: white; padding: 7px 12px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; width: 100%; border: none; cursor: pointer; }
+        .action-btn:hover { background: #1ebe5d; }
+
+        .form-group { margin-bottom: 12px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 13px; }
+        .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
+
+        .wheel-box { width: 200px; height: 200px; border: 8px solid #d4af37; border-radius: 50%; margin: 15px auto; display: flex; align-items: center; justify-content: center; background: #222; color: #fff; font-size: 16px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر وعنوان المول -->
     <header>
         <h1>مول لبنان</h1>
         <p>بوابتك الأولى لأرقى الألبسة، الأحذية، والعطورات في مكان واحد</p>
     </header>
 
-    <!-- شريط الأقسام -->
-    <div class="nav-categories">
-        <a href="#clothes">قسم الألبسة</a>
-        <a href="#shoes">قسم الأحذية</a>
-        <a href="#perfumes">قسم العطورات</a>
+    <!-- شريط التنقل السريع -->
+    <div class="nav-bar">
+        <button class="nav-btn" onclick="showSection('home')">الرئيسية</button>
+        <button class="nav-btn" onclick="showSection('clothes')">قسم الألبسة</button>
+        <button class="nav-btn" onclick="showSection('shoes')">قسم الأحذية</button>
+        <button class="nav-btn" onclick="showSection('perfumes')">قسم العطورات</button>
+        <button class="nav-btn" onclick="showSection('register')">انضم كتاجر</button>
+        <button class="nav-btn" onclick="showSection('login')">دخول التجار</button>
+        <button class="nav-btn" onclick="showSection('wheel')">عجلة الحظ</button>
     </div>
 
-    <!-- شاشة العرض الكبرى المتقلبة -->
-    <div class="slideshow-container">
-        <div class="slide">
-            <img src="https://via.placeholder.800x350?text=Featured+Item+1" alt="قطعة مميزة">
-            <div class="slide-title">محل الفخامة - جاكيت رجالي فاخر</div>
-            <a href="https://wa.me/96100000000?text=مرحباً، أرغب بالاستفسار عن هذه القطعة المميزة" class="whatsapp-btn" target="_blank">اطلب الآن عبر واتساب</a>
-        </div>
-        <div class="slide">
-            <img src="https://via.placeholder.800x350?text=Featured+Item+2" alt="قطعة مميزة">
-            <div class="slide-title">عطورات الذهب - عطر ملكي خاص</div>
-            <a href="https://wa.me/96100000000?text=مرحباً، أرغب بالاستفسار عن هذه القطعة المميزة" class="whatsapp-btn" target="_blank">اطلب الآن عبر واتساب</a>
-        </div>
-    </div>
-
-    <!-- المحلات المشتركة -->
     <div class="container">
-        <h2 class="section-title">المحلات المشتركة في المول</h2>
-        <div class="shops-grid" id="shopsList">
-            <!-- بطاقة محل تجريبي -->
-            <div class="shop-card">
-                <img src="https://via.placeholder.300x180?text=Shop+Sample" alt="صورة بضاعة المحل">
-                <h3>محل الأناقة للألبسة</h3>
-                <p>أرقى الموديلات الحديثة</p>
-                <a href="shop_view.html?id=1" class="visit-btn">تصفح المحل</a>
+
+        <!-- 1. واجهة الرئيسية -->
+        <div id="home" class="section active">
+            <h2 class="sec-title">أهلاً بك في مول لبنان</h2>
+            <p style="text-align: center; color: #555; margin-bottom: 20px;">اختر أحد الأقسام أدناه لتصفح أحدث المنتجات من متاجرنا المشتركة:</p>
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <button class="nav-btn" style="font-size: 15px; padding: 10px 20px;" onclick="showSection('clothes')">تصفح الألبسة</button>
+                <button class="nav-btn" style="font-size: 15px; padding: 10px 20px;" onclick="showSection('shoes')">تصفح الأحذية</button>
+                <button class="nav-btn" style="font-size: 15px; padding: 10px 20px;" onclick="showSection('perfumes')">تصفح العطورات</button>
             </div>
         </div>
+
+        <!-- 2. قسم الألبسة -->
+        <div id="clothes" class="section">
+            <h2 class="sec-title">قسم الألبسة</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>جاكيت رجالي فاخر</h3>
+                    <p>السعر: 35$</p>
+                    <a href="https://wa.me/96100000000?text=مرحباً، أرغب بطلب: جاكيت رجالي فاخر" class="action-btn" target="_blank">اطلب عبر واتساب</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. قسم الأحذية -->
+        <div id="shoes" class="section">
+            <h2 class="sec-title">قسم الأحذية</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>حذاء رياضي مريح</h3>
+                    <p>السعر: 25$</p>
+                    <a href="https://wa.me/96100000000?text=مرحباً، أرغب بطلب: حذاء رياضي مريح" class="action-btn" target="_blank">اطلب عبر واتساب</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. قسم العطورات -->
+        <div id="perfumes" class="section">
+            <h2 class="sec-title">قسم العطورات</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>عطر الملكي الفاخر</h3>
+                    <p>السعر: 40$</p>
+                    <a href="https://wa.me/96100000000?text=مرحباً، أرغب بطلب: عطر الملكي الفاخر" class="action-btn" target="_blank">اطلب عبر واتساب</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. تسجيل تاجر -->
+        <div id="register" class="section">
+            <h2 class="sec-title">استمارة تسجيل تاجر جديد (اشتراك 15$)</h2>
+            <div class="form-group">
+                <label>اسم المتجر:</label>
+                <input type="text" id="regShop" placeholder="مثلاً: محل الروائع">
+            </div>
+            <div class="form-group">
+                <label>القسم:</label>
+                <select id="regCat">
+                    <option value="clothes">ألبسة</option>
+                    <option value="shoes">أحذية</option>
+                    <option value="perfumes">عطورات</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>رقم الواتساب:</label>
+                <input type="text" id="regPhone" placeholder="96170000000+">
+            </div>
+            <button class="action-btn" onclick="submitReg()">إرسال طلب الانضمام</button>
+        </div>
+
+        <!-- 6. دخول التجار -->
+        <div id="login" class="section">
+            <h2 class="sec-title">تسجيل دخول التاجر</h2>
+            <div class="form-group">
+                <label>رقم الواتساب المسجل:</label>
+                <input type="text" id="logPhone" placeholder="96170000000+">
+            </div>
+            <div class="form-group">
+                <label>كلمة المرور:</label>
+                <input type="password" id="logPass" placeholder="••••••••">
+            </div>
+            <button class="action-btn" style="background:#111; color:#d4af37;" onclick="submitLogin()">دخول</button>
+        </div>
+
+        <!-- 7. عجلة الحظ -->
+        <div id="wheel" class="section" style="text-align: center;">
+            <h2 class="sec-title">عجلة الحظ الترويجية</h2>
+            <div class="wheel-box" id="wheelText">مول لبنان</div>
+            <button class="action-btn" style="max-width: 200px; margin: 0 auto;" onclick="spin()">ابدأ تدوير العجلة</button>
+            <div id="wheelResult" style="margin-top: 15px; font-weight: bold; color: #d4af37; font-size: 16px;"></div>
+        </div>
+
     </div>
 
     <script>
-        // حركة الشاشة المتقلبة أوتوماتيكياً
-        let slideIndex = 0;
-        showSlides();
+        function showSection(id) {
+            let sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0, 0);
+        }
 
-        function showSlides() {
-            let slides = document.getElementsByClassName("slide");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
+        function submitReg() {
+            let name = document.getElementById('regShop').value;
+            let phone = document.getElementById('regPhone').value;
+            if(name === "" || phone === "") {
+                alert("الرجاء ملء جميع الحقول!");
+                return;
             }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            slides[slideIndex-1].style.display = "block";  
-            setTimeout(showSlides, 4000); // تتغير كل 4 ثوانٍ
+            alert("تم إرسال طلبك بنجاح يا أبا علي! سيظهر لدى المشرف للمراجعة.");
+            document.getElementById('regShop').value = '';
+            document.getElementById('regPhone').value = '';
+        }
+
+        function submitLogin() {
+            let phone = document.getElementById('logPhone').value;
+            if(phone === "") {
+                alert("الرجاء إدخال رقم الهاتف!");
+                return;
+            }
+            alert("تم تسجيل الدخول بنجاح يا أبا علي!");
+        }
+
+        function spin() {
+            let prizes = [
+                "مبروك! خصم 10% على الألبسة",
+                "حظاً أوفر المرة القادمة",
+                "مبروك! توصيل مجاني",
+                "مبروك! خصم 5$ على العطورات",
+                "حظاً أوفر، جرب مرة أخرى"
+            ];
+            let res = prizes[Math.floor(Math.random() * prizes.length)];
+            document.getElementById('wheelResult').innerText = res;
         }
     </script>
 </body>
