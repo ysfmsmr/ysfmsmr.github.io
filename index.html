@@ -8,18 +8,17 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
         body { background-color: #f4f4f4; color: #333; direction: rtl; text-align: center; }
         
-        /* ترويسة فاخرة مع تصميم مجمع فخم يعكس أجواء المول الحقيقي */
+        /* ترويسة فاخرة مع التصميم المجمع الفخم */
         header { background: linear-gradient(135deg, #111 0%, #222 100%); color: #fff; padding: 15px; border-bottom: 4px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         header h1 { font-size: 26px; color: #d4af37; margin-bottom: 3px; font-weight: bold; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         header p { font-size: 12px; color: #e0e0e0; font-weight: 300; letter-spacing: 0.5px; margin-bottom: 10px; }
         
-        /* تصميم شبكي فخم يدمج الألبسة والأحذية والعطورات معاً بشكل عشوائي وساحر */
         .mall-showcase { display: grid; grid-template-columns: 2fr 1fr; gap: 4px; max-width: 500px; height: 160px; margin: 0 auto; border-radius: 8px; overflow: hidden; border: 2px solid #d4af37; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4); }
         .mall-showcase img { width: 100%; height: 100%; object-fit: cover; }
         .sub-grid { display: flex; flex-direction: column; gap: 4px; height: 100%; }
         .sub-grid img { height: calc(50% - 2px); }
 
-        /* شريط التنقل */
+        /* شريط التنقل والأزرار الذهبية */
         .nav-bar { background: #1a1a1a; padding: 12px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; border-bottom: 2px solid #333; }
         .nav-btn { background: #d4af37; color: #111; padding: 8px 14px; border-radius: 5px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; transition: 0.2s; }
         .nav-btn:hover { background: #e5c158; transform: translateY(-1px); }
@@ -30,7 +29,7 @@
         
         h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 6px; color: #111; text-align: center; }
         
-        /* شاشة العرض المتقلبة للتاجر */
+        /* شاشة العرض المتقلبة الخاصة بالتاجر فقط */
         .slider { width: 100%; height: 260px; background: #111; border: 2px solid #d4af37; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
         .slider img { width: 100%; height: 175px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; border: 1px solid #d4af37; }
         .slider span { color: #d4af37; font-size: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
@@ -43,11 +42,19 @@
         .action-btn:hover { opacity: 0.9; }
         .danger-btn { background: #e74c3c; margin-top: 10px; }
         
+        /* قائمة المتاجر المشتركة */
+        .vendor-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+        .vendor-item { background: #fafafa; border: 1px solid #d4af37; padding: 12px 15px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .vendor-item:hover { background: #fdfaf0; transform: translateY(-1px); }
+        .vendor-item h3 { font-size: 16px; color: #111; }
+        .vendor-item span { font-size: 13px; color: #d4af37; font-weight: bold; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 10px; }
         .card { background: #fafafa; border: 1px solid #e0e0e0; padding: 12px; border-radius: 6px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
         .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 8px; }
         .card h3 { font-size: 15px; color: #111; margin-bottom: 4px; }
-        .card p { font-size: 13px; color: #d4af37; font-weight: bold; margin-bottom: 8px; }
+        .card p { font-size: 13px; color: #333; margin-bottom: 4px; }
+        .card .price { color: #d4af37; font-weight: bold; margin-bottom: 6px; }
 
         .admin-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         .admin-table th, .admin-table td { border: 1px solid #ddd; padding: 9px; text-align: center; font-size: 13px; }
@@ -71,61 +78,48 @@
 
     <div class="nav-bar">
         <button class="nav-btn" onclick="showSec('home')">الرئيسية</button>
-        <button class="nav-btn" onclick="showSec('clothes')">الألبسة</button>
-        <button class="nav-btn" onclick="showSec('shoes')">الأحذية</button>
-        <button class="nav-btn" onclick="showSec('perfumes')">العطورات</button>
+        <button class="nav-btn" onclick="openVendors('clothes')">الألبسة</button>
+        <button class="nav-btn" onclick="openVendors('shoes')">الأحذية</button>
+        <button class="nav-btn" onclick="openVendors('perfumes')">العطورات</button>
         <button class="nav-btn" onclick="showSec('vendor')">لوحة التاجر</button>
         <button class="nav-btn" onclick="showSec('admin')">لوحة الإدارة</button>
     </div>
 
     <div class="container">
+        <!-- الرئيسية / شاشة العرض المتقلبة للتاجر فقط -->
         <div id="home" class="section active">
             <h2 class="sec-title">شاشة العرض المتقلبة (تحكم التجار)</h2>
             <div class="slider" id="sliderBox">
                 <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="إعلان التاجر">
                 <span>محل الأناقة للألبسة الراقية - أحدث صيحات الموضة</span>
             </div>
-            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">اختر أحد الأقسام بالأعلى لتصفح المنتجات أو توجه إلى لوحة التاجر لنشر إعلانك الفوري.</p>
+            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">اضغط على أقسام (الألبسة، الأحذية، العطورات) بالأعلى لتصفح قائمة التجار المشتركين.</p>
         </div>
 
-        <div id="clothes" class="section">
-            <h2 class="sec-title">قسم الألبسة</h2>
-            <div id="clothes-grid" class="grid">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" alt="صورة">
-                    <h3>جاكيت فاخر</h3>
-                    <p>السعر: 35$</p>
-                    <a href="https://wa.me/96170000000?text=أرغب بطلب جاكيت فاخر" class="action-btn" target="_blank">طلب عبر واتساب</a>
-                </div>
+        <!-- قسم قائمة التجار المشتركين بحسب القسم -->
+        <div id="vendors-section" class="section">
+            <h2 class="sec-title" id="vendorsTitle">قائمة التجار المشتركين</h2>
+            <div class="vendor-list" id="vendorListContainer">
+                <!-- يتم تعبئتها تلقائياً -->
             </div>
         </div>
 
-        <div id="shoes" class="section">
-            <h2 class="sec-title">قسم الأحذية</h2>
-            <div id="shoes-grid" class="grid">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="صورة">
-                    <h3>حذاء رياضي</h3>
-                    <p>السعر: 25$</p>
-                    <a href="https://wa.me/96170000000?text=أرغب بطلب حذاء رياضي" class="action-btn" target="_blank">طلب عبر واتساب</a>
-                </div>
+        <!-- قسم صفحة التاجر الشخصية وعرض بضاعته بالتفصيل -->
+        <div id="vendor-store" class="section">
+            <button onclick="showSec('vendors-section')" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة لقائمة التجار</button>
+            <h2 class="sec-title" id="storeNameTitle">متجر التاجر</h2>
+            <div id="storeProductsGrid" class="grid">
+                <!-- بضاعة التاجر مع السعر والمقاس ونمرة الرجل -->
             </div>
         </div>
 
-        <div id="perfumes" class="section">
-            <h2 class="sec-title">قسم العطورات</h2>
-            <div id="perfumes-grid" class="grid">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" alt="صورة">
-                    <h3>عطر أنك</h3>
-                    <p>السعر: 40$</p>
-                    <a href="https://wa.me/96170000000?text=أرغب بطلب عطر أنك" class="action-btn" target="_blank">طلب عبر واتساب</a>
-                </div>
-            </div>
-        </div>
-
+        <!-- لوحة التاجر -->
         <div id="vendor" class="section">
-            <h2 class="sec-title">لوحة التاجر - رفع الصور والتحكم بالشاشة</h2>
+            <h2 class="sec-title">لوحة التاجر - رفع المنتجات والتحكم بالشاشة</h2>
+            <div class="form-group">
+                <label>اسم المتجر / التاجر:</label>
+                <input type="text" id="vStoreName" placeholder="مثال: متجر أبو الزوز للأحذية">
+            </div>
             <div class="form-group">
                 <label>القسم:</label>
                 <select id="vCat">
@@ -143,6 +137,10 @@
                 <input type="text" id="vPrice" placeholder="السعر$">
             </div>
             <div class="form-group">
+                <label>نمرة الرجل / المقاس:</label>
+                <input type="text" id="vSize" placeholder="مثال: مقاس 42 / أو عام">
+            </div>
+            <div class="form-group">
                 <label>صورة المنتج:</label>
                 <input type="file" id="vImg" accept="image/*">
             </div>
@@ -151,12 +149,13 @@
             <button class="action-btn danger-btn" onclick="removeBigScreen()">إزالة الإعلان من الشاشة الكبرى</button>
         </div>
 
+        <!-- لوحة الإدارة -->
         <div id="admin" class="section">
             <h2 class="sec-title">لوحة الإدارة - القبول والرفض</h2>
             <table class="admin-table">
                 <thead>
                     <tr>
-                        <th>المنتج / التاجر</th>
+                        <th>التاجر / المنتج</th>
                         <th>القسم</th>
                         <th>الحالة</th>
                         <th>الإجراء</th>
@@ -184,7 +183,80 @@
             window.scrollTo(0, 0);
         }
 
-        /* شاشة العرض المتقلبة تحت تحكم التاجر فقط */
+        /* قاعدة بيانات المتاجر والمنتجات */
+        let mallData = {
+            clothes: [
+                {
+                    storeName: "محل الأناقة للألبسة",
+                    products: [
+                        { name: "جاكيت فاخر", price: "35", size: "مقاس L", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" }
+                    ]
+                }
+            ],
+            shoes: [
+                {
+                    storeName: "أحذية الفخامة العصرية",
+                    products: [
+                        { name: "حذاء رياضي مريح", price: "25", size: "مقاس 42", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" }
+                    ]
+                }
+            ],
+            perfumes: [
+                {
+                    storeName: "عطورات الملك",
+                    products: [
+                        { name: "عطر فرنسي ملكي", price: "40", size: "100 مل", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" }
+                    ]
+                }
+            ]
+        };
+
+        let catNames = { clothes: "قسم الألبسة - لائحة التجار المشتركين", shoes: "قسم الأحذية - لائحة التجار المشتركين", perfumes: "قسم العطورات - لائحة التجار المشتركين" };
+
+        function openVendors(cat) {
+            document.getElementById('vendorsTitle').innerText = catNames[cat];
+            let listContainer = document.getElementById('vendorListContainer');
+            listContainer.innerHTML = "";
+
+            let vendors = mallData[cat];
+            if (!vendors || vendors.length === 0) {
+                listContainer.innerHTML = "<p style='text-align:center; color:#777; padding:20px;'>لا يوجد تجار مشتركين في هذا القسم حالياً.</p>";
+            } else {
+                vendors.forEach(v => {
+                    let div = document.createElement('div');
+                    div.className = 'vendor-item';
+                    div.innerHTML = `
+                        <h3>🏪 ${v.storeName}</h3>
+                        <span>عرض المنتجات (${v.products.length}) ←</span>
+                    `;
+                    div.onclick = () => openStore(v);
+                    listContainer.appendChild(div);
+                });
+            }
+            showSec('vendors-section');
+        }
+
+        function openStore(vendorObj) {
+            document.getElementById('storeNameTitle').innerText = `متجر: ${vendorObj.storeName}`;
+            let grid = document.getElementById('storeProductsGrid');
+            grid.innerHTML = "";
+
+            vendorObj.products.forEach(p => {
+                let card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${p.img}" alt="صورة المنتج">
+                    <h3>${p.name}</h3>
+                    <p class="price">السعر: ${p.price}$</p>
+                    <p style="font-size:12px; color:#555; margin-bottom:6px;">نمرة الرجل / المقاس: <b>${p.size}</b></p>
+                    <a href="https://wa.me/96170000000?text=أرغب بطلب ${p.name} من متجر ${vendorObj.storeName}" class="action-btn" target="_blank">طلب عبر واتساب</a>
+                `;
+                grid.appendChild(card);
+            });
+            showSec('vendor-store');
+        }
+
+        /* شاشة العرض المتقلبة للتاجر فقط */
         let defaultSlides = [
             { text: "محل الأناقة للألبسة - أحدث الموضات الصيفية والشتوية", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" },
             { text: "أحذية الفخامة - راحة وأناقة لا توصف لقدميك", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
@@ -244,43 +316,48 @@
         }
 
         function uploadProd() {
+            let storeName = document.getElementById('vStoreName').value;
             let cat = document.getElementById('vCat').value;
             let name = document.getElementById('vName').value;
             let price = document.getElementById('vPrice').value;
+            let size = document.getElementById('vSize').value;
             let imgInput = document.getElementById('vImg');
 
-            if(name === "" || price === "") {
-                alert("الرجاء إدخال الاسم والسعر!");
+            if(storeName === "" || name === "" || price === "") {
+                alert("الرجاء إدخال اسم المتجر، اسم المنتج، والسعر!");
                 return;
             }
 
             let reader = new FileReader();
             if(imgInput.files && imgInput.files[0]) {
                 reader.onload = function(e) {
-                    addCard(cat, name, price, e.target.result);
+                    saveProductToMall(storeName, cat, name, price, size, e.target.result);
                 }
                 reader.readAsDataURL(imgInput.files[0]);
             } else {
-                addCard(cat, name, price, "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300");
+                saveProductToMall(storeName, cat, name, price, size, "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300");
             }
         }
 
-        function addCard(cat, name, price, imgSrc) {
-            let grid = document.getElementById(cat + '-grid');
-            let card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <img src="${imgSrc}" alt="صورة">
-                <h3>${name}</h3>
-                <p>السعر: ${price}$</p>
-                <a href="https://wa.me/96170000000?text=أرغب بطلب ${name}" class="action-btn" target="_blank">طلب عبر واتساب</a>
-            `;
-            grid.prepend(card);
+        function saveProductToMall(storeName, cat, name, price, size, imgSrc) {
+            if(!mallData[cat]) mallData[cat] = [];
+            
+            let vendor = mallData[cat].find(v => v.storeName === storeName);
+            let newProd = { name: name, price: price, size: size || 'متوفر', img: imgSrc };
+
+            if(vendor) {
+                vendor.products.unshift(newProd);
+            } else {
+                mallData[cat].unshift({
+                    storeName: storeName,
+                    products: [newProd]
+                });
+            }
 
             let tbody = document.getElementById('adminBody');
             let tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${name}</td>
+                <td>${storeName} (${name})</td>
                 <td>${cat}</td>
                 <td style="color:orange; font-weight:bold;">قيد الانتظار</td>
                 <td>
@@ -290,8 +367,8 @@
             `;
             tbody.prepend(tr);
 
-            alert("تم رفع المنتج بنجاح وتم إرساله للإدارة!");
-            showSec(cat);
+            alert("تم رفع المنتج وإرساله للإدارة بنجاح وسيظهر بمتجرك فوراً!");
+            openVendors(cat);
         }
 
         function acceptItem(btn) {
