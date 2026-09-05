@@ -8,74 +8,85 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
         body { background-color: #f4f4f4; color: #333; direction: rtl; text-align: center; }
         
-        header { background: #111; color: #fff; padding: 25px; border-bottom: 4px solid #d4af37; }
-        header h1 { font-size: 28px; color: #d4af37; margin-bottom: 8px; }
-        header p { font-size: 14px; color: #ccc; }
+        header { background: #111; color: #fff; padding: 20px; border-bottom: 4px solid #d4af37; }
+        header h1 { font-size: 26px; color: #d4af37; margin-bottom: 5px; }
 
-        .nav-bar { background: #222; padding: 12px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .nav-btn { background: #d4af37; color: #111; padding: 8px 14px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; }
+        .nav-bar { background: #222; padding: 10px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .nav-btn { background: #d4af37; color: #111; padding: 7px 12px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 12px; cursor: pointer; border: none; }
         .nav-btn:hover { background: #c19b2e; }
 
-        .container { max-width: 900px; margin: 20px auto; padding: 0 15px; text-align: right; }
-        .section { display: none; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .container { max-width: 800px; margin: 15px auto; padding: 0 10px; text-align: right; }
+        .section { display: none; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; }
         .section.active { display: block; }
         
-        h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 5px; color: #111; text-align: center; }
+        h2.sec-title { font-size: 18px; margin-bottom: 12px; border-bottom: 2px solid #d4af37; padding-bottom: 4px; color: #111; text-align: center; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; margin-top: 15px; }
-        .card { background: #fafafa; border: 1px solid #ddd; border-radius: 6px; padding: 15px; text-align: center; }
-        .card h3 { font-size: 16px; margin-bottom: 5px; color: #111; }
-        .card p { font-size: 13px; color: #666; margin-bottom: 12px; }
+        /* ستايل الشاشة العملاقة (السلايدر المتحرك) */
+        .slideshow-container { position: relative; max-width: 100%; margin: auto; background: #222; border-radius: 8px; overflow: hidden; border: 2px solid #d4af37; height: 220px; display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; }
+        .slide { display: none; width: 100%; padding: 20px; }
+        .slide.active-slide { display: block; }
+        .slide h3 { color: #d4af37; font-size: 20px; margin-bottom: 8px; }
+        .slide p { font-size: 14px; color: #ddd; }
 
-        .action-btn { display: inline-block; background: #25d366; color: white; padding: 7px 12px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; width: 100%; border: none; cursor: pointer; }
+        .form-group { margin-bottom: 10px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 3px; font-weight: bold; font-size: 12px; }
+        .form-group input, .form-group select { width: 100%; padding: 7px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; }
+
+        .action-btn { display: inline-block; background: #25d366; color: white; padding: 8px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; width: 100%; border: none; cursor: pointer; text-align: center; }
         .action-btn:hover { background: #1ebe5d; }
 
-        .form-group { margin-bottom: 12px; text-align: right; }
-        .form-group label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 13px; }
-        .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
-
-        .wheel-box { width: 200px; height: 200px; border: 8px solid #d4af37; border-radius: 50%; margin: 15px auto; display: flex; align-items: center; justify-content: center; background: #222; color: #fff; font-size: 16px; font-weight: bold; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+        .product-card { background: #fafafa; border: 1px solid #ddd; padding: 10px; border-radius: 5px; text-align: center; }
+        .product-card img { max-width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>مول لبنان</h1>
-        <p>بوابتك الأولى لأرقى الألبسة، الأحذية، والعطورات في مكان واحد</p>
+        <p>المنصة المركزية للتسوق وعرض المنتجات</p>
     </header>
 
-    <!-- شريط التنقل السريع -->
+    <!-- شريط التنقل -->
     <div class="nav-bar">
         <button class="nav-btn" onclick="showSection('home')">الرئيسية</button>
-        <button class="nav-btn" onclick="showSection('clothes')">قسم الألبسة</button>
-        <button class="nav-btn" onclick="showSection('shoes')">قسم الأحذية</button>
-        <button class="nav-btn" onclick="showSection('perfumes')">قسم العطورات</button>
-        <button class="nav-btn" onclick="showSection('register')">انضم كتاجر</button>
-        <button class="nav-btn" onclick="showSection('login')">دخول التجار</button>
+        <button class="nav-btn" onclick="showSection('clothes')">الألبسة</button>
+        <button class="nav-btn" onclick="showSection('shoes')">الأحذية</button>
+        <button class="nav-btn" onclick="showSection('perfumes')">العطورات</button>
+        <button class="nav-btn" onclick="showSection('vendor_upload')">لوحة التاجر (رفع الصور)</button>
         <button class="nav-btn" onclick="showSection('wheel')">عجلة الحظ</button>
     </div>
 
     <div class="container">
 
-        <!-- 1. واجهة الرئيسية -->
+        <!-- 1. الرئيسية مع السلايدر المتحرك -->
         <div id="home" class="section active">
-            <h2 class="sec-title">أهلاً بك في مول لبنان</h2>
-            <p style="text-align: center; color: #555; margin-bottom: 20px;">اختر أحد الأقسام أدناه لتصفح أحدث المنتجات من متاجرنا المشتركة:</p>
-            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-                <button class="nav-btn" style="font-size: 15px; padding: 10px 20px;" onclick="showSection('clothes')">تصفح الألبسة</button>
-                <button class="nav-btn" style="font-size: 15px; padding: 10px 20px;" onclick="showSection('shoes')">تصفح الأحذية</button>
-                <button class="nav-btn" style="font-size: 15px; padding: 10px 20px;" onclick="showSection('perfumes')">تصفح العطورات</button>
+            <h2 class="sec-title">عروض المحلات المميزة</h2>
+            
+            <div class="slideshow-container">
+                <div class="slide active-slide">
+                    <h3>محل الفخامة للألبسة</h3>
+                    <p>أرقى الجاكيتات والملابس الرجالية والنسائية - اطلب الآن!</p>
+                </div>
+                <div class="slide">
+                    <h3>أحذية العز</h3>
+                    <p>تشكيلة واسعة من الأحذية الرياضية والرسمية بأفضل الأسعار</p>
+                </div>
+                <div class="slide">
+                    <h3>عطورات الملك</h3>
+                    <p>أفخم العطور الشرقية والفرنسية الثابتة</p>
+                </div>
             </div>
         </div>
 
         <!-- 2. قسم الألبسة -->
         <div id="clothes" class="section">
             <h2 class="sec-title">قسم الألبسة</h2>
-            <div class="grid">
-                <div class="card">
+            <div id="clothes-list" class="product-grid">
+                <div class="product-card">
                     <h3>جاكيت رجالي فاخر</h3>
                     <p>السعر: 35$</p>
-                    <a href="https://wa.me/96100000000?text=مرحباً، أرغب بطلب: جاكيت رجالي فاخر" class="action-btn" target="_blank">اطلب عبر واتساب</a>
+                    <a href="https://wa.me/96170000000?text=مرحباً، أرغب بطلب جاكيت رجالي فاخر" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
@@ -83,11 +94,11 @@
         <!-- 3. قسم الأحذية -->
         <div id="shoes" class="section">
             <h2 class="sec-title">قسم الأحذية</h2>
-            <div class="grid">
-                <div class="card">
+            <div id="shoes-list" class="product-grid">
+                <div class="product-card">
                     <h3>حذاء رياضي مريح</h3>
                     <p>السعر: 25$</p>
-                    <a href="https://wa.me/96100000000?text=مرحباً، أرغب بطلب: حذاء رياضي مريح" class="action-btn" target="_blank">اطلب عبر واتساب</a>
+                    <a href="https://wa.me/96170000000?text=مرحباً، أرغب بطلب حذاء رياضي مريح" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
@@ -95,100 +106,114 @@
         <!-- 4. قسم العطورات -->
         <div id="perfumes" class="section">
             <h2 class="sec-title">قسم العطورات</h2>
-            <div class="grid">
-                <div class="card">
+            <div id="perfumes-list" class="product-grid">
+                <div class="product-card">
                     <h3>عطر الملكي الفاخر</h3>
                     <p>السعر: 40$</p>
-                    <a href="https://wa.me/96100000000?text=مرحباً، أرغب بطلب: عطر الملكي الفاخر" class="action-btn" target="_blank">اطلب عبر واتساب</a>
+                    <a href="https://wa.me/96170000000?text=مرحباً، أرغب بطلب عطر الملكي الفاخر" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
 
-        <!-- 5. تسجيل تاجر -->
-        <div id="register" class="section">
-            <h2 class="sec-title">استمارة تسجيل تاجر جديد (اشتراك 15$)</h2>
+        <!-- 5. لوحة التاجر لرفع الصور والمنتجات -->
+        <div id="vendor_upload" class="section">
+            <h2 class="sec-title">لوحة التاجر - إضافة منتج جديد</h2>
             <div class="form-group">
-                <label>اسم المتجر:</label>
-                <input type="text" id="regShop" placeholder="مثلاً: محل الروائع">
-            </div>
-            <div class="form-group">
-                <label>القسم:</label>
-                <select id="regCat">
-                    <option value="clothes">ألبسة</option>
-                    <option value="shoes">أحذية</option>
-                    <option value="perfumes">عطورات</option>
+                <label>اختر القسم:</label>
+                <select id="prodCat">
+                    <option value="clothes">قسم الألبسة</option>
+                    <option value="shoes">قسم الأحذية</option>
+                    <option value="perfumes">قسم العطورات</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>رقم الواتساب:</label>
-                <input type="text" id="regPhone" placeholder="96170000000+">
-            </div>
-            <button class="action-btn" onclick="submitReg()">إرسال طلب الانضمام</button>
-        </div>
-
-        <!-- 6. دخول التجار -->
-        <div id="login" class="section">
-            <h2 class="sec-title">تسجيل دخول التاجر</h2>
-            <div class="form-group">
-                <label>رقم الواتساب المسجل:</label>
-                <input type="text" id="logPhone" placeholder="96170000000+">
+                <label>اسم المنتج أو البضاعة:</label>
+                <input type="text" id="prodName" placeholder="مثلاً: قميص صيفي فاخر">
             </div>
             <div class="form-group">
-                <label>كلمة المرور:</label>
-                <input type="password" id="logPass" placeholder="••••••••">
+                <label>السعر:</label>
+                <input type="text" id="prodPrice" placeholder="مثلاً: 20$">
             </div>
-            <button class="action-btn" style="background:#111; color:#d4af37;" onclick="submitLogin()">دخول</button>
+            <div class="form-group">
+                <label>صورة المنتج (اختر صورة من هاتفك):</label>
+                <input type="file" id="prodImage" accept="image/*">
+            </div>
+            <button class="action-btn" onclick="addNewProduct()">نشر المنتج في المول</button>
         </div>
 
-        <!-- 7. عجلة الحظ -->
+        <!-- 6. عجلة الحظ -->
         <div id="wheel" class="section" style="text-align: center;">
             <h2 class="sec-title">عجلة الحظ الترويجية</h2>
-            <div class="wheel-box" id="wheelText">مول لبنان</div>
-            <button class="action-btn" style="max-width: 200px; margin: 0 auto;" onclick="spin()">ابدأ تدوير العجلة</button>
-            <div id="wheelResult" style="margin-top: 15px; font-weight: bold; color: #d4af37; font-size: 16px;"></div>
+            <div style="width: 150px; height: 150px; border: 6px solid #d4af37; border-radius: 50%; margin: 10px auto; display: flex; align-items: center; justify-content: center; background: #222; color: #fff; font-weight: bold;">مول لبنان</div>
+            <button class="action-btn" style="max-width: 180px; margin: 0 auto;" onclick="spin()">ابدأ تدوير العجلة</button>
+            <div id="wheelResult" style="margin-top: 10px; font-weight: bold; color: #d4af37;"></div>
         </div>
 
     </div>
 
     <script>
+        // تنقل الصفحات
         function showSection(id) {
-            let sections = document.querySelectorAll('.section');
-            sections.forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0, 0);
         }
 
-        function submitReg() {
-            let name = document.getElementById('regShop').value;
-            let phone = document.getElementById('regPhone').value;
-            if(name === "" || phone === "") {
-                alert("الرجاء ملء جميع الحقول!");
+        // السلايدر المتحرك (يتغير كل 3 ثواني)
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active-slide');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active-slide');
+        }
+        setInterval(nextSlide, 3000);
+
+        // وظيفة التاجر لرفع الصور والمنتجات مباشرة
+        function addNewProduct() {
+            let cat = document.getElementById('prodCat').value;
+            let name = document.getElementById('prodName').value;
+            let price = document.getElementById('prodPrice').value;
+            let imageInput = document.getElementById('prodImage');
+
+            if(name === "" || price === "") {
+                alert("الرجاء إدخال اسم المنتج والسعر!");
                 return;
             }
-            alert("تم إرسال طلبك بنجاح يا أبا علي! سيظهر لدى المشرف للمراجعة.");
-            document.getElementById('regShop').value = '';
-            document.getElementById('regPhone').value = '';
-        }
 
-        function submitLogin() {
-            let phone = document.getElementById('logPhone').value;
-            if(phone === "") {
-                alert("الرجاء إدخال رقم الهاتف!");
-                return;
+            let reader = new FileReader();
+            if (imageInput.files && imageInput.files[0]) {
+                reader.onload = function(e) {
+                    insertProductToDOM(cat, name, price, e.target.result);
+                }
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                insertProductToDOM(cat, name, price, "");
             }
-            alert("تم تسجيل الدخول بنجاح يا أبا علي!");
         }
 
+        function insertProductToDOM(cat, name, price, imgSrc) {
+            let targetDiv = document.getElementById(cat + '-list');
+            let card = document.createElement('div');
+            card.className = 'product-card';
+            
+            let imgHTML = imgSrc ? `<img src="${imgSrc}" alt="صورة البضاعة">` : '';
+            
+            card.innerHTML = `
+                ${imgHTML}
+                <h3>${name}</h3>
+                <p>السعر: ${price}</p>
+                <a href="https://wa.me/96170000000?text=مرحباً، أرغب بطلب: ${name}" class="action-btn" target="_blank">طلب عبر واتساب</a>
+            `;
+            targetDiv.prepend(card);
+            alert("تم نشر المنتج بنجاح وأصبح ظاهراً في القسم!");
+            showSection(cat);
+        }
+
+        // عجلة الحظ
         function spin() {
-            let prizes = [
-                "مبروك! خصم 10% على الألبسة",
-                "حظاً أوفر المرة القادمة",
-                "مبروك! توصيل مجاني",
-                "مبروك! خصم 5$ على العطورات",
-                "حظاً أوفر، جرب مرة أخرى"
-            ];
-            let res = prizes[Math.floor(Math.random() * prizes.length)];
-            document.getElementById('wheelResult').innerText = res;
+            let prizes = ["خصم 10% على الألبسة", "حظاً أوفر المرة القادمة", "توصيل مجاني لطلبك", "خصم 5$ على العطورات"];
+            document.getElementById('wheelResult').innerText = prizes[Math.floor(Math.random() * prizes.length)];
         }
     </script>
 </body>
