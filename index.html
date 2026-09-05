@@ -8,10 +8,13 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
         body { background-color: #f4f4f4; color: #333; direction: rtl; text-align: center; }
         
-        /* ترويسة فاخرة ومميزة */
-        header { background: linear-gradient(135deg, #111 0%, #222 100%); color: #fff; padding: 25px 15px; border-bottom: 4px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        header h1 { font-size: 32px; color: #d4af37; margin-bottom: 8px; font-weight: bold; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        header p { font-size: 14px; color: #e0e0e0; font-weight: 300; letter-spacing: 0.5px; }
+        /* ترويسة فاخرة مع صورة تعبيرية تجمع أجواء المول الحقيقي */
+        header { background: linear-gradient(135deg, #111 0%, #222 100%); color: #fff; padding: 20px 15px; border-bottom: 4px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        header h1 { font-size: 28px; color: #d4af37; margin-bottom: 5px; font-weight: bold; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        header p { font-size: 13px; color: #e0e0e0; font-weight: 300; letter-spacing: 0.5px; margin-bottom: 12px; }
+        
+        /* صورة الواجهة العلوية الثابتة التي تجمع أجواء المول الحقيقي */
+        .mall-hero-img { width: 100%; max-width: 500px; height: 160px; object-fit: cover; border-radius: 8px; border: 2px solid #d4af37; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3); margin: 0 auto; display: block; }
 
         /* شريط التنقل */
         .nav-bar { background: #1a1a1a; padding: 12px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; border-bottom: 2px solid #333; }
@@ -24,7 +27,7 @@
         
         h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 6px; color: #111; text-align: center; }
         
-        /* الشاشة الكبرى الفاخرة */
+        /* شاشة العرض المتقلبة للتاجر */
         .slider { width: 100%; height: 260px; background: #111; border: 2px solid #d4af37; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
         .slider img { width: 100%; height: 175px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; border: 1px solid #d4af37; }
         .slider span { color: #d4af37; font-size: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
@@ -53,6 +56,7 @@
     <header>
         <h1>مول لبنان</h1>
         <p>✦ الوجهة الأولى لأرقى الماركات، الألبسة، الأحذية، والعطورات الفاخرة في مكان واحد ✦</p>
+        <img class="mall-hero-img" src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?w=600" alt="مول لبنان الحقيقي">
     </header>
 
     <div class="nav-bar">
@@ -66,46 +70,46 @@
 
     <div class="container">
         <div id="home" class="section active">
-            <h2 class="sec-title">دليل مول لبنان - الواجهة الرئيسية</h2>
+            <h2 class="sec-title">شاشة العرض المتقلبة (تحكم التجار)</h2>
             <div class="slider" id="sliderBox">
-                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="دليل مول لبنان">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="إعلان التاجر">
                 <span>محل الأناقة للألبسة الراقية - أحدث صيحات الموضة</span>
             </div>
-            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">استكشف أقسامنا المتنوعة وتعرّف على أرقى المعروضات والمنتجات المميزة عبر دليل المول الشامل.</p>
+            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">اختر أحد الأقسام بالأعلى لتصفح المنتجات أو توجه إلى لوحة التاجر لنشر إعلانك الفوري.</p>
         </div>
 
         <div id="clothes" class="section">
-            <h2 class="sec-title">قسم الألبسة الفاخرة</h2>
+            <h2 class="sec-title">قسم الألبسة</h2>
             <div id="clothes-grid" class="grid">
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" alt="صورة">
-                    <h3>جاكيت رجالي فاخر</h3>
+                    <h3>جاكيت فاخر</h3>
                     <p>السعر: 35$</p>
-                    <a href="https://wa.me/96170000000?text=أرغب بطلب جاكيت رجالي فاخر" class="action-btn" target="_blank">طلب عبر واتساب</a>
+                    <a href="https://wa.me/96170000000?text=أرغب بطلب جاكيت فاخر" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
 
         <div id="shoes" class="section">
-            <h2 class="sec-title">قسم الأحذية العصرية</h2>
+            <h2 class="sec-title">قسم الأحذية</h2>
             <div id="shoes-grid" class="grid">
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="صورة">
-                    <h3>حذاء رياضي أنيق</h3>
+                    <h3>حذاء رياضي</h3>
                     <p>السعر: 25$</p>
-                    <a href="https://wa.me/96170000000?text=أرغب بطلب حذاء رياضي أنيق" class="action-btn" target="_blank">طلب عبر واتساب</a>
+                    <a href="https://wa.me/96170000000?text=أرغب بطلب حذاء رياضي" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
 
         <div id="perfumes" class="section">
-            <h2 class="sec-title">قسم العطورات الشرقية والفرنسية</h2>
+            <h2 class="sec-title">قسم العطورات</h2>
             <div id="perfumes-grid" class="grid">
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" alt="صورة">
-                    <h3>عطر الملك الخاص</h3>
+                    <h3>عطر أنك</h3>
                     <p>السعر: 40$</p>
-                    <a href="https://wa.me/96170000000?text=أرغب بطلب عطر الملك الخاص" class="action-btn" target="_blank">طلب عبر واتساب</a>
+                    <a href="https://wa.me/96170000000?text=أرغب بطلب عطر أنك" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
@@ -150,7 +154,7 @@
                 </thead>
                 <tbody id="adminBody">
                     <tr>
-                        <td>محل الفخامة (اشتراك)</td>
+                        <td>محل العبارة (اشتراك)</td>
                         <td>ألبسة</td>
                         <td style="color:orange; font-weight:bold;">قيد الانتظار</td>
                         <td>
@@ -170,11 +174,11 @@
             window.scrollTo(0, 0);
         }
 
-        /* واجهة الدليل العشوائية والمنسقة للشاشة الكبرى */
+        /* شاشة العرض المتقلبة تحت تحكم التاجر فقط */
         let defaultSlides = [
-            { text: "محل الأناقة للألبسة الراقية - أحدث صيحات الموضة", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" },
-            { text: "أحذية الفخامة العصرية - راحة وأناقة لا توصف", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
-            { text: "عطورات الملك الشرقية والفرنسية - عبير يخلد اللحظات", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500" }
+            { text: "محل الأناقة للألبسة - أحدث الموضات الصيفية والشتوية", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" },
+            { text: "أحذية الفخامة - راحة وأناقة لا توصف لقدميك", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
+            { text: "عطورات الملك - فخامة العطور الشرقية والفرنسية", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500" }
         ];
         let current = 0;
         let customBigScreen = null;
@@ -190,7 +194,7 @@
                 let slide = defaultSlides[current];
                 box.innerHTML = `<img src="${slide.img}" alt="دليل المول"><span>${slide.text}</span>`;
             }
-        }, 3500);
+        }, 3000);
 
         function publishToBigScreen() {
             let name = document.getElementById('vName').value;
@@ -209,7 +213,7 @@
                         text: `${name} - السعر: ${price}$ (عرض خاص من التاجر)`,
                         img: e.target.result
                     };
-                    alert("تم نشر الصورة والإعلان على الشاشة الكبرى بنجاح!");
+                    alert("تم نشر الإعلان على الشاشة الكبرى بنجاح!");
                     showSec('home');
                 }
                 reader.readAsDataURL(imgInput.files[0]);
@@ -225,7 +229,7 @@
 
         function removeBigScreen() {
             customBigScreen = null;
-            alert("تمت إزالة الإعلان من الشاشة الكبرى وعادت لدليل المول التلقائي!");
+            alert("تمت إزالة الإعلان من الشاشة الكبرى وعادت للحالة التلقائية!");
             showSec('home');
         }
 
@@ -247,7 +251,7 @@
                 }
                 reader.readAsDataURL(imgInput.files[0]);
             } else {
-                addCard(cat, name, price, "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300");
+                addCard(cat, name, price, "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300");
             }
         }
 
