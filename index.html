@@ -27,7 +27,7 @@
         
         h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 6px; color: #111; text-align: center; }
         
-        /* شاشة العرض المتقلبة حصرياً للرئيسية */
+        /* الشاشة المتقلبة في الرئيسية فقط */
         .slider { width: 100%; height: 260px; background: #111; border: 2px solid #d4af37; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
         .slider img { width: 100%; height: 175px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; border: 1px solid #d4af37; }
         .slider span { color: #d4af37; font-size: 15px; }
@@ -40,14 +40,15 @@
         .action-btn:hover { opacity: 0.9; }
         .danger-btn { background: #e74c3c; margin-top: 10px; }
         
-        /* واجهة محلات التجار المنعزلة */
-        .shops-portal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
-        .shop-card-portal { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); border: 2px solid #d4af37; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15); color: #fff; }
-        .shop-card-portal:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3); }
-        .shop-card-portal h3 { font-size: 18px; color: #d4af37; margin-bottom: 8px; }
-        .shop-card-portal p { font-size: 12px; color: #ccc; margin-bottom: 12px; }
-        .shop-card-portal span { background: #d4af37; color: #111; padding: 6px 12px; border-radius: 4px; font-weight: bold; font-size: 12px; display: inline-block; }
+        /* شبكة محلات التجار داخل القسم (تظهر فوراً عند اختيار القسم) */
+        .vendors-direct-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
+        .vendor-direct-card { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); border: 2px solid #d4af37; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15); color: #fff; }
+        .vendor-direct-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3); }
+        .vendor-direct-card h3 { font-size: 18px; color: #d4af37; margin-bottom: 8px; }
+        .vendor-direct-card p { font-size: 12px; color: #ccc; margin-bottom: 12px; }
+        .vendor-direct-card span { background: #d4af37; color: #111; padding: 6px 12px; border-radius: 4px; font-weight: bold; font-size: 12px; display: inline-block; }
 
+        /* فترينة أو صفحة التاجر المنعزلة التي تعرض كل بضائعه */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 10px; }
         .card { background: #fafafa; border: 1px solid #e0e0e0; padding: 12px; border-radius: 6px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
         .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 8px; }
@@ -74,44 +75,45 @@
         </div>
     </header>
 
+    <!-- الأزرار الرئيسية -->
     <div class="nav-bar">
         <button class="nav-btn" onclick="showSec('home')">الرئيسية</button>
-        <button class="nav-btn" onclick="openShopsPortal('clothes')">الألبسة</button>
-        <button class="nav-btn" onclick="openShopsPortal('shoes')">الأحذية</button>
-        <button class="nav-btn" onclick="openShopsPortal('perfumes')">العطورات</button>
+        <button class="nav-btn" onclick="openCategory('clothes')">الألبسة</button>
+        <button class="nav-btn" onclick="openCategory('shoes')">الأحذية</button>
+        <button class="nav-btn" onclick="openCategory('perfumes')">العطورات</button>
         <button class="nav-btn" onclick="showSec('vendor')">لوحة التاجر</button>
         <button class="nav-btn" onclick="showSec('admin')">لوحة الإدارة</button>
     </div>
 
     <div class="container">
-        <!-- الرئيسية: شاشة العرض المتقلبة للتاجر فقط -->
+        <!-- الرئيسية: الشاشة المتحركة فقط -->
         <div id="home" class="section active">
-            <h2 class="sec-title">شاشة العرض المتقلبة (عروض التجار الكبرى)</h2>
+            <h2 class="sec-title">شاشة العرض المتقلبة (إعلانات التجار)</h2>
             <div class="slider" id="sliderBox">
                 <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="إعلان التاجر">
                 <span>محل الأناقة للألبسة الراقية - أحدث صيحات الموضة</span>
             </div>
-            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">تفضل بزيارة أقسام المول بالأعلى (الألبسة، الأحذية، العطورات) لدخول محلات التجار وعرض فتريناتهم الخاصة.</p>
+            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">اضغط على أي قسم بالأعلى (الألبسة، الأحذية، العطورات) لاستعراض محلات التجار المشاركة.</p>
         </div>
 
-        <!-- صالة محلات التجار المشتركين للقسم -->
-        <div id="shops-portal" class="section">
+        <!-- قائمة محلات القسم المباشرة -->
+        <div id="category-section" class="section">
             <button onclick="showSec('home')" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة للرئيسية</button>
-            <h2 class="sec-title" id="portalTitle">قائمة محلات التجار</h2>
-            <p style="text-align:center; color:#666; font-size:13px; margin-bottom:15px;">اختر المحل للدخول إلى فتريته المنعزلة وعرض كافة بضائعه:</p>
-            <div class="shops-portal-grid" id="shopsPortalGrid"></div>
+            <h2 class="sec-title" id="categoryTitle">محلات القسم</h2>
+            <p style="text-align:center; color:#666; font-size:13px; margin-bottom:15px;">اختر المحل للدخول إلى صفحته وفترينته المنعزلة وعرض كافة بضائعه:</p>
+            <div class="vendors-direct-grid" id="vendorsDirectGrid"></div>
         </div>
 
-        <!-- فترينا / صفحة التاجر المنعزلة الخاصة به مع رقمه الخاص -->
-        <div id="vendor-isolated-store" class="section">
-            <button onclick="goBackToPortal()" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة لقائمة المحلات</button>
-            <h2 class="sec-title" id="isolatedStoreTitle">فترينة المحل</h2>
-            <div id="isolatedStoreGrid" class="grid"></div>
+        <!-- فترينة التاجر المنعزلة (تعرض جميع بضائع هذا التاجر فقط) -->
+        <div id="vendor-store-page" class="section">
+            <button onclick="goBackToCategory()" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة لقائمة المحلات</button>
+            <h2 class="sec-title" id="storePageTitle">فترينة المحل</h2>
+            <div id="storeProductsGrid" class="grid"></div>
         </div>
 
         <!-- لوحة التاجر -->
         <div id="vendor" class="section">
-            <h2 class="sec-title">لوحة التاجر - رفع المنتجات ورقم الواتساب والتحكم بالشاشة</h2>
+            <h2 class="sec-title">لوحة التاجر - رفع المنتجات ورقم الواتساب والشاشة</h2>
             <div class="form-group">
                 <label>اسم المحل / التاجر:</label>
                 <input type="text" id="vStoreName" placeholder="مثال: متجر أبو الزوز للأحذية">
@@ -183,7 +185,7 @@
             window.scrollTo(0, 0);
         }
 
-        /* قاعدة بيانات المتاجر مع أرقام الواتساب ومنتجاتها المرتبطة حصرياً بالقسم */
+        /* قاعدة بيانات المتاجر والمنتجات وأرقام الواتساب */
         let mallData = {
             clothes: [
                 {
@@ -214,43 +216,43 @@
             ]
         };
 
-        let currentActiveCategory = 'clothes';
+        let currentCategory = 'clothes';
 
-        let portalTitles = { 
-            clothes: "صالة محلات الألبسة المشتركة", 
-            shoes: "صالة محلات الأحذية المشتركة", 
-            perfumes: "صالة محلات العطورات المشتركة" 
+        let categoryTitles = { 
+            clothes: "محلات قسم الألبسة", 
+            shoes: "محلات قسم الأحذية", 
+            perfumes: "محلات قسم العطورات" 
         };
 
-        function openShopsPortal(cat) {
-            currentActiveCategory = cat;
-            document.getElementById('portalTitle').innerText = portalTitles[cat];
-            let grid = document.getElementById('shopsPortalGrid');
+        function openCategory(cat) {
+            currentCategory = cat;
+            document.getElementById('categoryTitle').innerText = categoryTitles[cat];
+            let grid = document.getElementById('vendorsDirectGrid');
             grid.innerHTML = "";
 
             let vendors = mallData[cat];
             if (!vendors || vendors.length === 0) {
-                grid.innerHTML = "<p style='text-align:center; color:#777; grid-column:1/-1; padding:20px;'>لا توجد محلات مشتركة في هذا القسم حالياً.</p>";
+                grid.innerHTML = "<p style='text-align:center; color:#777; grid-column:1/-1; padding:20px;'>لا توجد محلات مسجلة في هذا القسم حالياً.</p>";
             } else {
                 vendors.forEach((v, index) => {
                     let card = document.createElement('div');
-                    card.className = 'shop-card-portal';
+                    card.className = 'vendor-direct-card';
                     card.innerHTML = `
                         <h3>🏪 ${v.storeName}</h3>
                         <p>عدد المنتجات في الفترينا: ${v.products.length}</p>
-                        <span>دخول لفترينا المحل ←</span>
+                        <span>دخول لصفحة المحل ←</span>
                     `;
-                    card.onclick = () => openIsolatedStore(cat, index);
+                    card.onclick = () => openVendorStorePage(cat, index);
                     grid.appendChild(card);
                 });
             }
-            showSec('shops-portal');
+            showSec('category-section');
         }
 
-        function openIsolatedStore(cat, vendorIndex) {
+        function openVendorStorePage(cat, vendorIndex) {
             let vendorObj = mallData[cat][vendorIndex];
-            document.getElementById('isolatedStoreTitle').innerText = `فترينة محل: ${vendorObj.storeName}`;
-            let grid = document.getElementById('isolatedStoreGrid');
+            document.getElementById('storePageTitle').innerText = `فترينة محل: ${vendorObj.storeName}`;
+            let grid = document.getElementById('storeProductsGrid');
             grid.innerHTML = "";
 
             if (!vendorObj.products || vendorObj.products.length === 0) {
@@ -269,14 +271,14 @@
                     grid.appendChild(card);
                 });
             }
-            showSec('vendor-isolated-store');
+            showSec('vendor-store-page');
         }
 
-        function goBackToPortal() {
-            openShopsPortal(currentActiveCategory);
+        function goBackToCategory() {
+            openCategory(currentCategory);
         }
 
-        /* شاشة العرض المتحركة الخاصة بالرئيسية وحدها */
+        /* الشاشة المتحركة للرئيسية حصرياً */
         let defaultSlides = [
             { text: "محل الأناقة للألبسة - أحدث الموضات الصيفية والشتوية", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" },
             { text: "أحذية الفخامة - راحة وأناقة لا توصف لقدميك", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
@@ -390,8 +392,8 @@
             `;
             tbody.prepend(tr);
 
-            alert("تم رفع المنتج إلى فتريتك المنعزلة وإرساله للإدارة بنجاح!");
-            openShopsPortal(cat);
+            alert("تم رفع المنتج إلى فترينتك المنعزلة وإرساله للإدارة بنجاح!");
+            openCategory(cat);
         }
 
         function acceptItem(btn) {
