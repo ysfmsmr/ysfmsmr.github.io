@@ -3,165 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>انضم كتاجر | مول لبنان</title>
+    <title>تسجيل متجر جديد - مول لبنان</title>
     <style>
-        :root {
-            --primary: #d4af37;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text: #ffffff;
-            --accent: #015d64;
-        }
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text);
-            margin: 0;
-            padding: 15px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-        }
-        header {
-            text-align: center;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
-        }
-        header h1 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin: 0 0 5px 0;
-        }
-        header p {
-            color: #aaa;
-            margin: 0;
-            font-size: 0.9rem;
-        }
-        .card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
-        }
-        .card h2 {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-top: 0;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 8px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-        input[type="text"], select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background: #252525;
-            color: white;
-            font-size: 1rem;
-            box-sizing: border-box;
-            text-align: right;
-        }
-        .submit-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background: var(--primary);
-            color: #000;
-            padding: 12px;
-            border-radius: 8px;
-            border: none;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-        .back-btn {
-            display: block;
-            text-align: center;
-            background: #333;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-top: 15px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
+        body { background-color: #f4f4f4; color: #333; direction: rtl; }
+        
+        header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 4px solid #d4af37; }
+        header h1 { font-size: 26px; color: #d4af37; margin-bottom: 5px; }
+
+        .container { max-width: 500px; margin: 30px auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h2 { font-size: 20px; margin-bottom: 20px; color: #111; text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 8px; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+        
+        .submit-btn { background: #d4af37; color: #111; padding: 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; margin-top: 10px; }
+        .submit-btn:hover { background: #c19b2e; }
+        
+        .note { font-size: 12px; color: #666; text-align: center; margin-top: 15px; }
     </style>
 </head>
 <body>
 
+    <header>
+        <h1>انضم إلى مول لبنان</h1>
+        <p>سجل محلك معنا وابدأ بعرض منتجاتك للآلاف من الزبائن</p>
+    </header>
+
     <div class="container">
-        <!-- رأس الصفحة -->
-        <header>
-            <h1>تسجيل تاجر جديد</h1>
-            <p>انضم إلى مول لبنان واعرض منتجاتك لآلاف الزبائن</p>
-        </header>
-
-        <!-- استمارة التسجيل -->
-        <div class="card">
-            <h2>📝 بيانات المتجر والاتصال</h2>
-            
-            <div class="form-group">
-                <label for="storeName">اسم المحل أو المتجر:</label>
-                <input type="text" id="storeName" placeholder="مثال: محل الهرمل للأحذية">
-            </div>
-
-            <div class="form-group">
-                <label for="storeCity">المنطقة في البقاع:</label>
-                <select id="storeCity" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #252525; color: white; font-size: 1rem;">
-                    <option value="الهرمل">الهرمل</option>
-                    <option value="بعلبك">بعلبك</option>
-                    <option value="زحلة">زحلة</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="whatsappNumber">رقم الواتساب لاستقبال الطلبات (مع رمز الدولة، مثلاً: 96170123456):</label>
-                <input type="text" id="whatsappNumber" placeholder="961xxxxxxxx">
-            </div>
-
-            <button class="submit-btn" onclick="submitVendorRegistration()">إرسال طلب الانضمام للإدارة</button>
+        <h2>استمارة تسجيل تاجر جديد</h2>
+        <div class="form-group">
+            <label for="shopName">اسم المتجر أو المحل:</label>
+            <input type="text" id="shopName" placeholder="مثلاً: محل الروائع للألبسة">
         </div>
-
-        <!-- زر العودة -->
-        <a href="index.html" class="back-btn">⬅️ العودة إلى الصفحة الرئيسية للمول</a>
+        <div class="form-group">
+            <label for="shopCategory">قسم النشاط التجاري:</label>
+            <select id="shopCategory">
+                <option value="clothes">قسم الألبسة</option>
+                <option value="shoes">قسم الأحذية</option>
+                <option value="perfumes">قسم العطورات</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="whatsappNumber">رقم الواتساب للتواصل والطلبات:</label>
+            <input type="text" id="whatsappNumber" placeholder="مثلاً: 96170000000+">
+        </div>
+        <button class="submit-btn" onclick="submitRegistration()">إرسال طلب الانضمام (اشتراك 15$)</button>
+        <p class="note">سيتم مراجعة طلبك وتفعيل متجرك من قِبل الإدارة فور تأكيد دفع اشتراك الـ 15$ الشهري.</p>
     </div>
 
     <script>
-        function submitVendorRegistration() {
-            const storeName = document.getElementById('storeName').value.trim();
-            const storeCity = document.getElementById('storeCity').value;
-            const whatsappNumber = document.getElementById('whatsappNumber').value.trim();
+        function submitRegistration() {
+            let name = document.getElementById('shopName').value;
+            let whatsapp = document.getElementById('whatsappNumber').value;
 
-            if (!storeName || !whatsappNumber) {
-                alert('الرجاء تعبئة اسم المحل ورقم الواتساب على الأقل!');
+            if(name === "" || whatsapp === "") {
+                alert("الرجاء ملء جميع الحقول المطلوبة!");
                 return;
             }
 
-            // حفظ رقم الواتساب تلقائياً للنظام ليقوم الزبون بالطلب عبره آلياً
-            localStorage.setItem('vendorWhatsAppNumber', whatsappNumber);
-            localStorage.setItem('vendorStoreName', storeName);
-            localStorage.setItem('vendorCity', storeCity);
-
-            alert('✅ تم إرسال طلبك بنجاح إلى الإدارة!\n\nتم حفظ رقم الواتساب الخاص بك مؤقتاً، وبانتظار المراجعة والقبول النهائي.');
-            
-            // تحويله للصفحة الرئيسية بعد التسجيل
-            window.location.href = 'index.html';
+            alert("تم إرسال طلبك بنجاح يا أبا علي! سيظهر لدى المشرف في لوحة التحكم لمراجعته وتفعيله.");
+            document.getElementById('shopName').value = '';
+            document.getElementById('whatsappNumber').value = '';
         }
     </script>
 </body>
