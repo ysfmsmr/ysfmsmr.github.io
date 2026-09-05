@@ -3,30 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مول لبنان</title>
+    <title>مول لبنان - الوجهة الأولى للتسوق الراقي</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
         body { background-color: #f4f4f4; color: #333; direction: rtl; text-align: center; }
-        header { background: #111; color: #fff; padding: 20px; border-bottom: 4px solid #d4af37; }
-        header h1 { font-size: 26px; color: #d4af37; margin-bottom: 5px; }
-        .nav-bar { background: #222; padding: 10px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .nav-btn { background: #d4af37; color: #111; padding: 7px 12px; border-radius: 4px; font-weight: bold; font-size: 12px; cursor: pointer; border: none; }
-        .container { max-width: 800px; margin: 15px auto; padding: 0 10px; text-align: right; }
-        .section { display: none; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        
+        /* ترويسة فاخرة ومميزة */
+        header { background: linear-gradient(135deg, #111 0%, #222 100%); color: #fff; padding: 25px 15px; border-bottom: 4px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        header h1 { font-size: 32px; color: #d4af37; margin-bottom: 8px; font-weight: bold; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        header p { font-size: 14px; color: #e0e0e0; font-weight: 300; letter-spacing: 0.5px; }
+
+        /* شريط التنقل */
+        .nav-bar { background: #1a1a1a; padding: 12px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; border-bottom: 2px solid #333; }
+        .nav-btn { background: #d4af37; color: #111; padding: 8px 14px; border-radius: 5px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; transition: 0.2s; }
+        .nav-btn:hover { background: #e5c158; transform: translateY(-1px); }
+
+        .container { max-width: 800px; margin: 20px auto; padding: 0 10px; text-align: right; }
+        .section { display: none; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
         .section.active { display: block; }
-        h2.sec-title { font-size: 18px; margin-bottom: 12px; border-bottom: 2px solid #d4af37; padding-bottom: 4px; color: #111; text-align: center; }
-        .slider { width: 100%; height: 220px; background: #111; border: 2px solid #d4af37; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 10px; overflow: hidden; position: relative; }
-        .slider img { width: 100%; height: 140px; object-fit: cover; border-radius: 4px; margin-bottom: 5px; }
-        .form-group { margin-bottom: 10px; text-align: right; }
-        .form-group label { display: block; margin-bottom: 3px; font-weight: bold; font-size: 12px; }
-        .form-group input, .form-group select { width: 100%; padding: 7px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; }
-        .action-btn { display: block; background: #25d366; color: white; padding: 8px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; width: 100%; border: none; cursor: pointer; text-align: center; margin-top: 5px; }
-        .danger-btn { background: #e74c3c; margin-top: 8px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 10px; }
-        .card { background: #fafafa; border: 1px solid #ddd; padding: 10px; border-radius: 5px; text-align: center; }
-        .card img { width: 100%; height: 110px; object-fit: cover; border-radius: 4px; margin-bottom: 5px; }
+        
+        h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 6px; color: #111; text-align: center; }
+        
+        /* الشاشة الكبرى الفاخرة */
+        .slider { width: 100%; height: 260px; background: #111; border: 2px solid #d4af37; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
+        .slider img { width: 100%; height: 175px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; border: 1px solid #d4af37; }
+        .slider span { color: #d4af37; font-size: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+
+        .form-group { margin-bottom: 12px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 13px; color: #333; }
+        .form-group input, .form-group select { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; }
+        
+        .action-btn { display: block; background: #25d366; color: white; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; width: 100%; border: none; cursor: pointer; text-align: center; margin-top: 8px; transition: 0.2s; }
+        .action-btn:hover { opacity: 0.9; }
+        .danger-btn { background: #e74c3c; margin-top: 10px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 10px; }
+        .card { background: #fafafa; border: 1px solid #e0e0e0; padding: 12px; border-radius: 6px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 8px; }
+        .card h3 { font-size: 15px; color: #111; margin-bottom: 4px; }
+        .card p { font-size: 13px; color: #d4af37; font-weight: bold; margin-bottom: 8px; }
+
         .admin-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .admin-table th, .admin-table td { border: 1px solid #ddd; padding: 8px; text-align: center; font-size: 12px; }
+        .admin-table th, .admin-table td { border: 1px solid #ddd; padding: 9px; text-align: center; font-size: 13px; }
         .admin-table th { background: #222; color: #d4af37; }
     </style>
 </head>
@@ -34,7 +52,7 @@
 
     <header>
         <h1>مول لبنان</h1>
-        <p>المنصة المركزية المتكاملة</p>
+        <p>✦ الوجهة الأولى لأرقى الماركات، الألبسة، الأحذية، والعطورات الفاخرة في مكان واحد ✦</p>
     </header>
 
     <div class="nav-bar">
@@ -47,55 +65,51 @@
     </div>
 
     <div class="container">
-        <!-- الرئيسية -->
         <div id="home" class="section active">
-            <h2 class="sec-title">شاشة العرض المتقلبة الكبرى</h2>
+            <h2 class="sec-title">دليل مول لبنان - الواجهة الرئيسية</h2>
             <div class="slider" id="sliderBox">
-                <span>محل الأناقة للألبسة - أرقى الموديلات الحديثة</span>
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="دليل مول لبنان">
+                <span>محل الأناقة للألبسة الراقية - أحدث صيحات الموضة</span>
             </div>
-            <p style="text-align: center; color: #666; font-size: 13px;">اختر أحد الأقسام بالأعلى لتصفح المنتجات.</p>
+            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">استكشف أقسامنا المتنوعة وتعرّف على أرقى المعروضات والمنتجات المميزة عبر دليل المول الشامل.</p>
         </div>
 
-        <!-- الألبسة -->
         <div id="clothes" class="section">
-            <h2 class="sec-title">قسم الألبسة</h2>
+            <h2 class="sec-title">قسم الألبسة الفاخرة</h2>
             <div id="clothes-grid" class="grid">
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" alt="صورة">
-                    <h3>جاكيت فاخر</h3>
+                    <h3>جاكيت رجالي فاخر</h3>
                     <p>السعر: 35$</p>
-                    <a href="https://wa.me/96170000000?text=أرغب بطلب جاكيت فاخر" class="action-btn" target="_blank">طلب عبر واتساب</a>
+                    <a href="https://wa.me/96170000000?text=أرغب بطلب جاكيت رجالي فاخر" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
 
-        <!-- الأحذية -->
         <div id="shoes" class="section">
-            <h2 class="sec-title">قسم الأحذية</h2>
+            <h2 class="sec-title">قسم الأحذية العصرية</h2>
             <div id="shoes-grid" class="grid">
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="صورة">
-                    <h3>حذاء رياضي</h3>
+                    <h3>حذاء رياضي أنيق</h3>
                     <p>السعر: 25$</p>
-                    <a href="https://wa.me/96170000000?text=أرغب بطلب حذاء رياضي" class="action-btn" target="_blank">طلب عبر واتساب</a>
+                    <a href="https://wa.me/96170000000?text=أرغب بطلب حذاء رياضي أنيق" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
 
-        <!-- العطورات -->
         <div id="perfumes" class="section">
-            <h2 class="sec-title">قسم العطورات</h2>
+            <h2 class="sec-title">قسم العطورات الشرقية والفرنسية</h2>
             <div id="perfumes-grid" class="grid">
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" alt="صورة">
-                    <h3>عطر الملك</h3>
+                    <h3>عطر الملك الخاص</h3>
                     <p>السعر: 40$</p>
-                    <a href="https://wa.me/96170000000?text=أرغب بطلب عطر الملك" class="action-btn" target="_blank">طلب عبر واتساب</a>
+                    <a href="https://wa.me/96170000000?text=أرغب بطلب عطر الملك الخاص" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
 
-        <!-- لوحة التاجر -->
         <div id="vendor" class="section">
             <h2 class="sec-title">لوحة التاجر - رفع الصور والتحكم بالشاشة</h2>
             <div class="form-group">
@@ -123,7 +137,6 @@
             <button class="action-btn danger-btn" onclick="removeBigScreen()">إزالة الإعلان من الشاشة الكبرى</button>
         </div>
 
-        <!-- لوحة الإدارة -->
         <div id="admin" class="section">
             <h2 class="sec-title">لوحة الإدارة - القبول والرفض</h2>
             <table class="admin-table">
@@ -157,28 +170,27 @@
             window.scrollTo(0, 0);
         }
 
-        // السلايدر الافتراضي
+        /* واجهة الدليل العشوائية والمنسقة للشاشة الكبرى */
         let defaultSlides = [
-            "محل الأناقة للألبسة - أحدث الموديلات الصيفية والشتوية",
-            "أحذية الفخامة - راحة وأناقة لا توصف لقدميك",
-            "عطورات الملك - فخامة العطور الشرقية والفرنسية"
+            { text: "محل الأناقة للألبسة الراقية - أحدث صيحات الموضة", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" },
+            { text: "أحذية الفخامة العصرية - راحة وأناقة لا توصف", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
+            { text: "عطورات الملك الشرقية والفرنسية - عبير يخلد اللحظات", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500" }
         ];
         let current = 0;
-        let customBigScreen = null; // يحفظ الإعلان الخاص للتاجر
+        let customBigScreen = null;
 
         setInterval(() => {
             let box = document.getElementById('sliderBox');
             if(!box) return;
 
             if (customBigScreen) {
-                // إذا التاجر نشر إعلان مخصص يثبت عليه
                 box.innerHTML = `<img src="${customBigScreen.img}" alt="إعلان"><span>${customBigScreen.text}</span>`;
             } else {
-                // الوضع المتقلب الطبيعي
                 current = (current + 1) % defaultSlides.length;
-                box.innerHTML = `<span>${defaultSlides[current]}</span>`;
+                let slide = defaultSlides[current];
+                box.innerHTML = `<img src="${slide.img}" alt="دليل المول"><span>${slide.text}</span>`;
             }
-        }, 3000);
+        }, 3500);
 
         function publishToBigScreen() {
             let name = document.getElementById('vName').value;
@@ -194,7 +206,7 @@
                 let reader = new FileReader();
                 reader.onload = function(e) {
                     customBigScreen = {
-                        text: `${name} - السعر: ${price}$ (عرض خاص)`,
+                        text: `${name} - السعر: ${price}$ (عرض خاص من التاجر)`,
                         img: e.target.result
                     };
                     alert("تم نشر الصورة والإعلان على الشاشة الكبرى بنجاح!");
@@ -203,8 +215,8 @@
                 reader.readAsDataURL(imgInput.files[0]);
             } else {
                 customBigScreen = {
-                    text: `${name} - السعر: ${price}$ (عرض خاص)`,
-                    img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300"
+                    text: `${name} - السعر: ${price}$ (عرض خاص من التاجر)`,
+                    img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500"
                 };
                 alert("تم نشر الإعلان على الشاشة الكبرى بنجاح!");
                 showSec('home');
@@ -213,7 +225,7 @@
 
         function removeBigScreen() {
             customBigScreen = null;
-            alert("تمت إزالة الإعلان من الشاشة الكبرى بنجاح وعادت للحركة الطبيعية!");
+            alert("تمت إزالة الإعلان من الشاشة الكبرى وعادت لدليل المول التلقائي!");
             showSec('home');
         }
 
@@ -235,7 +247,7 @@
                 }
                 reader.readAsDataURL(imgInput.files[0]);
             } else {
-                addCard(cat, name, price, "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300");
+                addCard(cat, name, price, "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300");
             }
         }
 
@@ -246,12 +258,11 @@
             card.innerHTML = `
                 <img src="${imgSrc}" alt="صورة">
                 <h3>${name}</h3>
-                <p>السعر: ${price}</p>
+                <p>السعر: ${price}$</p>
                 <a href="https://wa.me/96170000000?text=أرغب بطلب ${name}" class="action-btn" target="_blank">طلب عبر واتساب</a>
             `;
             grid.prepend(card);
 
-            // إضافة الطلب للإدارة
             let tbody = document.getElementById('adminBody');
             let tr = document.createElement('tr');
             tr.innerHTML = `
