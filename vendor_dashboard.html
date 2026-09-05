@@ -3,146 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التاجر - إضافة منتج</title>
+    <title>لوحة تحكم التاجر - مول لبنان</title>
     <style>
-        :root {
-            --primary: #d4af37;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text: #ffffff;
-            --whatsapp: #25d366;
-        }
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text);
-            margin: 0;
-            padding: 15px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-        }
-        header {
-            text-align: center;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
-        }
-        header h1 {
-            color: var(--primary);
-            margin: 0;
-            font-size: 1.3rem;
-        }
-        .form-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--primary);
-            font-size: 0.9rem;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background: #252525;
-            color: white;
-            font-size: 1rem;
-            box-sizing: border-box;
-            text-align: right;
-        }
-        .submit-btn {
-            background: var(--whatsapp);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-        }
-        .back-btn {
-            display: block;
-            text-align: center;
-            background: #333;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
+        body { background-color: #f4f4f4; color: #333; direction: rtl; }
+        
+        header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 4px solid #d4af37; }
+        header h1 { font-size: 24px; color: #d4af37; margin-bottom: 5px; }
+
+        .container { max-width: 800px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { font-size: 20px; margin-bottom: 15px; color: #111; border-bottom: 2px solid #d4af37; padding-bottom: 5px; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        
+        .upload-btn { background: #d4af37; color: #111; padding: 10px 20px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; }
+        .upload-btn:hover { background: #c19b2e; }
+
+        .products-list { margin-top: 30px; }
+        .product-item { display: flex; justify-content: space-between; align-items: center; background: #f9f9f9; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ddd; }
+        .product-info { display: flex; align-items: center; gap: 10px; }
+        .product-info img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; }
+        
+        .delete-btn { background: #ff4d4d; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+        .delete-btn:hover { background: #cc0000; }
+        
+        .feature-checkbox { margin-right: 10px; font-size: 13px; color: #555; }
     </style>
 </head>
 <body>
+
+    <header>
+        <h1>لوحة تحكم التاجر</h1>
+        <p>أضف منتجاتك، تحكم ببضائعك، واعرضها في مول لبنان</p>
+    </header>
+
     <div class="container">
-        <header>
-            <h1>📦 لوحة إضافة منتج للتاجر</h1>
-        </header>
-
-        <div class="form-card">
-            <div class="form-group">
-                <label>اسم المحل / المتجر</label>
-                <input type="text" id="storeName" placeholder="مثال: محل الهرمل للأحذية">
-            </div>
-            <div class="form-group">
-                <label>اسم المنتج</label>
-                <input type="text" id="productName" placeholder="مثال: حذاء رجالي فاخر">
-            </div>
-            <div class="form-group">
-                <label>السعر ($)</label>
-                <input type="text" id="productPrice" placeholder="مثال: 25 $">
-            </div>
-            <div class="form-group">
-                <label>رقم الواتساب للتاجر (مع رمز الدولة)</label>
-                <input type="text" id="vendorPhone" placeholder="96181703239">
-            </div>
-            <button class="submit-btn" onclick="addNewProduct()">إضافة المنتج ونشره بالمول</button>
+        <h2>إضافة قطعة جديدة من الاستوديو</h2>
+        <div class="form-group">
+            <label for="productName">اسم القطعة أو المنتج:</label>
+            <input type="text" id="productName" placeholder="مثلاً: قميص رجالي فاخر / عطر ملكي">
         </div>
+        <div class="form-group">
+            <label for="productImage">اختر صورة القطعة من الاستوديو:</label>
+            <input type="file" id="productImage" accept="image/*">
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="isFeatured" class="feature-checkbox"> عرض هذه القطعة كـ "قطعة مميزة" على شاشة المول الكبرى
+            </label>
+        </div>
+        <button class="upload-btn" onclick="addProduct()">نشر القطعة في متجري</button>
 
-        <a href="index.html" class="back-btn">⬅️ العودة للرئيسية</a>
+        <div class="products-list">
+            <h2>بضائعي المعروضة حالياً</h2>
+            <div id="vendorProducts">
+                <!-- المنتجات المضافة ستظهر هنا -->
+                <div class="product-item">
+                    <div class="product-info">
+                        <img src="https://via.placeholder.60" alt="منتج">
+                        <div>
+                            <strong>جاكيت جلد أسود</strong>
+                            <p style="font-size: 12px; color: #666;">مميز على الشاشة الكبرى</p>
+                        </div>
+                    </div>
+                    <button class="delete-btn" onclick="this.parentElement.remove()">حذف</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        function addNewProduct() {
-            const store = document.getElementById('storeName').value.trim();
-            const name = document.getElementById('productName.value' || 'productName').value.trim(); // تم تعديلها لتكون دقيقة
-            const price = document.getElementById('productPrice').value.trim();
-            const phone = document.getElementById('vendorPhone').value.trim();
+        function addProduct() {
+            let name = document.getElementById('productName').value;
+            let imageInput = document.getElementById('productImage');
+            let isFeatured = document.getElementById('isFeatured').checked;
 
-            if (!store || !name || !price || !phone) {
-                alert('الرجاء تعبئة كافة الحقول بشكل صحيح!');
+            if(name === "") {
+                alert("الرجاء إدخال اسم القطعة!");
                 return;
             }
 
-            const actualName = document.getElementById('productName').value.trim();
-
-            let products = JSON.parse(localStorage.getItem('mallProducts')) || [];
-            products.push({
-                store: store,
-                name: actualName,
-                price: price,
-                phone: phone
-            });
-
-            localStorage.setItem('mallProducts', JSON.stringify(products));
-            localStorage.setItem('vendorWhatsAppNumber', phone);
-
-            alert('تم نشر المنتج بنجاح وأصبح ظاهراً في لوحة الإدارة والشاشة العملاقة!');
-            window.location.href = 'index.html';
+            let container = document.getElementById('vendorProducts');
+            let item = document.createElement('div');
+            item.className = 'product-item';
+            
+            item.innerHTML = `
+                <div class="product-info">
+                    <img src="https://via.placeholder.60?text=New" alt="منتج">
+                    <div>
+                        <strong>${name}</strong>
+                        <p style="font-size: 12px; color: #666;">${isFeatured ? 'مميز على الشاشة الكبرى' : 'معروض في المتجر'}</p>
+                    </div>
+                </div>
+                <button class="delete-btn" onclick="this.parentElement.remove()">حذف</button>
+            `;
+            
+            container.appendChild(item);
+            document.getElementById('productName').value = '';
+            document.getElementById('productImage').value = '';
+            document.getElementById('isFeatured').checked = false;
+            alert("تم نشر القطعة بنجاح في متجرك!");
         }
     </script>
 </body>
