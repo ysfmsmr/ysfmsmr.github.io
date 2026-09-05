@@ -8,17 +8,15 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
         body { background-color: #f4f4f4; color: #333; direction: rtl; text-align: center; }
         
-        /* ترويسة فاخرة مع التصميم المجمع الفخم */
         header { background: linear-gradient(135deg, #111 0%, #222 100%); color: #fff; padding: 15px; border-bottom: 4px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        header h1 { font-size: 26px; color: #d4af37; margin-bottom: 3px; font-weight: bold; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        header p { font-size: 12px; color: #e0e0e0; font-weight: 300; letter-spacing: 0.5px; margin-bottom: 10px; }
+        header h1 { font-size: 26px; color: #d4af37; margin-bottom: 3px; font-weight: bold; letter-spacing: 1px; }
+        header p { font-size: 12px; color: #e0e0e0; font-weight: 300; margin-bottom: 10px; }
         
         .mall-showcase { display: grid; grid-template-columns: 2fr 1fr; gap: 4px; max-width: 500px; height: 160px; margin: 0 auto; border-radius: 8px; overflow: hidden; border: 2px solid #d4af37; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4); }
         .mall-showcase img { width: 100%; height: 100%; object-fit: cover; }
         .sub-grid { display: flex; flex-direction: column; gap: 4px; height: 100%; }
         .sub-grid img { height: calc(50% - 2px); }
 
-        /* شريط التنقل والأزرار الذهبية */
         .nav-bar { background: #1a1a1a; padding: 12px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; border-bottom: 2px solid #333; }
         .nav-btn { background: #d4af37; color: #111; padding: 8px 14px; border-radius: 5px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; transition: 0.2s; }
         .nav-btn:hover { background: #e5c158; transform: translateY(-1px); }
@@ -29,10 +27,10 @@
         
         h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 6px; color: #111; text-align: center; }
         
-        /* شاشة العرض المتقلبة الخاصة بالتاجر فقط */
+        /* شاشة العرض المتقلبة حصرياً للرئيسية */
         .slider { width: 100%; height: 260px; background: #111; border: 2px solid #d4af37; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
         .slider img { width: 100%; height: 175px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; border: 1px solid #d4af37; }
-        .slider span { color: #d4af37; font-size: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+        .slider span { color: #d4af37; font-size: 15px; }
 
         .form-group { margin-bottom: 12px; text-align: right; }
         .form-group label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 13px; color: #333; }
@@ -86,37 +84,41 @@
     </div>
 
     <div class="container">
-        <!-- الرئيسية / شاشة العرض المتقلبة للتاجر فقط -->
+        <!-- الرئيسية: شاشة العرض المتقلبة للتاجر فقط -->
         <div id="home" class="section active">
-            <h2 class="sec-title">شاشة العرض المتقلبة (تحكم التجار)</h2>
+            <h2 class="sec-title">شاشة العرض المتقلبة (عروض التجار الكبرى)</h2>
             <div class="slider" id="sliderBox">
                 <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="إعلان التاجر">
                 <span>محل الأناقة للألبسة الراقية - أحدث صيحات الموضة</span>
             </div>
-            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">اضغط على أزرار الأقسام بالأعلى (الألبسة، الأحذية، العطورات) لدخول صالة محلات التجار المشتركين.</p>
+            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">تفضل بزيارة أقسام المول بالأعلى (الألبسة، الأحذية، العطورات) لدخول محلات التجار وعرض فتريناتهم الخاصة.</p>
         </div>
 
-        <!-- صالة محلات التجار المشتركين -->
+        <!-- صالة محلات التجار المشتركين للقسم -->
         <div id="shops-portal" class="section">
             <button onclick="showSec('home')" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة للرئيسية</button>
             <h2 class="sec-title" id="portalTitle">قائمة محلات التجار</h2>
-            <p style="text-align:center; color:#666; font-size:13px; margin-bottom:15px;">اختر المحل لعرض صفحته المنعزلة وجميع بضائعه:</p>
+            <p style="text-align:center; color:#666; font-size:13px; margin-bottom:15px;">اختر المحل للدخول إلى فتريته المنعزلة وعرض كافة بضائعه:</p>
             <div class="shops-portal-grid" id="shopsPortalGrid"></div>
         </div>
 
-        <!-- صفحة التاجر المنعزلة الخاصة به وحده -->
+        <!-- فترينا / صفحة التاجر المنعزلة الخاصة به مع رقمه الخاص -->
         <div id="vendor-isolated-store" class="section">
             <button onclick="goBackToPortal()" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة لقائمة المحلات</button>
-            <h2 class="sec-title" id="isolatedStoreTitle">محل التاجر</h2>
+            <h2 class="sec-title" id="isolatedStoreTitle">فترينة المحل</h2>
             <div id="isolatedStoreGrid" class="grid"></div>
         </div>
 
         <!-- لوحة التاجر -->
         <div id="vendor" class="section">
-            <h2 class="sec-title">لوحة التاجر - رفع المنتجات والتحكم بالشاشة</h2>
+            <h2 class="sec-title">لوحة التاجر - رفع المنتجات ورقم الواتساب والتحكم بالشاشة</h2>
             <div class="form-group">
                 <label>اسم المحل / التاجر:</label>
                 <input type="text" id="vStoreName" placeholder="مثال: متجر أبو الزوز للأحذية">
+            </div>
+            <div class="form-group">
+                <label>رقم الواتساب الخاص بك (مع رمز الدولة):</label>
+                <input type="text" id="vPhone" placeholder="مثال: 96170000000">
             </div>
             <div class="form-group">
                 <label>القسم:</label>
@@ -142,8 +144,8 @@
                 <label>صورة المنتج:</label>
                 <input type="file" id="vImg" accept="image/*">
             </div>
-            <button class="action-btn" onclick="uploadProd()">نشر المنتج وإرساله للإدارة</button>
-            <button class="action-btn" style="background:#d4af37; color:#111; margin-top:10px;" onclick="publishToBigScreen()">عرض هذا المنتج على الشاشة الكبرى فوراً</button>
+            <button class="action-btn" onclick="uploadProd()">نشر المنتج في فترينتي الخاصة وإرساله للإدارة</button>
+            <button class="action-btn" style="background:#d4af37; color:#111; margin-top:10px;" onclick="publishToBigScreen()">عرض هذا المنتج على الشاشة الكبرى في الرئيسية فوراً</button>
             <button class="action-btn danger-btn" onclick="removeBigScreen()">إزالة الإعلان من الشاشة الكبرى</button>
         </div>
 
@@ -181,11 +183,12 @@
             window.scrollTo(0, 0);
         }
 
-        /* قاعدة بيانات المتاجر والمنتجات المشتركة */
+        /* قاعدة بيانات المتاجر مع أرقام الواتساب الخاصة بكل تاجر ومنتجاته */
         let mallData = {
             clothes: [
                 {
                     storeName: "محل الأناقة للألبسة",
+                    phone: "96170000000",
                     products: [
                         { name: "جاكيت فاخر صيفي", price: "35", size: "مقاس L", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" }
                     ]
@@ -194,6 +197,7 @@
             shoes: [
                 {
                     storeName: "أحذية الفخامة العصرية",
+                    phone: "96171111111",
                     products: [
                         { name: "حذاء رياضي مريح", price: "25", size: "مقاس 42", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" }
                     ]
@@ -202,6 +206,7 @@
             perfumes: [
                 {
                     storeName: "عطورات الملك",
+                    phone: "96172222222",
                     products: [
                         { name: "عطر فرنسي ملكي", price: "40", size: "100 مل", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" }
                     ]
@@ -232,8 +237,8 @@
                     card.className = 'shop-card-portal';
                     card.innerHTML = `
                         <h3>🏪 ${v.storeName}</h3>
-                        <p>عدد المنتجات المعروضة: ${v.products.length}</p>
-                        <span>دخول لصفحة المحل ←</span>
+                        <p>عدد المنتجات في الفترينا: ${v.products.length}</p>
+                        <span>دخول لفترينا المحل ←</span>
                     `;
                     card.onclick = () => openIsolatedStore(v);
                     grid.appendChild(card);
@@ -243,7 +248,7 @@
         }
 
         function openIsolatedStore(vendorObj) {
-            document.getElementById('isolatedStoreTitle').innerText = `محل: ${vendorObj.storeName}`;
+            document.getElementById('isolatedStoreTitle').innerText = `فترينة محل: ${vendorObj.storeName}`;
             let grid = document.getElementById('isolatedStoreGrid');
             grid.innerHTML = "";
 
@@ -254,8 +259,8 @@
                     <img src="${p.img}" alt="صورة المنتج">
                     <h3>${p.name}</h3>
                     <p class="price">السعر: ${p.price}$</p>
-                    <p style="font-size:12px; color:#555; margin-bottom:6px;">نمرة الرجل / المقاس: <b>${p.size}</b></p>
-                    <a href="https://wa.me/96170000000?text=أرغب بطلب ${p.name} من محل ${vendorObj.storeName}" class="action-btn" target="_blank">طلب عبر واتساب</a>
+                    <p style="font-size:12px; color:#555; margin-bottom:6px;">المقاس / النمرة: <b>${p.size}</b></p>
+                    <a href="https://wa.me/${vendorObj.phone}?text=مرحباً، أرغب بطلب ${p.name} بسعر ${p.price}$ من محلكم" class="action-btn" target="_blank">طلب عبر واتساب التاجر</a>
                 `;
                 grid.appendChild(card);
             });
@@ -266,7 +271,7 @@
             openShopsPortal(currentActiveCategory);
         }
 
-        /* شاشة العرض المتقلبة للتاجر فقط */
+        /* شاشة العرض المتحركة الخاصة بالرئيسية وحدها */
         let defaultSlides = [
             { text: "محل الأناقة للألبسة - أحدث الموضات الصيفية والشتوية", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" },
             { text: "أحذية الفخامة - راحة وأناقة لا توصف لقدميك", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
@@ -302,19 +307,19 @@
                 let reader = new FileReader();
                 reader.onload = function(e) {
                     customBigScreen = {
-                        text: `${name} - السعر: ${price}$ (عرض خاص من التاجر)`,
+                        text: `${name} - السعر: ${price}$ (عرض خاص على الشاشة)`,
                         img: e.target.result
                     };
-                    alert("تم نشر الإعلان على الشاشة الكبرى بنجاح!");
+                    alert("تم نشر الإعلان على الشاشة الكبرى في الرئيسية بنجاح!");
                     showSec('home');
                 }
                 reader.readAsDataURL(imgInput.files[0]);
             } else {
                 customBigScreen = {
-                    text: `${name} - السعر: ${price}$ (عرض خاص من التاجر)`,
+                    text: `${name} - السعر: ${price}$ (عرض خاص على الشاشة)`,
                     img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500"
                 };
-                alert("تم نشر الإعلان على الشاشة الكبرى بنجاح!");
+                alert("تم نشر الإعلان على الشاشة الكبرى في الرئيسية بنجاح!");
                 showSec('home');
             }
         }
@@ -327,39 +332,42 @@
 
         function uploadProd() {
             let storeName = document.getElementById('vStoreName').value;
+            let phone = document.getElementById('vPhone').value;
             let cat = document.getElementById('vCat').value;
             let name = document.getElementById('vName').value;
             let price = document.getElementById('vPrice').value;
             let size = document.getElementById('vSize').value;
             let imgInput = document.getElementById('vImg');
 
-            if(storeName === "" || name === "" || price === "") {
-                alert("الرجاء إدخال اسم المحل، اسم المنتج، والسعر!");
+            if(storeName === "" || phone === "" || name === "" || price === "") {
+                alert("الرجاء إدخال اسم المحل، رقم الواتساب، اسم المنتج، والسعر!");
                 return;
             }
 
             let reader = new FileReader();
             if(imgInput.files && imgInput.files[0]) {
                 reader.onload = function(e) {
-                    saveProductToMall(storeName, cat, name, price, size, e.target.result);
+                    saveProductToMall(storeName, phone, cat, name, price, size, e.target.result);
                 }
                 reader.readAsDataURL(imgInput.files[0]);
             } else {
-                saveProductToMall(storeName, cat, name, price, size, "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300");
+                saveProductToMall(storeName, phone, cat, name, price, size, "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300");
             }
         }
 
-        function saveProductToMall(storeName, cat, name, price, size, imgSrc) {
+        function saveProductToMall(storeName, phone, cat, name, price, size, imgSrc) {
             if(!mallData[cat]) mallData[cat] = [];
             
             let vendor = mallData[cat].find(v => v.storeName === storeName);
             let newProd = { name: name, price: price, size: size || 'متوفر', img: imgSrc };
 
             if(vendor) {
+                vendor.phone = phone; // تحديث الرقم إن تغير
                 vendor.products.unshift(newProd);
             } else {
                 mallData[cat].unshift({
                     storeName: storeName,
+                    phone: phone,
                     products: [newProd]
                 });
             }
@@ -377,7 +385,7 @@
             `;
             tbody.prepend(tr);
 
-            alert("تم رفع المنتج وإرساله للإدارة بنجاح وسيظهر بصفحتكم الخاصة فوراً!");
+            alert("تم رفع المنتج إلى فتريتك المنعزلة وإرساله للإدارة بنجاح!");
             openShopsPortal(cat);
         }
 
