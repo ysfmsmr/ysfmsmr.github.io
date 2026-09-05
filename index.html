@@ -12,6 +12,7 @@
         header h1 { font-size: 26px; color: #d4af37; margin-bottom: 3px; font-weight: bold; letter-spacing: 1px; }
         header p { font-size: 12px; color: #e0e0e0; font-weight: 300; margin-bottom: 10px; }
         
+        /* الشاشة الكبرى المتقلبة الثابتة في الأعلى (ديكور وإعلانات المول) */
         .mall-showcase { display: grid; grid-template-columns: 2fr 1fr; gap: 4px; max-width: 500px; height: 160px; margin: 0 auto; border-radius: 8px; overflow: hidden; border: 2px solid #d4af37; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4); }
         .mall-showcase img { width: 100%; height: 100%; object-fit: cover; }
         .sub-grid { display: flex; flex-direction: column; gap: 4px; height: 100%; }
@@ -27,11 +28,6 @@
         
         h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 6px; color: #111; text-align: center; }
         
-        /* الشاشة المتقلبة في الرئيسية فقط */
-        .slider { width: 100%; height: 260px; background: #111; border: 2px solid #d4af37; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
-        .slider img { width: 100%; height: 175px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; border: 1px solid #d4af37; }
-        .slider span { color: #d4af37; font-size: 15px; }
-
         .form-group { margin-bottom: 12px; text-align: right; }
         .form-group label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 13px; color: #333; }
         .form-group input, .form-group select { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; }
@@ -40,7 +36,7 @@
         .action-btn:hover { opacity: 0.9; }
         .danger-btn { background: #e74c3c; margin-top: 10px; }
         
-        /* شبكة محلات التجار داخل القسم (تظهر فوراً عند اختيار القسم) */
+        /* مربعات المحلات داخل القسم */
         .vendors-direct-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
         .vendor-direct-card { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); border: 2px solid #d4af37; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15); color: #fff; }
         .vendor-direct-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3); }
@@ -48,7 +44,7 @@
         .vendor-direct-card p { font-size: 12px; color: #ccc; margin-bottom: 12px; }
         .vendor-direct-card span { background: #d4af37; color: #111; padding: 6px 12px; border-radius: 4px; font-weight: bold; font-size: 12px; display: inline-block; }
 
-        /* فترينة أو صفحة التاجر المنعزلة التي تعرض كل بضائعه */
+        /* صفحة التاجر المستقلة (عرض بضائع التاجر حصرياً) */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 10px; }
         .card { background: #fafafa; border: 1px solid #e0e0e0; padding: 12px; border-radius: 6px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
         .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 8px; }
@@ -62,6 +58,7 @@
 </head>
 <body>
 
+    <!-- الشاشة الكبرى الثابتة في أعلى المول دائمًا ولا تتأثر بالضغطات -->
     <header>
         <h1>مول لبنان</h1>
         <p>✦ الوجهة الأولى لأرقى الماركات، الألبسة، الأحذية، والعطورات الفاخرة في مكان واحد ✦</p>
@@ -75,7 +72,7 @@
         </div>
     </header>
 
-    <!-- الأزرار الرئيسية -->
+    <!-- أزرار التنقل الرئيسية -->
     <div class="nav-bar">
         <button class="nav-btn" onclick="showSec('home')">الرئيسية</button>
         <button class="nav-btn" onclick="openCategory('clothes')">الألبسة</button>
@@ -86,25 +83,21 @@
     </div>
 
     <div class="container">
-        <!-- الرئيسية: الشاشة المتحركة فقط -->
+        <!-- الرئيسية -->
         <div id="home" class="section active">
-            <h2 class="sec-title">شاشة العرض المتقلبة (إعلانات التجار)</h2>
-            <div class="slider" id="sliderBox">
-                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="إعلان التاجر">
-                <span>محل الأناقة للألبسة الراقية - أحدث صيحات الموضة</span>
-            </div>
-            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">اضغط على أي قسم بالأعلى (الألبسة، الأحذية، العطورات) لاستعراض محلات التجار المشاركة.</p>
+            <h2 class="sec-title">مرحباً بكم في مول لبنان التجاري</h2>
+            <p style="text-align: center; color: #555; font-size: 14px; line-height: 1.8;">استعراض أقسام المول بالأعلى للاطلاع على محلات التجار المعتمدة وصفحاتهم الخاصة.</p>
         </div>
 
-        <!-- قائمة محلات القسم المباشرة -->
+        <!-- قائمة محلات القسم -->
         <div id="category-section" class="section">
             <button onclick="showSec('home')" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة للرئيسية</button>
             <h2 class="sec-title" id="categoryTitle">محلات القسم</h2>
-            <p style="text-align:center; color:#666; font-size:13px; margin-bottom:15px;">اختر المحل للدخول إلى صفحته وفترينته المنعزلة وعرض كافة بضائعه:</p>
+            <p style="text-align:center; color:#666; font-size:13px; margin-bottom:15px;">اختر المحل للدخول إلى صفحته المنعزلة وعرض كافة بضائعه:</p>
             <div class="vendors-direct-grid" id="vendorsDirectGrid"></div>
         </div>
 
-        <!-- فترينة التاجر المنعزلة (تعرض جميع بضائع هذا التاجر فقط) -->
+        <!-- صفحة التاجر المنعزلة الخاصة به -->
         <div id="vendor-store-page" class="section">
             <button onclick="goBackToCategory()" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة لقائمة المحلات</button>
             <h2 class="sec-title" id="storePageTitle">فترينة المحل</h2>
@@ -113,7 +106,7 @@
 
         <!-- لوحة التاجر -->
         <div id="vendor" class="section">
-            <h2 class="sec-title">لوحة التاجر - رفع المنتجات ورقم الواتساب والشاشة</h2>
+            <h2 class="sec-title">لوحة التاجر - رفع المنتجات ورقم الواتساب</h2>
             <div class="form-group">
                 <label>اسم المحل / التاجر:</label>
                 <input type="text" id="vStoreName" placeholder="مثال: متجر أبو الزوز للأحذية">
@@ -146,9 +139,7 @@
                 <label>صورة المنتج:</label>
                 <input type="file" id="vImg" accept="image/*">
             </div>
-            <button class="action-btn" onclick="uploadProd()">نشر المنتج في فترينتي الخاصة وإرساله للإدارة</button>
-            <button class="action-btn" style="background:#d4af37; color:#111; margin-top:10px;" onclick="publishToBigScreen()">عرض هذا المنتج على الشاشة الكبرى في الرئيسية فوراً</button>
-            <button class="action-btn danger-btn" onclick="removeBigScreen()">إزالة الإعلان من الشاشة الكبرى</button>
+            <button class="action-btn" onclick="uploadProd()">نشر المنتج في صفحتي الخاصة وإرساله للإدارة</button>
         </div>
 
         <!-- لوحة الإدارة -->
@@ -185,7 +176,7 @@
             window.scrollTo(0, 0);
         }
 
-        /* قاعدة بيانات المتاجر والمنتجات وأرقام الواتساب */
+        /* قاعدة بيانات المتاجر والمنتجات وأرقام الواتساب لكل تاجر */
         let mallData = {
             clothes: [
                 {
@@ -239,7 +230,7 @@
                     card.className = 'vendor-direct-card';
                     card.innerHTML = `
                         <h3>🏪 ${v.storeName}</h3>
-                        <p>عدد المنتجات في الفترينا: ${v.products.length}</p>
+                        <p>عدد المنتجات في صفحته: ${v.products.length}</p>
                         <span>دخول لصفحة المحل ←</span>
                     `;
                     card.onclick = () => openVendorStorePage(cat, index);
@@ -251,12 +242,12 @@
 
         function openVendorStorePage(cat, vendorIndex) {
             let vendorObj = mallData[cat][vendorIndex];
-            document.getElementById('storePageTitle').innerText = `فترينة محل: ${vendorObj.storeName}`;
+            document.getElementById('storePageTitle').innerText = `صفحة ومحل: ${vendorObj.storeName}`;
             let grid = document.getElementById('storeProductsGrid');
             grid.innerHTML = "";
 
             if (!vendorObj.products || vendorObj.products.length === 0) {
-                grid.innerHTML = "<p style='text-align:center; color:#777; grid-column:1/-1; padding:20px;'>لا توجد منتجات معروضة في فترينة هذا المحل حالياً.</p>";
+                grid.innerHTML = "<p style='text-align:center; color:#777; grid-column:1/-1; padding:20px;'>لا توجد منتجات معروضة في صفحة هذا المحل حالياً.</p>";
             } else {
                 vendorObj.products.forEach(p => {
                     let card = document.createElement('div');
@@ -276,65 +267,6 @@
 
         function goBackToCategory() {
             openCategory(currentCategory);
-        }
-
-        /* الشاشة المتحركة للرئيسية حصرياً */
-        let defaultSlides = [
-            { text: "محل الأناقة للألبسة - أحدث الموضات الصيفية والشتوية", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" },
-            { text: "أحذية الفخامة - راحة وأناقة لا توصف لقدميك", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
-            { text: "عطورات الملك - فخامة العطور الشرقية والفرنسية", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" }
-        ];
-        let current = 0;
-        let customBigScreen = null;
-
-        setInterval(() => {
-            let box = document.getElementById('sliderBox');
-            if(!box) return;
-
-            if (customBigScreen) {
-                box.innerHTML = `<img src="${customBigScreen.img}" alt="إعلان"><span>${customBigScreen.text}</span>`;
-            } else {
-                current = (current + 1) % defaultSlides.length;
-                let slide = defaultSlides[current];
-                box.innerHTML = `<img src="${slide.img}" alt="دليل المول"><span>${slide.text}</span>`;
-            }
-        }, 3000);
-
-        function publishToBigScreen() {
-            let name = document.getElementById('vName').value;
-            let price = document.getElementById('vPrice').value;
-            let imgInput = document.getElementById('vImg');
-
-            if(name === "" || price === "") {
-                alert("الرجاء إدخال اسم المنتج والسعر أولاً!");
-                return;
-            }
-
-            if(imgInput.files && imgInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    customBigScreen = {
-                        text: `${name} - السعر: ${price}$ (عرض خاص على الشاشة)`,
-                        img: e.target.result
-                    };
-                    alert("تم نشر الإعلان على الشاشة الكبرى في الرئيسية بنجاح!");
-                    showSec('home');
-                }
-                reader.readAsDataURL(imgInput.files[0]);
-            } else {
-                customBigScreen = {
-                    text: `${name} - السعر: ${price}$ (عرض خاص على الشاشة)`,
-                    img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500"
-                };
-                alert("تم نشر الإعلان على الشاشة الكبرى في الرئيسية بنجاح!");
-                showSec('home');
-            }
-        }
-
-        function removeBigScreen() {
-            customBigScreen = null;
-            alert("تمت إزالة الإعلان من الشاشة الكبرى وعادت للحالة التلقائية!");
-            showSec('home');
         }
 
         function uploadProd() {
@@ -392,7 +324,7 @@
             `;
             tbody.prepend(tr);
 
-            alert("تم رفع المنتج إلى فترينتك المنعزلة وإرساله للإدارة بنجاح!");
+            alert("تم رفع المنتج إلى صفحتك المستقلة وإرساله للإدارة بنجاح!");
             openCategory(cat);
         }
 
