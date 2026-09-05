@@ -22,10 +22,10 @@
         
         h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 6px; color: #111; text-align: center; }
         
-        /* الشاشة الكبرى المتقلبة في الرئيسية فقط */
-        .slider { width: 100%; height: 260px; background: #111; border: 2px solid #d4af37; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
-        .slider img { width: 100%; height: 175px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; border: 1px solid #d4af37; }
-        .slider span { color: #d4af37; font-size: 15px; }
+        /* شاشة العرض المتقلبة المستقلة في الأعلى (على العالي) */
+        .top-master-slider { width: 100%; height: 260px; background: #111; border: 2px solid #d4af37; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 20px; text-align: center; padding: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
+        .top-master-slider img { width: 100%; height: 175px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; border: 1px solid #d4af37; }
+        .top-master-slider span { color: #d4af37; font-size: 15px; }
 
         .form-group { margin-bottom: 12px; text-align: right; }
         .form-group label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 13px; color: #333; }
@@ -42,7 +42,7 @@
         .vendor-direct-card p { font-size: 12px; color: #ccc; margin-bottom: 12px; }
         .vendor-direct-card span { background: #d4af37; color: #111; padding: 6px 12px; border-radius: 4px; font-weight: bold; font-size: 12px; display: inline-block; }
 
-        /* صفحة التاجر المنعزلة الخاصة به */
+        /* صفحة التاجر المنعزلة الخاصة بمنتجاته حصرياً */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 10px; }
         .card { background: #fafafa; border: 1px solid #e0e0e0; padding: 12px; border-radius: 6px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
         .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 8px; }
@@ -72,14 +72,14 @@
     </div>
 
     <div class="container">
-        <!-- الرئيسية: الشاشة المتحركة هنا فقط -->
+        <!-- الرئيسية: شاشة العرض المتقلبة المستقلة في الأعلى (على العالي) -->
         <div id="home" class="section active">
-            <h2 class="sec-title">شاشة العرض المتقلبة في المول</h2>
-            <div class="slider" id="sliderBox">
+            <h2 class="sec-title">شاشة العرض الكبرى المتقلبة</h2>
+            <div class="top-master-slider" id="masterSliderBox">
                 <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="إعلان التاجر">
                 <span>محل الأناقة للألبسة الراقية - أحدث صيحات الموضة</span>
             </div>
-            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">اختر من الأقسام بالأعلى (الألبسة، الأحذية، العطورات) لاستعراض محلات التجار وصفحاتهم المنعزلة.</p>
+            <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">اختر الأقسام بالأعلى (الألبسة، الأحذية، العطورات) لاستعراض محلات التجار والدخول لصفحاتهم المستقلة.</p>
         </div>
 
         <!-- قائمة محلات القسم -->
@@ -90,10 +90,10 @@
             <div class="vendors-direct-grid" id="vendorsDirectGrid"></div>
         </div>
 
-        <!-- صفحة التاجر المنعزلة (عرض بضائع التاجر حصرياً) -->
+        <!-- صفحة التاجر المنعزلة الخاصة به لعرض بضائعه حصرياً -->
         <div id="vendor-store-page" class="section">
             <button onclick="goBackToCategory()" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة لقائمة المحلات</button>
-            <h2 class="sec-title" id="storePageTitle">فترينة المحل</h2>
+            <h2 class="sec-title" id="storePageTitle">صفحة بضائع المحل</h2>
             <div id="storeProductsGrid" class="grid"></div>
         </div>
 
@@ -235,7 +235,7 @@
 
         function openVendorStorePage(cat, vendorIndex) {
             let vendorObj = mallData[cat][vendorIndex];
-            document.getElementById('storePageTitle').innerText = `صفحة ومحل: ${vendorObj.storeName}`;
+            document.getElementById('storePageTitle').innerText = `صفحة بضائع محل: ${vendorObj.storeName}`;
             let grid = document.getElementById('storeProductsGrid');
             grid.innerHTML = "";
 
@@ -262,21 +262,21 @@
             openCategory(currentCategory);
         }
 
-        /* الشاشة المتحركة تعمل في الرئيسية فقط */
-        let defaultSlides = [
+        /* شاشة العرض المتحركة المستقلة وحدها في الرئيسية */
+        let masterSlides = [
             { text: "محل الأناقة للألبسة - أحدث الموضات الصيفية والشتوية", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" },
             { text: "أحذية الفخامة - راحة وأناقة لا توصف لقدميك", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
-            { text: "عطورات الملك - فخامة العطور الشرقية والفرنسية", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" }
+            { text: "عطورات الملك - فخامة العطور الشرقية والفرنسية", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500" }
         ];
-        let current = 0;
+        let currentMasterSlide = 0;
 
         setInterval(() => {
-            let box = document.getElementById('sliderBox');
+            let box = document.getElementById('masterSliderBox');
             if(!box) return;
 
-            current = (current + 1) % defaultSlides.length;
-            let slide = defaultSlides[current];
-            box.innerHTML = `<img src="${slide.img}" alt="دليل المول"><span>${slide.text}</span>`;
+            currentMasterSlide = (currentMasterSlide + 1) % masterSlides.length;
+            let slide = masterSlides[currentMasterSlide];
+            box.innerHTML = `<img src="${slide.img}" alt="شاشة العرض"><span>${slide.text}</span>`;
         }, 3000);
 
         function uploadProd() {
@@ -321,10 +321,11 @@
                 });
             }
 
+            let displayTitle = storeName + " (" + name + ")";
             let tbody = document.getElementById('adminBody');
             let tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${storeName} (${name})</td>
+                <td>${displayTitle}</td>
                 <td>${cat}</td>
                 <td style="color:orange; font-weight:bold;">قيد الانتظار</td>
                 <td>
