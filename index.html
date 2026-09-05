@@ -42,7 +42,7 @@
         .action-btn:hover { opacity: 0.9; }
         .danger-btn { background: #e74c3c; margin-top: 10px; }
         
-        /* واجهة منعزلة وفخمة لعرض محلات التجار */
+        /* واجهة محلات التجار المنعزلة */
         .shops-portal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
         .shop-card-portal { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); border: 2px solid #d4af37; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15); color: #fff; }
         .shop-card-portal:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3); }
@@ -96,23 +96,19 @@
             <p style="text-align: center; color: #555; font-size: 13px; line-height: 1.6;">اضغط على أزرار الأقسام بالأعلى (الألبسة، الأحذية، العطورات) لدخول صالة محلات التجار المشتركين.</p>
         </div>
 
-        <!-- صالة محلات التجار المنعزلة (بوابة القسم) -->
+        <!-- صالة محلات التجار المشتركين -->
         <div id="shops-portal" class="section">
             <button onclick="showSec('home')" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة للرئيسية</button>
             <h2 class="sec-title" id="portalTitle">قائمة محلات التجار</h2>
-            <p style="text-align:center; color:#666; font-size:13px; margin-bottom:15px;">اضغط على أي محل للدخول إلى مقره المعزول وعرض بضاعته بالكامل:</p>
-            <div class="shops-portal-grid" id="shopsPortalGrid">
-                <!-- تعبئة تلقائية -->
-            </div>
+            <p style="text-align:center; color:#666; font-size:13px; margin-bottom:15px;">اختر المحل لعرض صفحته المنعزلة وجميع بضائعه:</p>
+            <div class="shops-portal-grid" id="shopsPortalGrid"></div>
         </div>
 
-        <!-- محل التاجر المنعزل (يعرض كل ما عرضه التاجر من منتجات وصور وسعر ونمرة رجل) -->
+        <!-- صفحة التاجر المنعزلة الخاصة به وحده -->
         <div id="vendor-isolated-store" class="section">
             <button onclick="goBackToPortal()" style="background:#333; color:#fff; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; margin-bottom:10px; font-size:12px;">← العودة لقائمة المحلات</button>
             <h2 class="sec-title" id="isolatedStoreTitle">محل التاجر</h2>
-            <div id="isolatedStoreGrid" class="grid">
-                <!-- تعبئة بضاعة التاجر -->
-            </div>
+            <div id="isolatedStoreGrid" class="grid"></div>
         </div>
 
         <!-- لوحة التاجر -->
@@ -124,7 +120,7 @@
             </div>
             <div class="form-group">
                 <label>القسم:</label>
-                <select id="vCat" onchange="updatePortalCategoryHint()">
+                <select id="vCat">
                     <option value="clothes">ألبسة</option>
                     <option value="shoes">أحذية</option>
                     <option value="perfumes">عطورات</option>
@@ -237,7 +233,7 @@
                     card.innerHTML = `
                         <h3>🏪 ${v.storeName}</h3>
                         <p>عدد المنتجات المعروضة: ${v.products.length}</p>
-                        <span>دخول للمحل ←</span>
+                        <span>دخول لصفحة المحل ←</span>
                     `;
                     card.onclick = () => openIsolatedStore(v);
                     grid.appendChild(card);
@@ -381,7 +377,7 @@
             `;
             tbody.prepend(tr);
 
-            alert("تم رفع المنتج وإرساله للإدارة بنجاح وسيظهر بمحلكم فوراً!");
+            alert("تم رفع المنتج وإرساله للإدارة بنجاح وسيظهر بصفحتكم الخاصة فوراً!");
             openShopsPortal(cat);
         }
 
