@@ -1,48 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مول لبنان - المنصة المركزية المتكاملة</title>
+    <title>مول لبنان</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
         body { background-color: #f4f4f4; color: #333; direction: rtl; text-align: center; }
-        
-        header { background: #111; color: #fff; padding: 25px; border-bottom: 4px solid #d4af37; }
-        header h1 { font-size: 28px; color: #d4af37; margin-bottom: 8px; }
-        header p { font-size: 14px; color: #ccc; }
-
-        .nav-bar { background: #222; padding: 12px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .nav-btn { background: #d4af37; color: #111; padding: 8px 14px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; }
-        .nav-btn:hover { background: #c19b2e; }
-
-        .container { max-width: 850px; margin: 20px auto; padding: 0 15px; text-align: right; }
-        .section { display: none; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        header { background: #111; color: #fff; padding: 20px; border-bottom: 4px solid #d4af37; }
+        header h1 { font-size: 26px; color: #d4af37; margin-bottom: 5px; }
+        .nav-bar { background: #222; padding: 10px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .nav-btn { background: #d4af37; color: #111; padding: 7px 12px; border-radius: 4px; font-weight: bold; font-size: 12px; cursor: pointer; border: none; }
+        .container { max-width: 800px; margin: 15px auto; padding: 0 10px; text-align: right; }
+        .section { display: none; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; }
         .section.active { display: block; }
-        
-        h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 5px; color: #111; text-align: center; }
-
-        /* الشاشة العملاقة المتقلبة (السلايدر) */
-        .giant-slider { position: relative; width: 100%; height: 280px; background: #111; border-radius: 8px; overflow: hidden; border: 3px solid #d4af37; display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .slide-item { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 1s ease-in-out; }
-        .slide-item.active { opacity: 1; }
-        .slide-item h3 { color: #d4af37; font-size: 24px; margin-bottom: 10px; }
-        .slide-item p { font-size: 16px; color: #eee; max-width: 600px; }
-
-        .form-group { margin-bottom: 12px; text-align: right; }
-        .form-group label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 13px; }
-        .form-group input, .form-group select { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
-
-        .action-btn { display: inline-block; background: #25d366; color: white; padding: 10px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px; width: 100%; border: none; cursor: pointer; text-align: center; }
-        .action-btn:hover { background: #1ebe5d; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
-        .card { background: #fafafa; border: 1px solid #ddd; padding: 12px; border-radius: 6px; text-align: center; }
-        .card img { width: 100%; height: 140px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; background: #eee; }
-        
+        h2.sec-title { font-size: 18px; margin-bottom: 12px; border-bottom: 2px solid #d4af37; padding-bottom: 4px; color: #111; text-align: center; }
+        .slider { width: 100%; height: 200px; background: #111; border: 2px solid #d4af37; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 15px; }
+        .form-group { margin-bottom: 10px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 3px; font-weight: bold; font-size: 12px; }
+        .form-group input, .form-group select { width: 100%; padding: 7px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; }
+        .action-btn { display: block; background: #25d366; color: white; padding: 8px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; width: 100%; border: none; cursor: pointer; text-align: center; margin-top: 5px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 10px; }
+        .card { background: #fafafa; border: 1px solid #ddd; padding: 10px; border-radius: 5px; text-align: center; }
+        .card img { width: 100%; height: 110px; object-fit: cover; border-radius: 4px; margin-bottom: 5px; }
         .admin-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .admin-table th, .admin-table td { border: 1px solid #ddd; padding: 10px; text-align: center; font-size: 13px; }
+        .admin-table th, .admin-table td { border: 1px solid #ddd; padding: 8px; text-align: center; font-size: 12px; }
         .admin-table th { background: #222; color: #d4af37; }
     </style>
 </head>
@@ -50,227 +32,202 @@
 
     <header>
         <h1>مول لبنان</h1>
-        <p>المنصة المركزية الكبرى للتسوق وعرض المنتجات</p>
+        <p>المنصة المركزية المتكاملة</p>
     </header>
 
-    <!-- شريط التنقل -->
     <div class="nav-bar">
-        <button class="nav-btn" onclick="showSection('home')">الرئيسية</button>
-        <button class="nav-btn" onclick="showSection('clothes')">قسم الألبسة</button>
-        <button class="nav-btn" onclick="showSection('shoes')">قسم الأحذية</button>
-        <button class="nav-btn" onclick="showSection('perfumes')">قسم العطورات</button>
-        <button class="nav-btn" onclick="showSection('vendor_panel')">لوحة التاجر (رفع الصور)</button>
-        <button class="nav-btn" onclick="showSection('admin_panel')">لوحة الإدارة (القبول والرفض)</button>
+        <button class="nav-btn" onclick="showSec('home')">الرئيسية</button>
+        <button class="nav-btn" onclick="showSec('clothes')">الألبسة</button>
+        <button class="nav-btn" onclick="showSec('shoes')">الأحذية</button>
+        <button class="nav-btn" onclick="showSec('perfumes')">العطورات</button>
+        <button class="nav-btn" onclick="showSec('vendor')">لوحة التاجر</button>
+        <button class="nav-btn" onclick="showSec('admin')">لوحة الإدارة</button>
     </div>
 
     <div class="container">
-
-        <!-- 1. الرئيسية والشاشة العملاقة المتقلبة -->
+        <!-- الرئيسية -->
         <div id="home" class="section active">
-            <h2 class="sec-title">شاشة العرض العملاقة المتقلبة</h2>
-            
-            <div class="giant-slider">
-                <div class="slide-item active">
-                    <h3>محل الأناقة للألبسة</h3>
-                    <p>أرقى الموديلات الرجالية والنسائية الحديثة - تصفح القسم الآن واطلب عبر واتساب!</p>
-                </div>
-                <div class="slide-item">
-                    <h3>أحذية الفخامة العصرية</h3>
-                    <p>تشكيلة واسعة من الأحذية الرياضية والرسمية المريحة بأفضل الأسعار في لبنان.</p>
-                </div>
-                <div class="slide-item">
-                    <h3>عطورات الملك الفاخرة</h3>
-                    <p>أجمل العطور الشرقية والفرنسية الثابتة التي تترك بصمتك الخاصة.</p>
-                </div>
-            </div>
-
-            <p style="text-align: center; color: #666; font-size: 14px;">اختر أحد الأقسام من الأعلى لتصفح أحدث بضائع التجار مباشرة.</p>
+            <h2 class="sec-title">شاشة العرض المتقلبة</h2>
+            <div class="slider" id="sliderBox">محل الأناقة للألبسة - أرقى الموديلات الحديثة</div>
+            <p style="text-align: center; color: #666; font-size: 13px;">اختر أحد الأقسام بالأعلى لتصفح المنتجات.</p>
         </div>
 
-        <!-- 2. قسم الألبسة -->
+        <!-- الألبسة -->
         <div id="clothes" class="section">
             <h2 class="sec-title">قسم الألبسة</h2>
             <div id="clothes-grid" class="grid">
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" alt="منتج">
-                    <h3>تيشيرت رجالي قطني</h3>
-                    <p>السعر: 15$</p>
-                    <a href="https://wa.me/96170000000?text=مرحباً، أرغب بطلب تيشيرت رجالي قطني" class="action-btn" target="_blank">اطلب عبر واتساب</a>
+                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" alt="صورة">
+                    <h3>جاكيت فاخر</h3>
+                    <p>السعر: 35$</p>
+                    <a href="https://wa.me/96170000000?text=أرغب بطلب جاكيت فاخر" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
 
-        <!-- 3. قسم الأحذية -->
+        <!-- الأحذية -->
         <div id="shoes" class="section">
             <h2 class="sec-title">قسم الأحذية</h2>
             <div id="shoes-grid" class="grid">
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="منتج">
-                    <h3>حذاء رياضي أحمر فاخر</h3>
-                    <p>السعر: 30$</p>
-                    <a href="https://wa.me/96170000000?text=مرحباً، أرغب بطلب حذاء رياضي" class="action-btn" target="_blank">اطلب عبر واتساب</a>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="صورة">
+                    <h3>حذاء رياضي</h3>
+                    <p>السعر: 25$</p>
+                    <a href="https://wa.me/96170000000?text=أرغب بطلب حذاء رياضي" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
 
-        <!-- 4. قسم العطورات -->
+        <!-- العطورات -->
         <div id="perfumes" class="section">
             <h2 class="sec-title">قسم العطورات</h2>
             <div id="perfumes-grid" class="grid">
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" alt="منتج">
-                    <h3>عطر العود الملكي</h3>
-                    <p>السعر: 45$</p>
-                    <a href="https://wa.me/96170000000?text=مرحباً، أرغب بطلب عطر العود الملكي" class="action-btn" target="_blank">اطلب عبر واتساب</a>
+                    <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" alt="صورة">
+                    <h3>عطر الملك</h3>
+                    <p>السعر: 40$</p>
+                    <a href="https://wa.me/96170000000?text=أرغب بطلب عطر الملك" class="action-btn" target="_blank">طلب عبر واتساب</a>
                 </div>
             </div>
         </div>
 
-        <!-- 5. لوحة التاجر لرفع الصور والمنتجات -->
-        <div id="vendor_panel" class="section">
-            <h2 class="sec-title">لوحة التاجر - رفع الصور والمنتجات</h2>
+        <!-- لوحة التاجر -->
+        <div id="vendor" class="section">
+            <h2 class="sec-title">لوحة التاجر - رفع الصور</h2>
             <div class="form-group">
-                <label>اختر القسم:</label>
-                <select id="vCategory">
-                    <option value="clothes">قسم الألبسة</option>
-                    <option value="shoes">قسم الأحذية</option>
-                    <option value="perfumes">قسم العطورات</option>
+                <label>القسم:</label>
+                <select id="vCat">
+                    <option value="clothes">ألبسة</option>
+                    <option value="shoes">أحذية</option>
+                    <option value="perfumes">عطورات</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>اسم المنتج:</label>
-                <input type="text" id="vName" placeholder="مثلاً: بنطال جينز عصري">
+                <input type="text" id="vName" placeholder="اسم البضاعة">
             </div>
             <div class="form-group">
                 <label>السعر:</label>
-                <input type="text" id="vPrice" placeholder="مثلاً: 20$">
+                <input type="text" id="vPrice" placeholder="السعر$">
             </div>
             <div class="form-group">
-                <label>صورة المنتج (اختر صورة من هاتفك):</label>
-                <input type="file" id="vImage" accept="image/*">
+                <label>صورة المنتج:</label>
+                <input type="file" id="vImg" accept="image/*">
             </div>
-            <button class="action-btn" onclick="vendorUploadProduct()">رفع المنتج ونشره بالمول</button>
+            <button class="action-btn" onclick="uploadProd()">نشر المنتج وإرساله للإدارة</button>
         </div>
 
-        <!-- 6. لوحة الإدارة (الاستقبال والرفض) -->
-        <div id="admin_panel" class="section">
-            <h2 class="sec-title">لوحة الإدارة - مراجعة طلبات التجار والمنتجات</h2>
-            <p style="font-size: 13px; color: #666; margin-bottom: 10px;">هنا يتم استقبال طلبات المحلات والمنتجات الجديدة وقبولها أو رفضها:</p>
+        <!-- لوحة الإدارة -->
+        <div id="admin" class="section">
+            <h2 class="sec-title">لوحة الإدارة - القبول والرفض</h2>
             <table class="admin-table">
                 <thead>
                     <tr>
-                        <th>اسم التاجر / المنتج</th>
+                        <th>المنتج / التاجر</th>
                         <th>القسم</th>
                         <th>الحالة</th>
-                        <th>إجراءات الإدارة</th>
+                        <th>الإجراء</th>
                     </tr>
                 </thead>
-                <tbody id="adminRequestsList">
+                <tbody id="adminBody">
                     <tr>
-                        <td>محل الفخامة للألبسة (اشتراك جديد)</td>
+                        <td>محل الفخامة (اشتراك)</td>
                         <td>ألبسة</td>
-                        <td style="color: orange; font-weight: bold;">قيد الانتظار</td>
+                        <td style="color:orange; font-weight:bold;">قيد الانتظار</td>
                         <td>
-                            <button onclick="approveItem(this)" style="background:green; color:white; border:none; padding:5px 10px; border-radius:3px; cursor:pointer;">قبول</button>
-                            <button onclick="rejectItem(this)" style="background:red; color:white; border:none; padding:5px 10px; border-radius:3px; cursor:pointer; margin-right:5px;">رفض</button>
+                            <button onclick="acceptItem(this)" style="background:green; color:white; border:none; padding:4px 8px; border-radius:3px; cursor:pointer;">قبول</button>
+                            <button onclick="refuseItem(this)" style="background:red; color:white; border:none; padding:4px 8px; border-radius:3px; cursor:pointer; margin-right:3px;">رفض</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
     </div>
 
     <script>
-        // تنقل الصفحات
-        function showSection(id) {
-            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+        function showSec(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0, 0);
         }
 
-        // السلايدر العملاقة المتقلبة (تتغير كل 3.5 ثانية)
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide-item');
-        function nextSlide() {
-            if(slides.length > 0) {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }
-        }
-        setInterval(nextSlide, 3500);
+        // السلايدر المتقلب
+        let slides = [
+            "محل الأناقة للألبسة - أحدث الموديلات الصيفية والشتوية",
+            "أحذية الفخامة - راحة وأناقة لا توصف لقدميك",
+            "عطورات الملك - فخامة العطور الشرقية والفرنسية"
+        ];
+        let current = 0;
+        setInterval(() => {
+            current = (current + 1) % slides.length;
+            let box = document.getElementById('sliderBox');
+            if(box) box.innerText = slides[current];
+        }, 3000);
 
-        // وظيفة رفع صور المنتجات من قبل التاجر
-        function vendorUploadProduct() {
-            let cat = document.getElementById('vCategory').value;
+        function uploadProd() {
+            let cat = document.getElementById('vCat').value;
             let name = document.getElementById('vName').value;
             let price = document.getElementById('vPrice').value;
-            let imageInput = document.getElementById('vImage');
+            let imgInput = document.getElementById('vImg');
 
             if(name === "" || price === "") {
-                alert("الرجاء إدخال اسم المنتج والسعر!");
+                alert("الرجاء إدخال الاسم والسعر!");
                 return;
             }
 
             let reader = new FileReader();
-            if (imageInput.files && imageInput.files[0]) {
+            if(imgInput.files && imgInput.files[0]) {
                 reader.onload = function(e) {
-                    addProductToPage(cat, name, price, e.target.result);
+                    addCard(cat, name, price, e.target.result);
                 }
-                reader.readAsDataURL(imageInput.files[0]);
+                reader.readAsDataURL(imgInput.files[0]);
             } else {
-                addProductToPage(cat, name, price, "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300");
+                addCard(cat, name, price, "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300");
             }
         }
 
-        function addProductToPage(cat, name, price, imgSrc) {
+        function addCard(cat, name, price, imgSrc) {
             let grid = document.getElementById(cat + '-grid');
             let card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <img src="${imgSrc}" alt="صورة المنتج">
+                <img src="${imgSrc}" alt="صورة">
                 <h3>${name}</h3>
                 <p>السعر: ${price}</p>
-                <a href="https://wa.me/96170000000?text=مرحباً، أرغب بطلب: ${name}" class="action-btn" target="_blank">اطلب عبر واتساب</a>
+                <a href="https://wa.me/96170000000?text=أرغب بطلب ${name}" class="action-btn" target="_blank">طلب عبر واتساب</a>
             `;
             grid.prepend(card);
 
-            // إضافة طلب إلى لوحة الإدارة للمراجعة
-            let adminTable = document.getElementById('adminRequestsList');
-            let row = document.createElement('tr');
-            row.innerHTML = `
-                <td>منتج جديد: ${name}</td>
+            // إضافة الطلب للإدارة
+            let tbody = document.getElementById('adminBody');
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${name}</td>
                 <td>${cat}</td>
-                <td style="color: orange; font-weight: bold;">قيد الانتظار</td>
+                <td style="color:orange; font-weight:bold;">قيد الانتظار</td>
                 <td>
-                    <button onclick="approveItem(this)" style="background:green; color:white; border:none; padding:5px 10px; border-radius:3px; cursor:pointer;">قبول</button>
-                    <button onclick="rejectItem(this)" style="background:red; color:white; border:none; padding:5px 10px; border-radius:3px; cursor:pointer; margin-right:5px;">رفض</button>
+                    <button onclick="acceptItem(this)" style="background:green; color:white; border:none; padding:4px 8px; border-radius:3px; cursor:pointer;">قبول</button>
+                    <button onclick="refuseItem(this)" style="background:red; color:white; border:none; padding:4px 8px; border-radius:3px; cursor:pointer; margin-right:3px;">رفض</button>
                 </td>
             `;
-            adminTable.prepend(row);
+            tbody.prepend(tr);
 
-            alert("تم رفع المنتج بنجاح وأرسل إلى لوحة الإدارة للمراجعة والقبول!");
-            showSection(cat);
+            alert("تم رفع المنتج بنجاح وتم إرساله للإدارة!");
+            showSec(cat);
         }
 
-        // دوال الإدارة للقبول والرفض
-        function approveItem(btn) {
-            let row = btn.closest('tr');
-            let statusCell = row.cells[2];
-            statusCell.innerText = "تم القبول ونشر بالمول";
-            statusCell.style.color = "green";
-            btn.parentElement.innerHTML = "<span style='color:green; font-weight:bold;'>مقبول</span>";
-            alert("تم قبول الطلب بنجاح!");
+        function acceptItem(btn) {
+            let td = btn.closest('tr').cells[2];
+            td.innerText = "مقبول ومنشور";
+            td.style.color = "green";
+            btn.parentElement.innerHTML = "<span style='color:green; font-weight:bold;'>تم القبول</span>";
         }
 
-        function rejectItem(btn) {
-            let row = btn.closest('tr');
-            let statusCell = row.cells[2];
-            statusCell.innerText = "تم الرفض";
-            statusCell.style.color = "red";
+        function refuseItem(btn) {
+            let td = btn.closest('tr').cells[2];
+            td.innerText = "مرفوض";
+            td.style.color = "red";
             btn.parentElement.innerHTML = "<span style='color:red; font-weight:bold;'>مرفوض</span>";
-            alert("تم رفض الطلب.");
         }
     </script>
 </body>
