@@ -15,11 +15,13 @@
         .section { display: none; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; }
         .section.active { display: block; }
         h2.sec-title { font-size: 18px; margin-bottom: 12px; border-bottom: 2px solid #d4af37; padding-bottom: 4px; color: #111; text-align: center; }
-        .slider { width: 100%; height: 200px; background: #111; border: 2px solid #d4af37; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 15px; }
+        .slider { width: 100%; height: 220px; background: #111; border: 2px solid #d4af37; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 10px; overflow: hidden; position: relative; }
+        .slider img { width: 100%; height: 140px; object-fit: cover; border-radius: 4px; margin-bottom: 5px; }
         .form-group { margin-bottom: 10px; text-align: right; }
         .form-group label { display: block; margin-bottom: 3px; font-weight: bold; font-size: 12px; }
         .form-group input, .form-group select { width: 100%; padding: 7px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; }
         .action-btn { display: block; background: #25d366; color: white; padding: 8px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; width: 100%; border: none; cursor: pointer; text-align: center; margin-top: 5px; }
+        .danger-btn { background: #e74c3c; margin-top: 8px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 10px; }
         .card { background: #fafafa; border: 1px solid #ddd; padding: 10px; border-radius: 5px; text-align: center; }
         .card img { width: 100%; height: 110px; object-fit: cover; border-radius: 4px; margin-bottom: 5px; }
@@ -47,8 +49,10 @@
     <div class="container">
         <!-- الرئيسية -->
         <div id="home" class="section active">
-            <h2 class="sec-title">شاشة العرض المتقلبة</h2>
-            <div class="slider" id="sliderBox">محل الأناقة للألبسة - أرقى الموديلات الحديثة</div>
+            <h2 class="sec-title">شاشة العرض المتقلبة الكبرى</h2>
+            <div class="slider" id="sliderBox">
+                <span>محل الأناقة للألبسة - أرقى الموديلات الحديثة</span>
+            </div>
             <p style="text-align: center; color: #666; font-size: 13px;">اختر أحد الأقسام بالأعلى لتصفح المنتجات.</p>
         </div>
 
@@ -93,7 +97,7 @@
 
         <!-- لوحة التاجر -->
         <div id="vendor" class="section">
-            <h2 class="sec-title">لوحة التاجر - رفع الصور</h2>
+            <h2 class="sec-title">لوحة التاجر - رفع الصور والتحكم بالشاشة</h2>
             <div class="form-group">
                 <label>القسم:</label>
                 <select id="vCat">
@@ -115,6 +119,8 @@
                 <input type="file" id="vImg" accept="image/*">
             </div>
             <button class="action-btn" onclick="uploadProd()">نشر المنتج وإرساله للإدارة</button>
+            <button class="action-btn" style="background:#d4af37; color:#111; margin-top:10px;" onclick="publishToBigScreen()">عرض هذا المنتج على الشاشة الكبرى فوراً</button>
+            <button class="action-btn danger-btn" onclick="removeBigScreen()">إزالة الإعلان من الشاشة الكبرى</button>
         </div>
 
         <!-- لوحة الإدارة -->
@@ -151,18 +157,65 @@
             window.scrollTo(0, 0);
         }
 
-        // السلايدر المتقلب
-        let slides = [
+        // السلايدر الافتراضي
+        let defaultSlides = [
             "محل الأناقة للألبسة - أحدث الموديلات الصيفية والشتوية",
             "أحذية الفخامة - راحة وأناقة لا توصف لقدميك",
             "عطورات الملك - فخامة العطور الشرقية والفرنسية"
         ];
         let current = 0;
+        let customBigScreen = null; // يحفظ الإعلان الخاص للتاجر
+
         setInterval(() => {
-            current = (current + 1) % slides.length;
             let box = document.getElementById('sliderBox');
-            if(box) box.innerText = slides[current];
+            if(!box) return;
+
+            if (customBigScreen) {
+                // إذا التاجر نشر إعلان مخصص يثبت عليه
+                box.innerHTML = `<img src="${customBigScreen.img}" alt="إعلان"><span>${customBigScreen.text}</span>`;
+            } else {
+                // الوضع المتقلب الطبيعي
+                current = (current + 1) % defaultSlides.length;
+                box.innerHTML = `<span>${defaultSlides[current]}</span>`;
+            }
         }, 3000);
+
+        function publishToBigScreen() {
+            let name = document.getElementById('vName').value;
+            let price = document.getElementById('vPrice').value;
+            let imgInput = document.getElementById('vImg');
+
+            if(name === "" || price === "") {
+                alert("الرجاء إدخال اسم المنتج والسعر أولاً!");
+                return;
+            }
+
+            if(imgInput.files && imgInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    customBigScreen = {
+                        text: `${name} - السعر: ${price}$ (عرض خاص)`,
+                        img: e.target.result
+                    };
+                    alert("تم نشر الصورة والإعلان على الشاشة الكبرى بنجاح!");
+                    showSec('home');
+                }
+                reader.readAsDataURL(imgInput.files[0]);
+            } else {
+                customBigScreen = {
+                    text: `${name} - السعر: ${price}$ (عرض خاص)`,
+                    img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300"
+                };
+                alert("تم نشر الإعلان على الشاشة الكبرى بنجاح!");
+                showSec('home');
+            }
+        }
+
+        function removeBigScreen() {
+            customBigScreen = null;
+            alert("تمت إزالة الإعلان من الشاشة الكبرى بنجاح وعادت للحركة الطبيعية!");
+            showSec('home');
+        }
 
         function uploadProd() {
             let cat = document.getElementById('vCat').value;
