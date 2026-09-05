@@ -22,7 +22,7 @@
         
         h2.sec-title { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #d4af37; padding-bottom: 6px; color: #111; text-align: center; }
         
-        /* الشاشة الكبرى المتقلبة - موجودة في الرئيسية فقط */
+        /* الشاشة الكبرى المتقلبة في الرئيسية فقط */
         .slider { width: 100%; height: 260px; background: #111; border: 2px solid #d4af37; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: center; padding: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
         .slider img { width: 100%; height: 175px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; border: 1px solid #d4af37; }
         .slider span { color: #d4af37; font-size: 15px; }
@@ -34,7 +34,7 @@
         .action-btn { display: block; background: #25d366; color: white; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; width: 100%; border: none; cursor: pointer; text-align: center; margin-top: 8px; transition: 0.2s; }
         .action-btn:hover { opacity: 0.9; }
         
-        /* مربعات المحلات داخل القسم */
+        /* شبكة محلات التجار داخل القسم */
         .vendors-direct-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
         .vendor-direct-card { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); border: 2px solid #d4af37; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15); color: #fff; }
         .vendor-direct-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3); }
@@ -72,7 +72,7 @@
     </div>
 
     <div class="container">
-        <!-- الرئيسية: الشاشة المتحركة هنا وحدها فقط -->
+        <!-- الرئيسية: الشاشة المتحركة هنا فقط -->
         <div id="home" class="section active">
             <h2 class="sec-title">شاشة العرض المتقلبة في المول</h2>
             <div class="slider" id="sliderBox">
@@ -346,7 +346,7 @@
         }
 
         function refuseItem(btn) {
-            let td = btn.closest('tr'].cells[2];
+            let td = btn.closest('tr').cells[2];
             td.innerText = "مرفوض";
             td.style.color = "red";
             btn.parentElement.innerHTML = "<span style='color:red; font-weight:bold;'>مرفوض</span>";
