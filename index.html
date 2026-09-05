@@ -8,13 +8,16 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
         body { background-color: #f4f4f4; color: #333; direction: rtl; text-align: center; }
         
-        /* ترويسة فاخرة مع صورة تعبيرية تجمع أجواء المول الحقيقي */
-        header { background: linear-gradient(135deg, #111 0%, #222 100%); color: #fff; padding: 20px 15px; border-bottom: 4px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        header h1 { font-size: 28px; color: #d4af37; margin-bottom: 5px; font-weight: bold; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        header p { font-size: 13px; color: #e0e0e0; font-weight: 300; letter-spacing: 0.5px; margin-bottom: 12px; }
+        /* ترويسة فاخرة مع تصميم مجمع فخم يعكس أجواء المول الحقيقي */
+        header { background: linear-gradient(135deg, #111 0%, #222 100%); color: #fff; padding: 15px; border-bottom: 4px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        header h1 { font-size: 26px; color: #d4af37; margin-bottom: 3px; font-weight: bold; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        header p { font-size: 12px; color: #e0e0e0; font-weight: 300; letter-spacing: 0.5px; margin-bottom: 10px; }
         
-        /* صورة الواجهة العلوية الثابتة التي تجمع أجواء المول الحقيقي */
-        .mall-hero-img { width: 100%; max-width: 500px; height: 160px; object-fit: cover; border-radius: 8px; border: 2px solid #d4af37; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3); margin: 0 auto; display: block; }
+        /* تصميم شبكي فخم يدمج الألبسة والأحذية والعطورات معاً بشكل عشوائي وساحر */
+        .mall-showcase { display: grid; grid-template-columns: 2fr 1fr; gap: 4px; max-width: 500px; height: 160px; margin: 0 auto; border-radius: 8px; overflow: hidden; border: 2px solid #d4af37; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4); }
+        .mall-showcase img { width: 100%; height: 100%; object-fit: cover; }
+        .sub-grid { display: flex; flex-direction: column; gap: 4px; height: 100%; }
+        .sub-grid img { height: calc(50% - 2px); }
 
         /* شريط التنقل */
         .nav-bar { background: #1a1a1a; padding: 12px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; border-bottom: 2px solid #333; }
@@ -56,7 +59,14 @@
     <header>
         <h1>مول لبنان</h1>
         <p>✦ الوجهة الأولى لأرقى الماركات، الألبسة، الأحذية، والعطورات الفاخرة في مكان واحد ✦</p>
-        <img class="mall-hero-img" src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?w=600" alt="مول لبنان الحقيقي">
+        
+        <div class="mall-showcase">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" alt="ألبسة فاخرة">
+            <div class="sub-grid">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="أحذية فاخرة">
+                <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" alt="عطورات راقية">
+            </div>
+        </div>
     </header>
 
     <div class="nav-bar">
