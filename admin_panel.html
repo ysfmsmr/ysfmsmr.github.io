@@ -3,214 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم الإدارية - مول لبنان</title>
+    <title>لوحة تحكم الإدارة - مول لبنان</title>
     <style>
-        :root {
-            --primary: #d4af37;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text: #ffffff;
-            --danger: #e74c3c;
-            --whatsapp: #25d366;
-        }
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text);
-            margin: 0;
-            padding: 15px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-        }
-        header {
-            text-align: center;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--primary);
-        }
-        header h1 {
-            color: var(--primary);
-            margin: 0;
-            font-size: 1.3rem;
-        }
-        header p {
-            color: #aaa;
-            font-size: 0.85rem;
-            margin: 5px 0 0;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .stat-card {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid #333;
-        }
-        .stat-card h3 {
-            margin: 0;
-            color: #aaa;
-            font-size: 0.85rem;
-        }
-        .stat-card .number {
-            color: var(--primary);
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-        .section-title {
-            color: var(--primary);
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .action-btn {
-            background: var(--primary);
-            color: #000;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .card {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-right: 4px solid var(--primary);
-        }
-        .product-info h3 {
-            margin: 0 0 5px;
-            font-size: 1rem;
-            color: var(--text);
-        }
-        .product-info p {
-            margin: 2px 0;
-            color: #aaa;
-            font-size: 0.85rem;
-        }
-        .delete-btn {
-            background: var(--danger);
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.85rem;
-        }
-        .empty-msg {
-            text-align: center;
-            color: #777;
-            padding: 25px;
-            background: var(--card-bg);
-            border-radius: 10px;
-            font-size: 0.95rem;
-        }
-        .back-btn {
-            display: block;
-            text-align: center;
-            background: #333;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
+        body { background-color: #f4f4f4; color: #333; direction: rtl; }
+        
+        header { background: #111; color: #fff; padding: 20px; text-align: center; border-bottom: 4px solid #d4af37; }
+        header h1 { font-size: 26px; color: #d4af37; margin-bottom: 5px; }
+
+        .container { max-width: 900px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { font-size: 20px; margin-bottom: 15px; color: #111; border-bottom: 2px solid #d4af37; padding-bottom: 5px; }
+
+        .vendor-request-card { display: flex; justify-content: space-between; align-items: center; background: #f9f9f9; padding: 15px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ddd; }
+        .vendor-info h3 { font-size: 18px; color: #111; margin-bottom: 5px; }
+        .vendor-info p { font-size: 14px; color: #666; margin-bottom: 3px; }
+
+        .actions { display: flex; gap: 10px; }
+        .accept-btn { background: #25d366; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .accept-btn:hover { background: #1ebe5d; }
+        
+        .reject-btn { background: #ff4d4d; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .reject-btn:hover { background: #cc0000; }
     </style>
 </head>
 <body>
+
+    <header>
+        <h1>لوحة تحكم الإدارة العليا</h1>
+        <p>التحكم الشامل بالمحلات المشتركة، تفعيل الاشتراكات، والقبض أو الرفض</p>
+    </header>
+
     <div class="container">
-        <header>
-            <h1>⚙️ لوحة التحكم والإدارة العامة</h1>
-            <p>مول لبنان الإلكتروني - إدارة العمليات والبضائع</p>
-        </header>
-
-        <!-- إحصائيات سريعة -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>إجمالي المنتجات</h3>
-                <div class="number" id="totalProductsCount">0</div>
-            </div>
-            <div class="stat-card">
-                <h3>حالة النظام</h3>
-                <div class="number" style="color: #2ecc71; font-size: 1rem; margin-top: 8px;">يعمل بانتظام</div>
-            </div>
-        </div>
-
-        <div class="section-title">
-            <span>📦 المنتجات المعروضة من التجار</span>
-            <button class="action-btn" onclick="loadAdminData()">تحديث البيانات</button>
-        </div>
+        <h2>طلبات انضمام التجار المعلقة (بانتظار دفع الاشتراك 15$)</h2>
         
-        <div id="adminProductsList"></div>
+        <div id="requestsList">
+            <!-- طلب تجريبي 1 -->
+            <div class="vendor-request-card" id="req1">
+                <div class="vendor-info">
+                    <h3>محل العز للعطورات</h3>
+                    <p>نوع النشاط: عطورات</p>
+                    <p>رقم الواتساب: 96170000000+</p>
+                    <p style="color: #d4af37; font-weight: bold;">حالة الاشتراك: بانتظار تأكيد الدفع (15$)</p>
+                </div>
+                <div class="actions">
+                    <button class="accept-btn" onclick="activateVendor('req1', 'محل العز للعطورات')">موافق وتفعيل</button>
+                    <button class="reject-btn" onclick="rejectVendor('req1')">رفض الحظر</button>
+                </div>
+            </div>
 
-        <a href="index.html" class="back-btn">⬅️ العودة للرئيسية</a>
+            <!-- طلب تجريبي 2 -->
+            <div class="vendor-request-card" id="req2">
+                <div class="vendor-info">
+                    <h3>أحذية الفخامة</h3>
+                    <p>نوع النشاط: أحذية</p>
+                    <p>رقم الواتساب: 96171111111+</p>
+                    <p style="color: #d4af37; font-weight: bold;">حالة الاشتراك: بانتظار تأكيد الدفع (15$)</p>
+                </div>
+                <div class="actions">
+                    <button class="accept-btn" onclick="activateVendor('req2', 'أحذية الفخامة')">موافق وتفعيل</button>
+                    <button class="reject-btn" onclick="rejectVendor('req2')">رفض الحظر</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        function loadAdminData() {
-            const container = document.getElementById('adminProductsList');
-            const countElem = document.getElementById('totalProductsCount');
-            
-            let products = JSON.parse(localStorage.getItem('mallProducts')) || 
-                           JSON.parse(localStorage.getItem('vendorProducts')) || [];
+        function activateVendor(reqId, vendorName) {
+            alert("تم قبول وتفعيل متجر (" + vendorName + ") بنجاح! أصبح ظاهراً في المول الآن.");
+            document.getElementById(reqId).remove();
+        }
 
-            countElem.innerText = products.length;
-
-            if (products.length === 0) {
-                container.innerHTML = `<div class="empty-msg">لا توجد منتجات مضافة حالياً.<br>قم بإضافة منتج من لوحة التاجر ليظهر هنا فوراً.</div>`;
-                return;
+        function rejectVendor(reqId) {
+            if(confirm("هل أنت متأكد من رفض و حذف هذا الطلب؟")) {
+                document.getElementById(reqId).remove();
+                alert("تم رفض الطلب وإزالته.");
             }
-
-            container.innerHTML = '';
-            products.forEach((product, index) => {
-                container.innerHTML += `
-                    <div class="card">
-                        <div class="product-info">
-                            <h3>${product.name || product.productName || 'منتج بدون اسم'}</h3>
-                            <p>المحل: ${product.store || product.storeName || 'غير محدد'}</p>
-                            <p>السعر: <span style="color: #2ecc71; font-weight: bold;">${product.price || 'غير محدد'}</span></p>
-                            <p style="color: var(--whatsapp); font-size: 0.8rem; margin-top:4px;">هاتف الواتساب: ${product.phone || product.vendorPhone || 'غير متوفر'}</p>
-                        </div>
-                        <button class="delete-btn" onclick="deleteProduct(${index})">حذف</button>
-                    </div>
-                `;
-            });
         }
-
-        function deleteProduct(index) {
-            if (!confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) return;
-
-            let products = JSON.parse(localStorage.getItem('mallProducts')) || 
-                           JSON.parse(localStorage.getItem('vendorProducts')) || [];
-            
-            products.splice(index, 1);
-            localStorage.setItem('mallProducts', JSON.stringify(products));
-            loadAdminData();
-        }
-
-        window.onload = loadAdminData;
     </script>
 </body>
 </html>
