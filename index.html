@@ -183,7 +183,7 @@
             window.scrollTo(0, 0);
         }
 
-        /* قاعدة بيانات المتاجر مع أرقام الواتساب الخاصة بكل تاجر ومنتجاته */
+        /* قاعدة بيانات المتاجر مع أرقام الواتساب ومنتجاتها المرتبطة حصرياً بالقسم */
         let mallData = {
             clothes: [
                 {
@@ -214,7 +214,7 @@
             ]
         };
 
-        let currentActiveCategory = 'shoes';
+        let currentActiveCategory = 'clothes';
 
         let portalTitles = { 
             clothes: "صالة محلات الألبسة المشتركة", 
@@ -232,7 +232,7 @@
             if (!vendors || vendors.length === 0) {
                 grid.innerHTML = "<p style='text-align:center; color:#777; grid-column:1/-1; padding:20px;'>لا توجد محلات مشتركة في هذا القسم حالياً.</p>";
             } else {
-                vendors.forEach(v => {
+                vendors.forEach((v, index) => {
                     let card = document.createElement('div');
                     card.className = 'shop-card-portal';
                     card.innerHTML = `
@@ -240,30 +240,35 @@
                         <p>عدد المنتجات في الفترينا: ${v.products.length}</p>
                         <span>دخول لفترينا المحل ←</span>
                     `;
-                    card.onclick = () => openIsolatedStore(v);
+                    card.onclick = () => openIsolatedStore(cat, index);
                     grid.appendChild(card);
                 });
             }
             showSec('shops-portal');
         }
 
-        function openIsolatedStore(vendorObj) {
+        function openIsolatedStore(cat, vendorIndex) {
+            let vendorObj = mallData[cat][vendorIndex];
             document.getElementById('isolatedStoreTitle').innerText = `فترينة محل: ${vendorObj.storeName}`;
             let grid = document.getElementById('isolatedStoreGrid');
             grid.innerHTML = "";
 
-            vendorObj.products.forEach(p => {
-                let card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <img src="${p.img}" alt="صورة المنتج">
-                    <h3>${p.name}</h3>
-                    <p class="price">السعر: ${p.price}$</p>
-                    <p style="font-size:12px; color:#555; margin-bottom:6px;">المقاس / النمرة: <b>${p.size}</b></p>
-                    <a href="https://wa.me/${vendorObj.phone}?text=مرحباً، أرغب بطلب ${p.name} بسعر ${p.price}$ من محلكم" class="action-btn" target="_blank">طلب عبر واتساب التاجر</a>
-                `;
-                grid.appendChild(card);
-            });
+            if (!vendorObj.products || vendorObj.products.length === 0) {
+                grid.innerHTML = "<p style='text-align:center; color:#777; grid-column:1/-1; padding:20px;'>لا توجد منتجات معروضة في فترينة هذا المحل حالياً.</p>";
+            } else {
+                vendorObj.products.forEach(p => {
+                    let card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <img src="${p.img}" alt="صورة المنتج">
+                        <h3>${p.name}</h3>
+                        <p class="price">السعر: ${p.price}$</p>
+                        <p style="font-size:12px; color:#555; margin-bottom:6px;">المقاس / النمرة: <b>${p.size}</b></p>
+                        <a href="https://wa.me/${vendorObj.phone}?text=مرحباً، أرغب بطلب ${p.name} بسعر ${p.price}$ من محلكم" class="action-btn" target="_blank">طلب عبر واتساب التاجر</a>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
             showSec('vendor-isolated-store');
         }
 
@@ -275,7 +280,7 @@
         let defaultSlides = [
             { text: "محل الأناقة للألبسة - أحدث الموضات الصيفية والشتوية", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500" },
             { text: "أحذية الفخامة - راحة وأناقة لا توصف لقدميك", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
-            { text: "عطورات الملك - فخامة العطور الشرقية والفرنسية", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500" }
+            { text: "عطورات الملك - فخامة العطور الشرقية والفرنسية", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=300" }
         ];
         let current = 0;
         let customBigScreen = null;
@@ -362,7 +367,7 @@
             let newProd = { name: name, price: price, size: size || 'متوفر', img: imgSrc };
 
             if(vendor) {
-                vendor.phone = phone; // تحديث الرقم إن تغير
+                vendor.phone = phone;
                 vendor.products.unshift(newProd);
             } else {
                 mallData[cat].unshift({
